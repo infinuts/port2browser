@@ -28,6 +28,14 @@ def is_link_or_reparse(info):
     )
 
 
+def is_regular_unlinked(path):
+    try:
+        info = path.lstat()
+        return stat.S_ISREG(info.st_mode) and not is_link_or_reparse(info)
+    except OSError:
+        return False
+
+
 def binary_info(data):
     if data.startswith(b"\0asm"):
         return {"format": "WebAssembly", "architecture": "wasm (memory model unverified)"}
@@ -135,7 +143,7 @@ def inspect_game(root, max_entries=20000, max_depth=32):
                         clue("rpg-maker", relative, "possible MV/MZ JavaScript runtime")
                     if suffix in {".rpy", ".rpyc", ".rpa"}:
                         clue("renpy", relative, "possible Ren'Py script/archive; verify runtime")
-                    if suffix == ".love" or (name == "conf.lua" and (path.parent / "main.lua").is_file()):
+                    if suffix == ".love" or (name == "conf.lua" and is_regular_unlinked(path.parent / "main.lua")):
                         clue("love", relative, "possible LÖVE project/package; verify version and contents")
                     if suffix == ".yyp" or name == "data.win":
                         clue("gamemaker", relative, "possible GameMaker project/runner data")
@@ -151,8 +159,8 @@ def inspect_game(root, max_entries=20000, max_depth=32):
                                         for engine in ("electron", "nw", "phaser", "pixi.js", "three"):
                                             if engine in dependencies:
                                                 clue(engine, relative, f"declared {engine} dependency (may be tooling)")
-                            except (ValueError, UnicodeError):
-                                warn(f"invalid JSON manifest: {relative}")
+                            except (ValueError, UnicodeError, RecursionError):
+                                warn(f"invalid JSON or decoder nesting limit: {relative}")
                     if suffix in BINARY_SUFFIXES or (not suffix and info.st_mode & stat.S_IXUSR):
                         if len(binaries) < 100:
                             detected = binary_info(read_sample(path, HEADER_BYTES))

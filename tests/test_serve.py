@@ -65,6 +65,9 @@ class ServerTests(unittest.TestCase):
         self.assertEqual(headers["Content-Encoding"], "br")
         self.assertEqual(headers["Content-Type"], "text/javascript")
         self.assertEqual(body, b"")
+        status, headers, _ = self.request("/game.wasm%2egz")
+        self.assertEqual(status, 200)
+        self.assertEqual(headers["Content-Encoding"], "gzip")
 
     def test_compressed_404_is_not_mislabeled(self):
         status, headers, _ = self.request("/missing.wasm.gz")

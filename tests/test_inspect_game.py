@@ -61,6 +61,15 @@ class InventoryTests(unittest.TestCase):
         self.assertTrue(any("manifest exceeds" in warning for warning in report["warnings"]))
         self.assertLessEqual(inspect_game(self.root, max_entries=1)["inventory"]["entries"], 1)
 
+    def test_decoder_nesting_limit_does_not_abort_inventory(self):
+        self.write("package.json", b"[" * 2000 + b"]" * 2000)
+        self.write("project.godot")
+        # Older supported interpreters reject nesting accepted by newer decoders.
+        with patch("scripts.inspect_game.json.loads", side_effect=RecursionError("nesting limit")):
+            report = inspect_game(self.root)
+        self.assertEqual(report["candidates"][0]["engine"], "godot")
+        self.assertTrue(any("JSON" in warning for warning in report["warnings"]))
+
     def test_links_are_not_followed(self):
         target = self.write("real/project.godot")
         try:
@@ -75,6 +84,18 @@ class InventoryTests(unittest.TestCase):
     def test_windows_junction_attribute(self):
         info = type("Info", (), {"st_mode": 0o40755, "st_file_attributes": 0x400})()
         self.assertTrue(is_link_or_reparse(info))
+
+    def test_love_clue_does_not_follow_linked_main(self):
+        target = self.write("real.lua")
+        self.write("conf.lua")
+        try:
+            (self.root / "main.lua").symlink_to(target)
+        except OSError:
+            self.skipTest("symlink creation unavailable on this host")
+        self.assertFalse(inspect_game(self.root)["candidates"])
+        (self.root / "main.lua").unlink()
+        self.write("main.lua")
+        self.assertEqual(inspect_game(self.root)["candidates"][0]["engine"], "love")
 
     def test_no_execute_or_unbounded_read(self):
         self.write("game.exe", b"MZ" + b"\0" * 8192)

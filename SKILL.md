@@ -42,8 +42,13 @@ Map the entry point, main loop, renderer, audio layer, input, saves, threading,
 networking, and OS calls. Cite file paths, symbols, or observations; label each
 finding as confirmed, inferred, or unknown. A filename match alone is a clue.
 
-For a bounded first pass, run `python <skill-dir>/scripts/inspect_game.py
-<game-directory>`. It reads names, metadata and small header/manifest samples;
+For a bounded first pass, run:
+
+```sh
+python "<skill-dir>/scripts/inspect_game.py" "<game-directory>"
+```
+
+It reads names, metadata and small header/manifest samples;
 it does not execute games or extract archives. Review warnings and scan limits.
 Its candidates are leads to verify, not compatibility or licensing findings.
 
@@ -110,6 +115,11 @@ compatibility from a single scene.
 
 Use the compact [port report template](references/port-report.md) for a durable
 handoff, trimming fields that do not apply. Store it in the port project, not in
-the installed skill. For local output, `python <skill-dir>/scripts/serve.py
-<build-directory>` provides a loopback test server; add `--isolate` only when
-the runtime needs cross-origin isolation. See the build reference for limits.
+the installed skill. For local output, use the loopback test server:
+
+```sh
+python "<skill-dir>/scripts/serve.py" "<build-directory>"
+```
+
+Add `--isolate` only when the runtime needs cross-origin isolation. See the build
+reference for limits.
