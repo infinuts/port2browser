@@ -1,9 +1,9 @@
 name: Browser examples
 on:
   push:
-    paths: ['examples/**', 'SKILL.md', 'references/**', 'tests/scenarios.md', 'tests/evaluation-*/**', 'tests/browser/**', 'playwright.config.js', 'package*.json', 'scripts/serve.py', '.github/workflows/examples.yml']
+    paths: ['examples/**', 'README.md', 'CONTRIBUTING.md', 'CHANGELOG.md', 'SKILL.md', 'references/**', 'tests/scenarios.md', 'tests/evaluation-*/**', 'tests/browser/**', 'playwright.config.js', 'package*.json', 'scripts/serve.py', '.github/workflows/examples.yml']
   pull_request:
-    paths: ['examples/**', 'SKILL.md', 'references/**', 'tests/scenarios.md', 'tests/evaluation-*/**', 'tests/browser/**', 'playwright.config.js', 'package*.json', 'scripts/serve.py', '.github/workflows/examples.yml']
+    paths: ['examples/**', 'README.md', 'CONTRIBUTING.md', 'CHANGELOG.md', 'SKILL.md', 'references/**', 'tests/scenarios.md', 'tests/evaluation-*/**', 'tests/browser/**', 'playwright.config.js', 'package*.json', 'scripts/serve.py', '.github/workflows/examples.yml']
   workflow_dispatch:
 permissions:
   contents: read
