@@ -58,6 +58,11 @@ Read [Approach and engine selection](references/approaches.md). Confirm the exac
 engine/runtime version against its matching upstream documentation. Multiple
 engines may appear in launchers, tools, or bundled samples; identify the game.
 
+When source is missing or platform behavior is unclear, read the
+[reverse-engineering workflow and optional REA resource](references/no-source.md#investigate-before-reconstructing).
+Use recovered behavior to test a bounded reconstruction before choosing its
+browser implementation; an analysis result is not a completed port.
+
 ## 3. Choose a route with a falsifiable first milestone
 
 Compare plausible routes using the actual inputs:
