@@ -51,6 +51,8 @@ python "<skill-dir>/scripts/inspect_game.py" "<game-directory>"
 It reads names, metadata and small header/manifest samples;
 it does not execute games or extract archives. Review warnings and scan limits.
 Its candidates are leads to verify, not compatibility or licensing findings.
+For report consumers, [Inspection JSON](references/inspection-json.md) describes
+observed metadata, omitted output counts, scan errors, and completeness fields.
 
 Read [Approach and engine selection](references/approaches.md). Confirm the exact
 engine/runtime version against its matching upstream documentation. Multiple

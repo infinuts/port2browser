@@ -102,6 +102,50 @@ agent's discovery directory.
 
 </details>
 
+## Try an original example
+
+The examples use original MIT code, generated shapes, and generated sound.
+They are optional development material; installing the skill needs none of their
+toolchains or Node packages.
+
+- [SDL Beacon](examples/sdl-beacon/README.md): shared native C and Wasm gameplay.
+- [Electron Beacon](examples/electron-beacon/README.md): filesystem/IPC desktop
+  services adapted to browser storage and menu handling.
+
+For the SDL example, activate Emscripten **4.0.16**, then run from this repo:
+
+```sh
+python3 examples/sdl-beacon/build.py web
+python3 scripts/serve.py examples/sdl-beacon/build/web --port 8000
+```
+
+Open `http://127.0.0.1:8000/`, click Start, press Right eight times, Space, and S.
+Expect position 120, a collected beacon, and `Save ready`; reload to check the
+saved state. The [completed report](examples/sdl-beacon/port-report.md) records
+actual tested versions and limits. With Node.js 22+ and npm, optional automation:
+
+```sh
+npm ci
+npx playwright install chromium firefox
+npm run test:browser
+```
+
+### Evidence, not general compatibility
+
+| Route | Evidence level | Tested scope |
+| --- | --- | --- |
+| SDL2/C → Emscripten 4.0.16 / SDL2 2.32.8 | [Evaluated original example](examples/sdl-beacon/port-report.md) | Chromium 141.0.7390.37 / Firefox 142.0.1 on macOS 15.7.4; one scene, input, audio activation, focus, save/reload |
+| Electron 44.8.0 → browser JavaScript | [Evaluated original example](examples/electron-beacon/port-report.md) | Same browser versions/OS; gameplay plus menu and persistence; desktop filesystem/IPC smoke |
+| Shipped Unity files without a project | [Blocked synthetic assessment](tests/evaluation-results/2026-10-16.md) | Missing editable project; filename clues remain inferred |
+| Godot descriptor with missing native dependency | [Blocked synthetic assessment](tests/evaluation-results/2026-10-16.md) | Missing source/web extension build; config format 5 is not an engine version |
+| Other engine exporters, emulation, open engines and reconstruction | Investigation only | No completed port bundled for these routes; verify the exact input/runtime |
+
+These are implementation regressions, not blind agent benchmarks. Manual
+listening, mobile/Safari, long sessions, and performance profiling are untested.
+Future CI runs attach their own browser versions and evidence. See the
+[evaluation checklists](tests/evaluation-expected/checklists.md) and
+[contribution guide](CONTRIBUTING.md).
+
 ## How it works
 
 [![port2browser](https://readme-flow-svg.vercel.app/svg?steps=%5B%22Game+files%22%2C%22Inspect+engine%22%2C%22Choose+a+route%22%2C%22Adapt+and+build%22%2C%22Browser+playtest%22%2C%22Report+blockers%22%5D&theme=custom&traveler=code&duration=10&icons=%5B%22file%22%2C%22process%22%2C%22shield%22%2C%22build%22%2C%22test%22%2C%22message%22%5D&customTheme=%7B%22background%22%3A%22%230d1117%22%2C%22card%22%3A%22%23161b22%22%2C%22text%22%3A%22%23e6edf3%22%2C%22accent%22%3A%22%23a78bfa%22%2C%22border%22%3A%22%2330363d%22%2C%22tint%22%3A%22%23241e38%22%2C%22muted%22%3A%22%238b949e%22%2C%22line%22%3A%22%23484f58%22%7D&title=port2browser&subtitle=Inspect+the+game%2C+prove+a+viable+route%2C+and+test+a+playable+slice&layout=snake&connectionMode=custom&spacing=80&connections=%5B%7B%22from%22%3A0%2C%22to%22%3A1%2C%22label%22%3A%22%22%7D%2C%7B%22from%22%3A1%2C%22to%22%3A2%2C%22label%22%3A%22%22%7D%2C%7B%22from%22%3A2%2C%22to%22%3A3%2C%22label%22%3A%22Viable%22%7D%2C%7B%22from%22%3A3%2C%22to%22%3A4%2C%22label%22%3A%22%22%7D%2C%7B%22from%22%3A2%2C%22to%22%3A5%2C%22label%22%3A%22%22%7D%5D)](https://readme-flow-svg.vercel.app/r)
@@ -251,7 +295,7 @@ Run the helper and packaging tests with the standard library:
 python -m unittest discover -s tests -v
 ```
 
-GitHub Actions runs the same suite on Windows and Linux with Python 3.10 and
+GitHub Actions runs the same suite on Windows, Linux and macOS with Python 3.10 and
 3.14. It checks the helper behavior, local documentation links, manifest fields,
 and a minimal copied install launched from another directory.
 
@@ -260,6 +304,10 @@ Automated helper tests cannot establish that an agent can port an arbitrary game
 Keep existing helper arguments and JSON fields compatible; add fields within
 `schema_version: 1`, and bump that version for a breaking schema change. Commit
 related changes together so regressions can be traced and reverted.
+
+For additive inspection fields and partial-scan interpretation, see the
+[JSON contract](references/inspection-json.md). For release versions and update
+instructions, see the [changelog](CHANGELOG.md).
 
 ## License and inspiration
 

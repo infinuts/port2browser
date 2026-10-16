@@ -1,0 +1,38 @@
+# Changelog
+
+## v0.1.0-rc.1 — 2026-10-16
+
+First evaluation candidate; the four ordered improvement PRs await review.
+The release tag identifies the full candidate commit, not the current main branch.
+
+- Add an original SDL2 native/Wasm game with generated audio and durable saves.
+- Add an original Electron filesystem/IPC wrapper and browser adaptation.
+- Add optional Chromium/Firefox gameplay checks with retained evidence artifacts.
+- Extend schema-version-1 inspection reports with bounded observed metadata,
+  omission counts, scan errors and separate completeness indicators.
+- Add synthetic Unity/Godot assessment inputs and explicit evaluation checklists.
+- Extend helper CI to macOS and document tested routes and remaining limits.
+
+See [recorded evaluations](tests/evaluation-results/2026-10-16.md) and each example's
+port report for measured results. Manual listening, Safari/mobile, long sessions,
+performance profiling, and unseen-game agent success are not established.
+
+### Install, update, or reproduce this candidate
+
+Keep SKILL.md, references/, scripts/ and LICENSE together. For example:
+
+```sh
+git clone --branch v0.1.0-rc.1 https://github.com/infinuts/port2browser.git ~/.agents/skills/port2browser
+```
+
+For an existing clone, review local changes first, then:
+
+```sh
+git -C /path/to/port2browser fetch --tags origin
+git -C /path/to/port2browser checkout v0.1.0-rc.1
+```
+
+A tag checkout is detached and reproducible. Return to your tracked branch before
+using `git pull --ff-only` for ongoing updates. Restart your agent session after
+installation. Claude Code uses its own skill directory as described in README.md.
+Optional examples/dev dependencies are not required to load the skill.

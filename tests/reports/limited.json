@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "metadata": [
+    {
+      "engine": "godot",
+      "path": "project.godot",
+      "field": "config_version",
+      "value": "5"
+    }
+  ],
+  "omitted": {
+    "evidence": 0,
+    "build_files": 0,
+    "binaries": 0,
+    "warnings": 0,
+    "metadata": 0
+  },
+  "scan_errors": {
+    "stat": 0,
+    "read": 0,
+    "directory": 0
+  },
+  "completeness": {
+    "traversal_complete": false,
+    "samples_readable": true,
+    "output_capped": false,
+    "metadata_sample_limits": 0
+  },
+  "root": "<game-directory>",
+  "limits": {
+    "max_entries": 20000,
+    "max_depth": 0,
+    "header_bytes": 4096,
+    "manifest_bytes": 65536
+  },
+  "inventory": {
+    "entries": 2,
+    "files": 1,
+    "bytes": 17,
+    "skipped_directories": 0,
+    "skipped_links": 0,
+    "extensions": {
+      ".godot": 1
+    },
+    "source_extensions": {}
+  },
+  "candidates": [
+    {
+      "engine": "godot",
+      "confidence": "inferred",
+      "evidence": [
+        {
+          "path": "project.godot",
+          "reason": "Godot project or possible exported pack; verify format/version"
+        }
+      ],
+      "evidence_count": 1,
+      "evidence_omitted": 0
+    }
+  ],
+  "build_files": [],
+  "binaries": [],
+  "truncated": true,
+  "warnings": [
+    "depth limit at nested",
+    "scan limit reached; inventory is partial"
+  ],
+  "limitations": [
+    "Filename/dependency clues do not confirm engine, editable source, rights or browser support.",
+    "Archives are not opened; dependencies and binary imports are not fully analyzed.",
+    "Links/reparse points, special files and common dependency/VCS directories are skipped.",
+    "Evidence is capped at 10 paths per candidate; build_files and binaries at 100 each; warnings at 100.",
+    "Traversal uses filesystem order; keep the input tree unchanged while scanning."
+  ]
+}

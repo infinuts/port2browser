@@ -1,0 +1,24 @@
+name: Document a porting case
+description: Share a reproducible route, blocker or upstream correction.
+body:
+  - type: textarea
+    id: inputs
+    attributes:
+      label: Inputs, versions and route
+      description: Game/engine revision, source availability and provenance, skill revision, and chosen route.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Reproduction and browser evidence
+      description: Exact commands, OS/SDK/browser versions, inspection warnings and tested interactions. Identify inferred findings and untested claims.
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Outcome and remaining blockers
+      description: Playable slice, tested scope, build only, or blocked. Include code/data licenses and only distributable evidence.
+    validations:
+      required: true
