@@ -1,9 +1,9 @@
 name: Browser examples
 on:
   push:
-    paths: ['examples/**', 'tests/browser/**', 'playwright.config.js', 'package*.json', 'scripts/serve.py', '.github/workflows/examples.yml']
+    paths: ['examples/**', 'SKILL.md', 'references/**', 'tests/scenarios.md', 'tests/evaluation-*/**', 'tests/browser/**', 'playwright.config.js', 'package*.json', 'scripts/serve.py', '.github/workflows/examples.yml']
   pull_request:
-    paths: ['examples/**', 'tests/browser/**', 'playwright.config.js', 'package*.json', 'scripts/serve.py', '.github/workflows/examples.yml']
+    paths: ['examples/**', 'SKILL.md', 'references/**', 'tests/scenarios.md', 'tests/evaluation-*/**', 'tests/browser/**', 'playwright.config.js', 'package*.json', 'scripts/serve.py', '.github/workflows/examples.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -45,6 +45,10 @@ jobs:
           python examples/sdl-beacon/build.py native
           SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy P2B_SAVE_PATH="$RUNNER_TEMP/beacon-save.txt" examples/sdl-beacon/build/native/beacon --smoke
           python examples/sdl-beacon/build.py web
+      - name: Electron filesystem and IPC smoke
+        run: |
+          npm ci --prefix examples/electron-beacon/desktop
+          xvfb-run -a npm --prefix examples/electron-beacon/desktop run smoke -- --no-sandbox --user-data-dir="$RUNNER_TEMP/electron-profile"
       - name: Start virtual audio output for Firefox
         run: |
           sudo apt-get update

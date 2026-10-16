@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+<title>Electron Beacon</title><link rel="icon" href="data:,">
+<style>body{font:18px system-ui;background:#0f172a;color:#e2e8f0;max-width:48rem;margin:3rem auto}canvas{width:640px;max-width:100%;image-rendering:pixelated;border:2px solid #64748b}button{font:inherit;padding:.6rem}output{display:block;padding:1rem 0}</style>
+<h1>Electron Beacon</h1><p>Arrows: move one step per press. Space: collect the beacon. S: save.</p>
+<button id="start" disabled>Start audio and play</button><button id="menu">Menu</button>
+<p id="menu-result" aria-live="polite"></p><output id="status" aria-live="polite">Loading…</output>
+<canvas width="320" height="180" tabindex="0" aria-label="Beacon game"></canvas>
+
+<script src="../game.js"></script>
+</html>

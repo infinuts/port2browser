@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-for (const example of ['sdl-beacon/build/web']) {
+for (const example of ['sdl-beacon/build/web', 'electron-beacon/web']) {
 test(`${example}: gameplay, audio, focus, and durable save`, async ({ page, browser }, testInfo) => {
   const logs = [], errors = [];
   page.on('console', message => logs.push(`${message.type()}: ${message.text()}`));

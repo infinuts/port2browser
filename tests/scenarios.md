@@ -76,3 +76,14 @@ audio context and memory-only saves.
 Expected: inspects console/network output, checks isolation, adds an audio start
 gesture and durable save handling, and reruns each failing interaction. Reports
 Firefox/Safari as untested. Do not infer that the headers fix audio or saves.
+
+## Reproduction and recording
+
+Original runnable examples are in `examples/sdl-beacon/` and
+`examples/electron-beacon/`. Synthetic assessment inputs are in
+`tests/evaluation-inputs/`. These contain no commercial game material.
+Keep `tests/evaluation-expected/checklists.md` out of an evaluating agent's input.
+Use `tests/evaluation-results/TEMPLATE.md` to record each run. A reference
+implementation regression is not a blind agent evaluation; label the mode.
+The remaining DOS/proprietary/failing-build scenarios still require the described
+inputs and are not claimed as evaluated merely because examples pass CI.

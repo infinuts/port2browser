@@ -1,0 +1,7 @@
+; Synthetic assessment fixture. Not a claim of a working game.
+config_version=5
+[application]
+config/name="Native dependency assessment"
+config/features=PackedStringArray("4.3", "GL Compatibility")
+[rendering]
+renderer/rendering_method="gl_compatibility"

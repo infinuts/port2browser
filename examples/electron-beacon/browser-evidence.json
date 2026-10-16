@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-16",
+  "os": "macOS 15.7.4 arm64",
+  "harness": "Codex implementation regression; not a blind agent evaluation",
+  "playwright": "1.56.1",
+  "source_sha256": {
+    "game.js": "a6c4d94d151628d8361c9f5b055c40bfb0128b2c451c959d65567edbe68dbcd1",
+    "web/index.html": "efc9963b8912d642d31516817e6cc188205c9bbadbddf9640443b70ba6941f8a",
+    "web/platform.js": "947a35f0c392f0fc3ad6a56f84886a76f46cacb1f5680800c05f8431ef4ef553",
+    "desktop/index.html": "a4f94358a80d0e0328f2cde34955c0daf5cf44742d381d348563f1714e91f9f6",
+    "desktop/preload.cjs": "be63dc88a3b14085adee4be658d88829e346361711e2e3e439961d74753e89ea",
+    "desktop/main.cjs": "f6fe4a1c316b4405d6bd029bf2f1aa7e23900bd9ceaa5e824c884297250070c4"
+  },
+  "tests": [
+    {
+      "project": "chromium",
+      "status": "expected",
+      "gameplay-evidence": {
+        "browser": "141.0.7390.37",
+        "startupMs": 347.60000014305115,
+        "state": {
+          "x": 132,
+          "collected": 1,
+          "started": 1,
+          "sounds": 1,
+          "saving": 0,
+          "saves": 1,
+          "audioState": "running",
+          "menu": "Continue with arrows, Space, and S."
+        },
+        "manualListening": "untested"
+      },
+      "browser-log": {
+        "logs": [],
+        "errors": []
+      }
+    },
+    {
+      "project": "firefox",
+      "status": "expected",
+      "gameplay-evidence": {
+        "browser": "142.0.1",
+        "startupMs": 307,
+        "state": {
+          "x": 132,
+          "collected": 1,
+          "started": 1,
+          "sounds": 1,
+          "saving": 0,
+          "saves": 1,
+          "audioState": "running",
+          "menu": "Continue with arrows, Space, and S."
+        },
+        "manualListening": "untested"
+      },
+      "browser-log": {
+        "logs": [],
+        "errors": []
+      }
+    }
+  ]
+}
