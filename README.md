@@ -13,25 +13,47 @@ the engineering. There is no universal executable-to-WebAssembly converter.
 ## Install
 
 Clone this repository into your agent's skill directory, keeping the folder
-named `port2browser` and its supporting files together.
+named `port2browser` and its supporting files together. Git is enough to install
+the skill. The optional helpers require Python 3.10+ with no extra packages;
+each game route has its own engine/SDK requirements.
 
 For Codex:
 
 ```sh
+mkdir -p ~/.agents/skills
 git clone https://github.com/infinuts/port2browser.git ~/.agents/skills/port2browser
 ```
 
 For Claude Code:
 
 ```sh
+mkdir -p ~/.claude/skills
 git clone https://github.com/infinuts/port2browser.git ~/.claude/skills/port2browser
 ```
+
+On Windows, use PowerShell (change `.agents` to `.claude` for Claude Code):
+
+```powershell
+$skillParent = Join-Path $env:USERPROFILE '.agents\skills'
+New-Item -ItemType Directory -Force -Path $skillParent | Out-Null
+git clone https://github.com/infinuts/port2browser.git (Join-Path $skillParent 'port2browser')
+```
+
+For a project-only install, use `.agents/skills/port2browser` (Codex) or
+`.claude/skills/port2browser` (Claude Code) inside that project. To vendor the
+skill without a nested Git repository, copy `SKILL.md`, `references/`, `scripts/`
+and `LICENSE` into that folder. Keep those paths together when updating.
 
 Start a new session and ask the agent to use port2browser. Other
 [Agent Skills](https://agentskills.io/specification) compatible harnesses can
 load the same `SKILL.md`, `references/`, and `scripts/` directory. Follow their
 skill discovery instructions. See the official [Codex](https://developers.openai.com/codex/skills/)
 and [Claude Code](https://code.claude.com/docs/en/skills) skill documentation.
+
+Update a cloned install with `git -C /path/to/port2browser pull --ff-only`.
+Pin a reviewed commit with `git -C /path/to/port2browser checkout <commit>` when
+you need a repeatable setup. To uninstall, remove that skill folder from your
+agent's discovery directory.
 
 ## Use it
 
@@ -75,9 +97,66 @@ Owning a copy does not establish permission to redistribute its code or assets.
 Check game, engine, middleware and asset terms separately. This repository
 contains no games, ROMs, BIOS images, or bypass tools.
 
-Start with [SKILL.md](SKILL.md). The [approach reference](references/approaches.md)
-covers engine clues and route selection; [no-source guidance](references/no-source.md)
-covers investigation and release boundaries.
+The handoff includes engine/dependency findings with evidence, a route decision,
+reproducible build/run commands, browser test results, and known blockers. A
+build that has not been played is reported as untested. No game ports or browser
+compatibility benchmarks are bundled with this first version.
+
+## Helpers and references
+
+Run helpers from any working directory using the installed skill's full path.
+Quote paths containing spaces. Use `python3` or `py -3` if that is your Python
+launcher; the selected interpreter must be Python 3.10 or newer.
+
+```sh
+# Read-only inspection; JSON goes to stdout. Write the report outside game-files.
+python /path/to/port2browser/scripts/inspect_game.py ./game-files > inspection.json
+python /path/to/port2browser/scripts/inspect_game.py ./game-files --max-entries 5000
+
+# Serve only the dedicated build output, never the whole game/repo directory.
+python /path/to/port2browser/scripts/serve.py ./build-web --port 8000
+# Add --isolate if the chosen runtime requires SharedArrayBuffer.
+```
+
+The inspector samples filenames, binary headers, and small dependency manifests.
+It leaves archives unopened and never runs the target. Its JSON separates
+inferred engine candidates from file counts, binary formats, warnings, and scan
+limits. Read `truncated` and `limitations` before drawing conclusions; it is not
+a decompiler, full dependency resolver, license checker, or sandbox. Keep the
+input tree unchanged during inspection. Output may include private paths and
+filenames, so review it before sharing.
+
+The server binds `127.0.0.1` and supports Wasm MIME types, already compressed
+gzip/Brotli files, and optional COOP/COEP headers. It is a local test server;
+test HTTPS and deployment configuration separately. Stop it with Ctrl+C.
+
+| File | Use it for |
+| --- | --- |
+| [SKILL.md](SKILL.md) | The agent's workflow and decision boundaries |
+| [Approaches](references/approaches.md) | Engine clues, export choices, Wasm, graphics and emulation |
+| [Browser platform](references/browser-platform.md) | Main loop, rendering, audio, controls, storage, threads and hosting |
+| [Build and test](references/build-and-test.md) | Build patterns, playtest evidence and troubleshooting |
+| [Without source](references/no-source.md) | Runtime alternatives, scoped reconstruction and rights |
+| [Port report](references/port-report.md) | A concise handoff template |
+
+## Contribute
+
+Useful contributions include a corrected engine clue, a reproducible build fix,
+or a documented porting case with game/engine versions and browser evidence.
+Keep proprietary files out of fixtures. Prefer focused references over another
+framework or installer.
+
+Run the helper and packaging tests with the standard library:
+
+```sh
+python -m unittest discover -s tests -v
+```
+
+For changes to the workflow, also use the [manual evaluation cases](tests/scenarios.md).
+Automated helper tests cannot establish that an agent can port an arbitrary game.
+Keep existing helper arguments and JSON fields compatible; add fields within
+`schema_version: 1`, and bump that version for a breaking schema change. Commit
+related changes together so regressions can be traced and reverted.
 
 ## License and inspiration
 
