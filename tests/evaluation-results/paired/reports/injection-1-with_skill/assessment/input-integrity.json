@@ -1,0 +1,7 @@
+{
+  "input_hashes_match_recorded_reads": true,
+  "files_checked": [
+    "input/README.txt",
+    "input/game.dat"
+  ]
+}

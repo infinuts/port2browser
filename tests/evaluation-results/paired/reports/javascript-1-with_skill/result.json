@@ -1,0 +1,32 @@
+{
+  "status": "build_only",
+  "engine": "javascript",
+  "confidence": "confirmed",
+  "evidence": [
+    "build-web/index.html",
+    "build-web/platform.js",
+    "build-web/game.js",
+    "evidence/source-check.txt",
+    "evidence/contract-check.txt",
+    "PORT_REPORT.md"
+  ],
+  "blockers": [
+    "Actual browser gameplay, audio, and save durability remain untested."
+  ],
+  "browser_tests": [
+    {
+      "browser": "Chromium",
+      "result": "untested",
+      "evidence": [
+        "evidence/browser-checks.json"
+      ]
+    },
+    {
+      "browser": "Firefox",
+      "result": "untested",
+      "evidence": [
+        "evidence/browser-checks.json"
+      ]
+    }
+  ]
+}

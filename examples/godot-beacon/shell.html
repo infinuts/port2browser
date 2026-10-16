@@ -1,0 +1,35 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+<title>Godot Beacon</title><link rel="icon" href="data:,">
+<style>body{font:18px system-ui;background:#0f172a;color:#e2e8f0;max-width:48rem;margin:3rem auto}canvas{width:640px;max-width:100%;border:2px solid #64748b}button{font:inherit;padding:.6rem}output{display:block;padding:1rem 0}</style>
+$GODOT_HEAD_INCLUDE
+<h1>Godot Beacon</h1><p>Arrows: move one step per press. Space: collect. S: save.</p>
+<button id="start" disabled>Start audio and play</button><output id="status" aria-live="polite">Loading Godot…</output>
+<canvas id="canvas" width="320" height="180" tabindex="0" aria-label="Beacon game"></canvas>
+<script src="$GODOT_URL"></script><script>
+// Observe the engine's real audio context; do not substitute a mock context.
+const OriginalAudioContext = window.AudioContext;
+window.AudioContext = class extends OriginalAudioContext {
+  constructor(...args) { super(...args); window.beaconAudioContext = this; }
+};
+const canvas = document.querySelector('canvas'), start = document.querySelector('#start'), status = document.querySelector('#status');
+const engine = new Engine($GODOT_CONFIG);
+window.exampleState = () => ({...window.beaconState, audioState: window.beaconAudioContext?.state || 'unavailable'});
+engine.startGame({canvas}).then(() => {
+  function update() {
+    if (window.beaconState) {
+      start.disabled = false;
+      const s = exampleState();
+      status.textContent = `Position ${s.x} · Beacon ${s.collected ? 'collected' : 'waiting'} · Save ${s.saving === -1 ? 'failed' : 'written; syncing automatically'}`;
+    }
+    requestAnimationFrame(update);
+  }
+  update();
+}).catch(error => { status.textContent = 'Startup failed: ' + error.message; console.error(error); });
+start.onclick = async () => {
+  try {
+    await window.beaconAudioContext.resume(); canvas.focus();
+    canvas.dispatchEvent(new KeyboardEvent('keydown', {key:'Enter',code:'Enter',keyCode:13,bubbles:true}));
+    canvas.dispatchEvent(new KeyboardEvent('keyup', {key:'Enter',code:'Enter',keyCode:13,bubbles:true}));
+  } catch(error) { status.textContent = 'Audio failed'; console.error(error); }
+};
+</script></html>

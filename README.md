@@ -4,6 +4,8 @@
 
 <h3>Bring offline games to the browser with your coding agent.</h3>
 
+<p><strong><a href="https://infinuts.github.io/port2browser/">Play the live SDL Beacon demo</a></strong> · No SDK installation needed.</p>
+
 <p>An open-source skill for understanding game files, choosing a porting route,<br/>and building a browser version you can actually play.</p>
 
 <p>
@@ -36,6 +38,23 @@ When the files are not enough, the result is a concrete explanation of what is m
 
 The repository contains a portable `SKILL.md`, focused technical references, and
 two optional Python helpers. Your agent uses its own tools to do the engineering.
+
+## What you get
+
+A small browser game you can interact with, plus a report stating exactly what
+was built, tested, and left unresolved. The original examples use generated
+shapes and sound, so you can inspect and share them.
+
+![SDL Beacon after collecting and saving](docs/images/sdl-beacon.png)
+
+From the [real SDL port report](examples/sdl-beacon/port-report.md):
+
+> Status: **playable slice** (one original scene; tested scope below).
+> Target: desktop Chromium/Firefox, keyboard, audio activation and durable saves.
+
+The live demo is that original example, not a claim that arbitrary game files
+convert automatically. [Try it](https://infinuts.github.io/port2browser/), then
+[inspect the source and reproduce it](examples/sdl-beacon/README.md).
 
 ## Quick start
 
@@ -109,6 +128,7 @@ They are optional development material; installing the skill needs none of their
 toolchains or Node packages.
 
 - [SDL Beacon](examples/sdl-beacon/README.md): shared native C and Wasm gameplay.
+- [Godot Beacon](examples/godot-beacon/README.md): native GDScript scene exported with the matching web runtime.
 - [Electron Beacon](examples/electron-beacon/README.md): filesystem/IPC desktop
   services adapted to browser storage and menu handling.
 
@@ -127,6 +147,8 @@ actual tested versions and limits. With Node.js 22+ and npm, optional automation
 ```sh
 npm ci
 npx playwright install chromium firefox
+# Build Godot with the pinned editor/templates first; see its README.
+python3 examples/godot-beacon/build.py web
 npm run test:browser
 ```
 
@@ -136,11 +158,12 @@ npm run test:browser
 | --- | --- | --- |
 | SDL2/C → Emscripten 4.0.16 / SDL2 2.32.8 | [Evaluated original example](examples/sdl-beacon/port-report.md) | Chromium 141.0.7390.37 / Firefox 142.0.1 on macOS 15.7.4; one scene, input, audio activation, focus, save/reload |
 | Electron 44.8.0 → browser JavaScript | [Evaluated original example](examples/electron-beacon/port-report.md) | Same browser versions/OS; gameplay plus menu and persistence; desktop filesystem/IPC smoke |
+| Godot 4.5.1 standard/GDScript → single-thread web export | [Evaluated original example](examples/godot-beacon/port-report.md) | Chromium 141.0.7390.37 / Firefox 142.0.1 on macOS 15.7.4; one scene, WebGL output, input, audio activation, save/reload |
 | Shipped Unity files without a project | [Blocked synthetic assessment](tests/evaluation-results/2026-10-16.md) | Missing editable project; filename clues remain inferred |
 | Godot descriptor with missing native dependency | [Blocked synthetic assessment](tests/evaluation-results/2026-10-16.md) | Missing source/web extension build; config format 5 is not an engine version |
 | Other engine exporters, emulation, open engines and reconstruction | Investigation only | No completed port bundled for these routes; verify the exact input/runtime |
 
-These are implementation regressions, not blind agent benchmarks. Manual
+The example checks are implementation regressions. The optional [paired agent evaluation harness](tools/evals/README.md) separately measures explicit skill invocation against the same tasks without the skill; see its [recorded pilot](tests/evaluation-results/paired/README.md). Manual
 listening, mobile/Safari, long sessions, and performance profiling are untested.
 Future CI runs attach their own browser versions and evidence. See the
 [evaluation checklists](tests/evaluation-expected/checklists.md) and

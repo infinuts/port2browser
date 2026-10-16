@@ -1,0 +1,23 @@
+{
+  "status": "blocked",
+  "engine": "unity",
+  "confidence": "inferred",
+  "evidence": [
+    "assessment/report.md",
+    "assessment/inspection.json",
+    "assessment/static-evidence.json"
+  ],
+  "blockers": [
+    "Supplied files are synthetic text placeholders; no usable runtime, game assets, source, or editable project exists in input/.",
+    "Actual engine version, dependencies, and licenses are unknown. A real game project is required to assess a browser export."
+  ],
+  "browser_tests": [
+    {
+      "browser": "Desktop browser (unspecified)",
+      "result": "untested",
+      "evidence": [
+        "assessment/report.md"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "status": "blocked",
+  "engine": "unity",
+  "confidence": "inferred",
+  "evidence": [
+    "inventory.json",
+    "assessment.md",
+    "input/README.txt",
+    "input/UnityPlayer.dll",
+    "input/Game_Data/globalgamemanagers"
+  ],
+  "blockers": [
+    "assessment.md"
+  ],
+  "browser_tests": [
+    {
+      "browser": "unspecified",
+      "result": "untested",
+      "evidence": [
+        "assessment.md"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "status",
+    "engine",
+    "confidence",
+    "evidence",
+    "blockers",
+    "browser_tests"
+  ],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "blocked",
+        "build_only",
+        "playable_slice"
+      ]
+    },
+    "engine": {
+      "type": "string",
+      "enum": [
+        "unity",
+        "javascript",
+        "unknown",
+        "other"
+      ]
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "confirmed",
+        "inferred",
+        "unknown"
+      ]
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "browser_tests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "browser",
+          "result",
+          "evidence"
+        ],
+        "properties": {
+          "browser": {
+            "type": "string"
+          },
+          "result": {
+            "type": "string",
+            "enum": [
+              "pass",
+              "fail",
+              "untested"
+            ]
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "date": "2026-10-16",
+  "os": "macOS 15.7.4 arm64",
+  "godot": "4.5.1.stable.official.f62fdbde1",
+  "playwright": "1.56.1",
+  "source_sha256": {
+    "main.tscn": "b7b7999afd9224348e1f8f86632ac4c68b85c51b1dfb1900cc3ab6364860e6dc",
+    "build.py": "375241b7af317589a976eb58611c32b80eb5c0fe03e7c2accd0c15d425f99021",
+    "shell.html": "2135ab7eb9c9d2340f3f72fa3d1b873c32d6c79a72f82db254396b5eaed3056a",
+    "project.godot": "398d775f157ee63554b8ac6d8771759c9f08630e3296f030e66d291ef14126ad",
+    "export_presets.cfg": "95b4712f0e32691b2944be344842daf22d844131a5e98899b3e6351387f63bc9",
+    "game.gd": "c74af5e92d6d8b910389dd74fb4d2182f520c10a8d08e1f0222e03d32ede904d"
+  },
+  "tests": [
+    {
+      "project": "chromium",
+      "status": "expected",
+      "gameplay-evidence": {
+        "browser": "141.0.7390.37",
+        "state": {
+          "collected": 1,
+          "saves": 1,
+          "saving": 0,
+          "sounds": 1,
+          "started": 1,
+          "x": 132,
+          "audioState": "running"
+        },
+        "manualListening": "untested"
+      },
+      "browser-log": {
+        "logs": [
+          "log: Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org",
+          "log: OpenGL API OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium)) - Compatibility - Using Device: WebKit - WebKit WebGL",
+          "log: Build configuration: Emscripten 4.0.10, single-threaded, no GDExtension support.",
+          "warning: [.WebGL-0x12c00500200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+          "warning: [.WebGL-0x12c00502600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+          "warning: [.WebGL-0x12c00502600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+          "warning: [.WebGL-0x12c00502600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)",
+          "log: Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org",
+          "log: OpenGL API OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium)) - Compatibility - Using Device: WebKit - WebKit WebGL",
+          "log: Build configuration: Emscripten 4.0.10, single-threaded, no GDExtension support."
+        ],
+        "errors": [],
+        "navigationAborts": []
+      }
+    },
+    {
+      "project": "firefox",
+      "status": "expected",
+      "gameplay-evidence": {
+        "browser": "142.0.1",
+        "state": {
+          "collected": 1,
+          "saves": 1,
+          "saving": 0,
+          "sounds": 1,
+          "started": 1,
+          "x": 132,
+          "audioState": "running"
+        },
+        "manualListening": "untested"
+      },
+      "browser-log": {
+        "logs": [
+          "warning: [JavaScript Warning: \"The WebAssembly exception handling 'try' instruction is deprecated and should no longer be used. Please recompile to use the 'try_table' instruction instead.\"]",
+          "log: Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org",
+          "log: OpenGL API OpenGL ES 3.0 (WebGL 2.0) - Compatibility - Using Device: Mozilla - Apple M1, or similar",
+          "log: Build configuration: Emscripten 4.0.10, single-threaded, no GDExtension support.",
+          "warning: [JavaScript Warning: \"WebGL warning: drawElementsInstanced: Drawing without vertex attrib 0 array enabled forces the browser to do expensive emulation work when running on desktop OpenGL platforms, for example on Mac. It is preferable to always draw with vertex attrib 0 array enabled, by using bindAttribLocation to bind some always-used attribute to location 0.\"]",
+          "warning: [JavaScript Warning: \"The WebAssembly exception handling 'try' instruction is deprecated and should no longer be used. Please recompile to use the 'try_table' instruction instead.\"]",
+          "log: Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org",
+          "log: OpenGL API OpenGL ES 3.0 (WebGL 2.0) - Compatibility - Using Device: Mozilla - Apple M1, or similar",
+          "log: Build configuration: Emscripten 4.0.10, single-threaded, no GDExtension support.",
+          "warning: [JavaScript Warning: \"WebGL warning: drawElementsInstanced: Drawing without vertex attrib 0 array enabled forces the browser to do expensive emulation work when running on desktop OpenGL platforms, for example on Mac. It is preferable to always draw with vertex attrib 0 array enabled, by using bindAttribLocation to bind some always-used attribute to location 0.\"]"
+        ],
+        "errors": [],
+        "navigationAborts": []
+      }
+    }
+  ]
+}

@@ -15,7 +15,8 @@ git diff --check
 
 For examples, browser platform guidance or server changes, also follow the
 [SDL build instructions](examples/sdl-beacon/README.md) and
-[Electron instructions](examples/electron-beacon/README.md), then run:
+[Electron instructions](examples/electron-beacon/README.md), and the
+[Godot build instructions](examples/godot-beacon/README.md), then run:
 
 ```sh
 npm ci
@@ -23,7 +24,8 @@ npx playwright install chromium firefox
 npm run test:browser
 ```
 
-Browser CI builds native and web SDL, runs Electron IPC smoke, and exercises both
+Browser CI builds native and web SDL, exports Godot and runs its native smoke,
+runs Electron IPC smoke, and exercises all three examples in both
 browsers. Linux Firefox needs an audio server: CI starts a PulseAudio null sink;
 a running audio context plus submitted samples is not manual listening evidence.
 Artifacts include logs, actual browser versions, screenshots and failure traces.
@@ -45,7 +47,7 @@ Keep changes focused; related tests/docs should accompany behavior changes.
 
 1. Run helper/distribution checks on Linux, Windows and macOS with Python 3.10/3.14.
 2. Build the original examples from a clean checkout and pass Chromium/Firefox
-   interactions plus native SDL and Electron filesystem/IPC smoke.
+   interactions plus native SDL/Godot and Electron filesystem/IPC smoke.
 3. Record evaluated skill/source revisions, tool/browser versions, test evidence,
    blockers and unrun agent scenarios. Review all distributable material's rights.
 4. Update CHANGELOG.md, create a version tag at the evaluated commit, and publish

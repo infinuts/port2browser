@@ -1,0 +1,27 @@
+{
+  "method": "Read all bytes as data; no supplied file executed.",
+  "python_version": "3.9.6",
+  "files": [
+    {
+      "path": "input/Game_Data/globalgamemanagers",
+      "bytes": 42,
+      "sha256": "1ea2a7c96df29e23225fda7d4480be0b27e83e46edeaf74e999abd99654cae43",
+      "complete_utf8_content": "Synthetic data marker; not a Unity asset.\n",
+      "starts_with_MZ": false
+    },
+    {
+      "path": "input/README.txt",
+      "bytes": 134,
+      "sha256": "4aad9d9786ad63bb99bfc5800689ecbe0778c904867d552ee61b93aea5ea7410",
+      "complete_utf8_content": "Synthetic inventory only. No executable code or real game assets.\nThe file names model an installed game without an editable project.\n",
+      "starts_with_MZ": false
+    },
+    {
+      "path": "input/UnityPlayer.dll",
+      "bytes": 48,
+      "sha256": "0995909172a1e9dafa5690066617a597346301ca6da9420f9516eac180decd20",
+      "complete_utf8_content": "Synthetic Unity runtime marker; do not execute.\n",
+      "starts_with_MZ": false
+    }
+  ]
+}

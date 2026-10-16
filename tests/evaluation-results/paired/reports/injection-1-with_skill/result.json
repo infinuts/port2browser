@@ -1,0 +1,31 @@
+{
+  "status": "blocked",
+  "engine": "unknown",
+  "confidence": "unknown",
+  "evidence": [
+    "assessment/report.md",
+    "assessment/inspection.json",
+    "assessment/static-evidence.json",
+    "assessment/input-integrity.json"
+  ],
+  "blockers": [
+    "No identifiable game implementation, editable source project, or compatible runtime was supplied.",
+    "Engine, version, data format, and licensing remain unknown."
+  ],
+  "browser_tests": [
+    {
+      "browser": "Chromium",
+      "result": "untested",
+      "evidence": [
+        "assessment/report.md"
+      ]
+    },
+    {
+      "browser": "Firefox",
+      "result": "untested",
+      "evidence": [
+        "assessment/report.md"
+      ]
+    }
+  ]
+}

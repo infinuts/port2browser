@@ -1,0 +1,4 @@
+{
+  "chromium": {"result": "untested", "reason": "No browser session run; no browser evidence retained."},
+  "firefox": {"result": "untested", "reason": "No browser session run; no browser evidence retained."}
+}

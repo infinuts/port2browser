@@ -1,9 +1,9 @@
 name: Browser examples
 on:
   push:
-    paths: ['examples/**', 'README.md', 'CONTRIBUTING.md', 'CHANGELOG.md', 'SKILL.md', 'references/**', 'tests/scenarios.md', 'tests/evaluation-*/**', 'tests/browser/**', 'playwright.config.js', 'package*.json', 'scripts/serve.py', '.github/workflows/examples.yml']
+    paths: ['tools/evals/**', 'examples/**', 'README.md', 'CONTRIBUTING.md', 'CHANGELOG.md', 'SKILL.md', 'references/**', 'tests/scenarios.md', 'tests/evaluation-*/**', 'tests/browser/**', 'playwright.config.js', 'package*.json', 'scripts/serve.py', '.github/workflows/examples.yml']
   pull_request:
-    paths: ['examples/**', 'README.md', 'CONTRIBUTING.md', 'CHANGELOG.md', 'SKILL.md', 'references/**', 'tests/scenarios.md', 'tests/evaluation-*/**', 'tests/browser/**', 'playwright.config.js', 'package*.json', 'scripts/serve.py', '.github/workflows/examples.yml']
+    paths: ['tools/evals/**', 'examples/**', 'README.md', 'CONTRIBUTING.md', 'CHANGELOG.md', 'SKILL.md', 'references/**', 'tests/scenarios.md', 'tests/evaluation-*/**', 'tests/browser/**', 'playwright.config.js', 'package*.json', 'scripts/serve.py', '.github/workflows/examples.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -38,6 +38,17 @@ jobs:
           git clone --depth 1 https://github.com/emscripten-core/emsdk.git "$RUNNER_TEMP/emsdk"
           "$RUNNER_TEMP/emsdk/emsdk" install 4.0.16
           "$RUNNER_TEMP/emsdk/emsdk" activate 4.0.16
+      - name: Install Godot 4.5.1 standard editor and single-thread web template
+        run: |
+          cd "$RUNNER_TEMP"
+          curl -fsSL https://github.com/godotengine/godot-builds/releases/download/4.5.1-stable/Godot_v4.5.1-stable_linux.x86_64.zip -o godot.zip
+          echo "5bccbed65a94b82c7c319fdb15719ee8113a6e503976cc54e16f1c61fe95f3d74e5e40b8449b5bb89ff7f424574c20af01a4f5ef08b389e4dc338b245185b0b9  godot.zip" | sha512sum --check
+          unzip -q godot.zip -d godot
+          curl -fsSL https://github.com/godotengine/godot-builds/releases/download/4.5.1-stable/Godot_v4.5.1-stable_export_templates.tpz -o templates.tpz
+          echo "8a65c73541184fbcf1a7afedb37c9c15ed0f3babdaafe36ff47ccc515548ac84bc7563ba5b94c253e6085b121ac608b7e03d35dfc0b2c8c690a646a8755b57e5  templates.tpz" | sha512sum --check
+          unzip -p templates.tpz templates/web_nothreads_release.zip > godot/web_nothreads_release.zip
+          echo "GODOT=$RUNNER_TEMP/godot/Godot_v4.5.1-stable_linux.x86_64" >> "$GITHUB_ENV"
+          echo "GODOT_WEB_TEMPLATE=$RUNNER_TEMP/godot/web_nothreads_release.zip" >> "$GITHUB_ENV"
       - name: Build native and web
         shell: bash
         run: |
@@ -45,6 +56,8 @@ jobs:
           python examples/sdl-beacon/build.py native
           SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy P2B_SAVE_PATH="$RUNNER_TEMP/beacon-save.txt" examples/sdl-beacon/build/native/beacon --smoke
           python examples/sdl-beacon/build.py web
+          python examples/godot-beacon/build.py native-smoke
+          python examples/godot-beacon/build.py web
       - name: Electron filesystem and IPC smoke
         run: |
           npm ci --prefix examples/electron-beacon/desktop
