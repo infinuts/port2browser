@@ -1,0 +1,61 @@
+name: Browser examples
+on:
+  push:
+    paths: ['examples/**', 'tests/browser/**', 'playwright.config.js', 'package*.json', 'scripts/serve.py', '.github/workflows/examples.yml']
+  pull_request:
+    paths: ['examples/**', 'tests/browser/**', 'playwright.config.js', 'package*.json', 'scripts/serve.py', '.github/workflows/examples.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Install development tools
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium firefox
+          curl -fsSL https://www.libsdl.org/release/SDL2-2.32.10.tar.gz -o "$RUNNER_TEMP/SDL2.tar.gz"
+          echo "5f5993c530f084535c65a6879e9b26ad441169b3e25d789d83287040a9ca5165  $RUNNER_TEMP/SDL2.tar.gz" | sha256sum --check
+          tar -xzf "$RUNNER_TEMP/SDL2.tar.gz" -C "$RUNNER_TEMP"
+          cd "$RUNNER_TEMP/SDL2-2.32.10"
+          ./configure --prefix="$RUNNER_TEMP/sdl2" --disable-shared --enable-static
+          make -j2
+          make install
+          echo "$RUNNER_TEMP/sdl2/bin" >> "$GITHUB_PATH"
+          cd "$GITHUB_WORKSPACE"
+          git clone --depth 1 https://github.com/emscripten-core/emsdk.git "$RUNNER_TEMP/emsdk"
+          "$RUNNER_TEMP/emsdk/emsdk" install 4.0.16
+          "$RUNNER_TEMP/emsdk/emsdk" activate 4.0.16
+      - name: Build native and web
+        shell: bash
+        run: |
+          source "$RUNNER_TEMP/emsdk/emsdk_env.sh"
+          python examples/sdl-beacon/build.py native
+          SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy P2B_SAVE_PATH="$RUNNER_TEMP/beacon-save.txt" examples/sdl-beacon/build/native/beacon --smoke
+          python examples/sdl-beacon/build.py web
+      - name: Start virtual audio output for Firefox
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pulseaudio
+          pulseaudio --start --exit-idle-time=-1
+          pactl load-module module-null-sink sink_name=ci
+          pactl set-default-sink ci
+      - name: Browser interactions
+        run: npm run test:browser
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-evidence
+          path: test-results/

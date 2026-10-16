@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+<title>SDL Beacon</title><link rel="icon" href="data:,">
+<style>body{font:18px system-ui;background:#0f172a;color:#e2e8f0;max-width:48rem;margin:3rem auto}canvas{width:640px;max-width:100%;image-rendering:pixelated;border:2px solid #64748b}button{font:inherit;padding:.6rem}output{display:block;padding:1rem 0}</style>
+<h1>SDL Beacon</h1><p>Arrows: move one step per press. Space: collect the beacon. S: save.</p>
+<button id="start" disabled>Start audio and play</button>
+<output id="status" aria-live="polite">Loading…</output>
+<canvas id="canvas" width="320" height="180" tabindex="0" aria-label="Beacon game"></canvas>
+<script>
+const canvas = document.querySelector('#canvas');
+const status = document.querySelector('#status');
+const start = document.querySelector('#start');
+var Module = {
+  canvas,
+  preRun: [function() {
+    addRunDependency('restore-saves');
+    FS.mkdir('/saves'); FS.mount(IDBFS, {}, '/saves');
+    FS.syncfs(true, function(error) {
+      if (error) { status.textContent = 'Storage unavailable; reload to retry.'; console.error(error); return; }
+      removeRunDependency('restore-saves');
+    });
+  }],
+  onRuntimeInitialized() {
+    start.disabled = false;
+    requestAnimationFrame(update);
+  },
+  onAbort(reason) { status.textContent = 'Startup failed: ' + reason; }
+};
+window.exampleState = function() {
+  return {x: Module._game_x(), collected: Module._game_collected(), started: Module._game_started(),
+    sounds: Module._game_sounds(), queued: Module._game_queued(), saving: Module._game_saving(), saves: Module._game_saves(),
+    audioState: Module.SDL2?.audioContext ? Module.SDL2.audioContext.state : 'unavailable'};
+};
+function update() {
+  const state = window.exampleState();
+  status.textContent = `Position ${state.x} · Beacon ${state.collected ? 'collected' : 'waiting'} · Save ${state.saving === 1 ? 'pending' : state.saving === -1 ? 'failed' : 'ready'}`;
+  requestAnimationFrame(update);
+}
+start.onclick = async function() {
+  try { await Module.SDL2.audioContext.resume(); Module._game_start(); canvas.focus(); }
+  catch (error) { status.textContent = 'Audio failed'; console.error(error); }
+};
+canvas.addEventListener('keydown', event => { if (['ArrowLeft','ArrowRight',' '].includes(event.key)) event.preventDefault(); });
+</script>
+{{{ SCRIPT }}}
+</html>
