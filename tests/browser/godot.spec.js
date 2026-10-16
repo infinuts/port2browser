@@ -2,13 +2,28 @@ const {test, expect} = require('@playwright/test');
 const {PNG} = require('pngjs');
 test('Godot native exporter: gameplay, audio and user:// persistence', async ({page,browser},testInfo) => {
   test.setTimeout(90000);
-  const errors=[], logs=[], navigationAborts=[];
+  const errors=[], logs=[], navigationAborts=[], wasmStreamCancellations=[];
+  const responses=new Map();
   let reloading=false;
   page.on('pageerror',e=>errors.push(e.message));
   page.on('console',e=>logs.push(`${e.type()}: ${e.text()}`));
-  page.on('requestfailed',r=>{
-    const failure=`${r.url()}: ${r.failure()?.errorText}`;
-    if(reloading && /ERR_ABORTED|NS_BINDING_ABORTED/.test(r.failure()?.errorText || '')) navigationAborts.push(failure);
+  page.on('response',response=>{
+    responses.set(response.request(),response);
+    if(response.status()>=400) errors.push(`${response.status()} ${response.url()}`);
+  });
+  page.on('requestfailed',request=>{
+    const failure=`${request.url()}: ${request.failure()?.errorText}`;
+    const aborted=/^(net::ERR_ABORTED|NS_BINDING_ABORTED)$/.test(request.failure()?.errorText || '');
+    const response=responses.get(request);
+    // Godot 4.5.1 clones its streaming Wasm response before instantiation.
+    // Chromium can report cancellation of that stream even after HTTP 200.
+    // Keep this evidence separate: only this exact asset/MIME/status/abort is
+    // eligible, and the assertions below still require a running, rendered
+    // engine before AND after reload. Other transport and HTTP failures fail.
+    if(aborted && new URL(request.url()).pathname==='/godot-beacon/build/web/index.wasm' &&
+       response?.status()===200 && response.headers()['content-type']?.split(';')[0]==='application/wasm') {
+      wasmStreamCancellations.push({url:request.url(),status:response.status(),error:request.failure().errorText,duringReload:reloading});
+    } else if(reloading && aborted) navigationAborts.push(failure);
     else errors.push(failure);
   });
   try {
@@ -48,9 +63,14 @@ test('Godot native exporter: gameplay, audio and user:// persistence', async ({p
     await expect(page.locator('#status')).toContainText('Position 132',{timeout:60000});
     expect(await page.evaluate(()=>exampleState().collected)).toBe(1);
     reloading=false;
+    await expect.poll(async()=>{
+      const pixels=PNG.sync.read(await page.locator('canvas').screenshot());
+      const x=Math.floor(pixels.width*137/320), y=Math.floor(pixels.height*110/180);
+      return Array.from(pixels.data.subarray((y*pixels.width+x)*4,(y*pixels.width+x)*4+3));
+    },{timeout:10000}).toEqual([56,189,248]);
     expect(errors).toEqual([]);
     await testInfo.attach('gameplay-evidence',{body:JSON.stringify({browser:browser.version(),state,manualListening:'untested'}),contentType:'application/json'});
   } finally {
-    await testInfo.attach('browser-log',{body:JSON.stringify({logs,errors,navigationAborts}),contentType:'application/json'});
+    await testInfo.attach('browser-log',{body:JSON.stringify({logs,errors,navigationAborts,wasmStreamCancellations}),contentType:'application/json'});
   }
 });
