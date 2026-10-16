@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-16",
+  "os": "macOS 15.7.4 arm64",
+  "harness": "Codex implementation regression; not a blind agent evaluation",
+  "playwright": "1.56.1",
+  "source_sha256": {
+    "game.c": "f8c968a9cde54b83c92cabaafd80f8a298e7c352b0389d62496ef22a8a374717",
+    "shell.html": "785f7c8692d901e3160016214f109570f0bf169bcbc225ab1e1892102e41a3cc"
+  },
+  "tests": [
+    {
+      "project": "chromium",
+      "status": "expected",
+      "gameplay-evidence": {
+        "browser": "141.0.7390.37",
+        "startupMs": 348.40000009536743,
+        "state": {
+          "x": 132,
+          "collected": 1,
+          "started": 1,
+          "sounds": 1,
+          "queued": 0,
+          "saving": 0,
+          "saves": 1,
+          "audioState": "running"
+        },
+        "manualListening": "untested"
+      },
+      "browser-log": {
+        "logs": [
+          "warning: The ScriptProcessorNode is deprecated. Use AudioWorkletNode instead. (https://bit.ly/audio-worklet)",
+          "warning: The ScriptProcessorNode is deprecated. Use AudioWorkletNode instead. (https://bit.ly/audio-worklet)"
+        ],
+        "errors": []
+      }
+    },
+    {
+      "project": "firefox",
+      "status": "expected",
+      "gameplay-evidence": {
+        "browser": "142.0.1",
+        "startupMs": 499,
+        "state": {
+          "x": 132,
+          "collected": 1,
+          "started": 1,
+          "sounds": 1,
+          "queued": 0,
+          "saving": 0,
+          "saves": 1,
+          "audioState": "running"
+        },
+        "manualListening": "untested"
+      },
+      "browser-log": {
+        "logs": [],
+        "errors": []
+      }
+    }
+  ]
+}
