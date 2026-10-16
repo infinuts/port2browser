@@ -1,0 +1,29 @@
+name: Reproducible problem
+description: Report a helper, workflow or example regression.
+body:
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and actual behavior
+      description: Include the smallest input or interaction sequence that reproduces the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: versions
+    attributes:
+      label: Versions and environment
+      description: Skill revision, Python, OS, agent/harness, engine/SDK, and exact browser versions as applicable.
+    validations:
+      required: true
+  - type: textarea
+    id: commands
+    attributes:
+      label: Commands and evidence
+      description: Build/run commands, errors, inspection warnings/limits/completeness, and browser logs or screenshots. Review private paths before sharing.
+    validations:
+      required: true
+  - type: textarea
+    id: limits
+    attributes:
+      label: Untested areas or blockers
+      description: Missing resources, unavailable browsers, and whether this is synthetic or a real project. Keep proprietary files out of the report.
