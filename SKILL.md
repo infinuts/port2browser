@@ -42,6 +42,11 @@ Map the entry point, main loop, renderer, audio layer, input, saves, threading,
 networking, and OS calls. Cite file paths, symbols, or observations; label each
 finding as confirmed, inferred, or unknown. A filename match alone is a clue.
 
+For a bounded first pass, run `python <skill-dir>/scripts/inspect_game.py
+<game-directory>`. It reads names, metadata and small header/manifest samples;
+it does not execute games or extract archives. Review warnings and scan limits.
+Its candidates are leads to verify, not compatibility or licensing findings.
+
 Read [Approach and engine selection](references/approaches.md). Confirm the exact
 engine/runtime version against its matching upstream documentation. Multiple
 engines may appear in launchers, tools, or bundled samples; identify the game.
@@ -78,6 +83,9 @@ Preserve gameplay and data formats where practical. Add a browser platform layer
 or engine configuration instead of scattering browser checks through game logic.
 Adapt rendering and shaders, frame scheduling, audio activation, controls,
 asset loading, persistent saves, and any threads or networking the slice uses.
+Read [Browser platform adaptation](references/browser-platform.md) for the
+subsystems that apply, and [Build and test](references/build-and-test.md) for
+toolchain patterns and symptom-driven troubleshooting.
 Keep the native build working when source is available; use small, reversible
 commits and keep toolchain/version choices reproducible.
 
@@ -99,3 +107,9 @@ Report the result as **playable slice**, **tested port** (state tested scope),
 steps, evidence, known regressions, and the next useful step. Mark tests that
 could not be run explicitly. Never invent browser results or infer whole-game
 compatibility from a single scene.
+
+Use the compact [port report template](references/port-report.md) for a durable
+handoff, trimming fields that do not apply. Store it in the port project, not in
+the installed skill. For local output, `python <skill-dir>/scripts/serve.py
+<build-directory>` provides a loopback test server; add `--isolate` only when
+the runtime needs cross-origin isolation. See the build reference for limits.
