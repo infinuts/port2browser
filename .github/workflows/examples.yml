@@ -45,6 +45,13 @@ jobs:
           python examples/sdl-beacon/build.py native
           SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy P2B_SAVE_PATH="$RUNNER_TEMP/beacon-save.txt" examples/sdl-beacon/build/native/beacon --smoke
           python examples/sdl-beacon/build.py web
+      - name: Start virtual audio output for Firefox
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pulseaudio
+          pulseaudio --start --exit-idle-time=-1
+          pactl load-module module-null-sink sink_name=ci
+          pactl set-default-sink ci
       - name: Browser interactions
         run: npm run test:browser
       - uses: actions/upload-artifact@v4
