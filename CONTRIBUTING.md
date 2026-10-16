@@ -28,6 +28,9 @@ Browser CI builds native and web SDL, exports Godot and runs its native smoke,
 runs Electron IPC smoke, and exercises all three examples in both
 browsers. Linux Firefox needs an audio server: CI starts a PulseAudio null sink;
 a running audio context plus submitted samples is not manual listening evidence.
+Linux CI uses headed browsers under Xvfb and Mesa software rendering because the
+runner's headless Firefox disallows WebGL 2. Pixel assertions still verify the
+rendered game. See [Playwright CI guidance](https://playwright.dev/docs/ci).
 Artifacts include logs, actual browser versions, screenshots and failure traces.
 Do not skip a failing check to establish compatibility.
 
