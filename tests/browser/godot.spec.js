@@ -20,10 +20,13 @@ test('Godot native exporter: gameplay, audio and user:// persistence', async ({p
     for(let i=0;i<8;i++) await page.keyboard.press('ArrowRight');
     await expect.poll(()=>page.evaluate(()=>exampleState().x)).toBe(120);
     // Screenshot reads the rendered WebGL output, without relying on a 2D context.
-    const pixels=PNG.sync.read(await page.locator('canvas').screenshot());
-    const x=Math.floor(pixels.width*125/320), y=Math.floor(pixels.height*110/180);
-    const rgb=Array.from(pixels.data.subarray((y*pixels.width+x)*4,(y*pixels.width+x)*4+3));
-    expect(rgb).toEqual([56,189,248]);
+    // State publication can precede the next WebGL presentation on CI Firefox.
+    // Poll the rendered pixel itself; state alone never satisfies this assertion.
+    await expect.poll(async()=>{
+      const pixels=PNG.sync.read(await page.locator('canvas').screenshot());
+      const x=Math.floor(pixels.width*125/320), y=Math.floor(pixels.height*110/180);
+      return Array.from(pixels.data.subarray((y*pixels.width+x)*4,(y*pixels.width+x)*4+3));
+    },{timeout:10000}).toEqual([56,189,248]);
     await page.keyboard.press('Space');
     await expect.poll(()=>page.evaluate(()=>exampleState().collected)).toBe(1);
     await expect.poll(()=>page.evaluate(()=>exampleState().sounds)).toBe(1);
