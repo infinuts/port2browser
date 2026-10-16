@@ -6,12 +6,16 @@ import sys
 import tempfile
 from threading import Thread
 import unittest
+from unittest.mock import patch
 
-from scripts.serve import make_server
+from scripts.serve import GameHandler, make_server
 
 
 class ServerTests(unittest.TestCase):
     def setUp(self):
+        logger = patch.object(GameHandler, "log_message")
+        logger.start()
+        self.addCleanup(logger.stop)
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name) / "build"

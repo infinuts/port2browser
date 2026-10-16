@@ -152,6 +152,10 @@ Run the helper and packaging tests with the standard library:
 python -m unittest discover -s tests -v
 ```
 
+GitHub Actions runs the same suite on Windows and Linux with Python 3.10 and
+3.14. It checks the helper behavior, local documentation links, manifest fields,
+and a minimal copied install launched from another directory.
+
 For changes to the workflow, also use the [manual evaluation cases](tests/scenarios.md).
 Automated helper tests cannot establish that an agent can port an arbitrary game.
 Keep existing helper arguments and JSON fields compatible; add fields within
