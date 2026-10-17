@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+- Add Mosslight, an original C++/SDL exploration game with hazards, collectibles,
+  generated art/audio, completion and durable saves, as the live demo.
+- Add measured debug/release/gzip size comparisons and a static-host decoder.
+- Extend the skill with content/code/asset size reduction, Brotli/gzip hosting,
+  demand-loading and honest transfer/memory accounting guidance.
+
 ## v0.1.0-rc.1 — 2026-10-16
 
 First evaluation candidate; the four ordered improvement PRs await review.

@@ -36,6 +36,9 @@ only for a demonstrated synchronous-call migration need; measure its cost.
 Choose memory limits/growth from observed requirements and the target devices.
 Never treat raising the heap limit as proof of acceptable peak memory.
 
+For measured release-size reduction, asset optimization and compressed hosting,
+read [Size and compression](size-and-compression.md).
+
 ## Serve the output
 
 The optional helper uses Python 3.10+ and the standard library:

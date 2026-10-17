@@ -1,9 +1,9 @@
 name: Browser examples
 on:
   push:
-    paths: ['tools/evals/**', 'examples/**', 'README.md', 'CONTRIBUTING.md', 'CHANGELOG.md', 'SKILL.md', 'references/**', 'tests/scenarios.md', 'tests/evaluation-*/**', 'tests/browser/**', 'playwright.config.js', 'package*.json', 'scripts/serve.py', '.github/workflows/examples.yml']
+    paths: ['tools/build_demo.py', 'tools/evals/**', 'examples/**', 'README.md', 'CONTRIBUTING.md', 'CHANGELOG.md', 'SKILL.md', 'references/**', 'tests/scenarios.md', 'tests/evaluation-*/**', 'tests/browser/**', 'playwright.config.js', 'package*.json', 'scripts/serve.py', '.github/workflows/examples.yml']
   pull_request:
-    paths: ['tools/evals/**', 'examples/**', 'README.md', 'CONTRIBUTING.md', 'CHANGELOG.md', 'SKILL.md', 'references/**', 'tests/scenarios.md', 'tests/evaluation-*/**', 'tests/browser/**', 'playwright.config.js', 'package*.json', 'scripts/serve.py', '.github/workflows/examples.yml']
+    paths: ['tools/build_demo.py', 'tools/evals/**', 'examples/**', 'README.md', 'CONTRIBUTING.md', 'CHANGELOG.md', 'SKILL.md', 'references/**', 'tests/scenarios.md', 'tests/evaluation-*/**', 'tests/browser/**', 'playwright.config.js', 'package*.json', 'scripts/serve.py', '.github/workflows/examples.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -56,6 +56,11 @@ jobs:
           python examples/sdl-beacon/build.py native
           SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy P2B_SAVE_PATH="$RUNNER_TEMP/beacon-save.txt" examples/sdl-beacon/build/native/beacon --smoke
           python examples/sdl-beacon/build.py web
+          python examples/mosslight/build.py native
+          SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy P2B_SAVE_PATH="$RUNNER_TEMP/mosslight-save.txt" examples/mosslight/build/native/mosslight --smoke
+          python examples/mosslight/build.py debug-web
+          python examples/mosslight/build.py web
+          python tools/build_demo.py --output examples/mosslight/build/demo
           python examples/godot-beacon/build.py native-smoke
           python examples/godot-beacon/build.py web
       - name: Electron filesystem and IPC smoke

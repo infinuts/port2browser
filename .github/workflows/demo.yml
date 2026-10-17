@@ -1,10 +1,10 @@
-name: Live SDL demo
+name: Live game demo
 on:
   push:
     branches: [main, codex/demo-evals-godot]
-    paths: ['examples/sdl-beacon/**', 'tools/build_demo.py', '.github/workflows/demo.yml']
+    paths: ['examples/sdl-beacon/**', 'examples/mosslight/**', 'tools/build_demo.py', '.github/workflows/demo.yml']
   pull_request:
-    paths: ['examples/sdl-beacon/**', 'tools/build_demo.py', '.github/workflows/demo.yml']
+    paths: ['examples/sdl-beacon/**', 'examples/mosslight/**', 'tools/build_demo.py', '.github/workflows/demo.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -30,6 +30,8 @@ jobs:
           "$RUNNER_TEMP/emsdk/emsdk" activate 4.0.16
           source "$RUNNER_TEMP/emsdk/emsdk_env.sh"
           python examples/sdl-beacon/build.py web
+          python examples/mosslight/build.py debug-web
+          python examples/mosslight/build.py web
           python tools/build_demo.py
       - uses: actions/upload-pages-artifact@v4
         with:

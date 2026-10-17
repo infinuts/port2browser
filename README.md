@@ -4,7 +4,7 @@
 
 <h3>Bring offline games to the browser with your coding agent.</h3>
 
-<p><strong><a href="https://infinuts.github.io/port2browser/">Play the live SDL Beacon demo</a></strong> · No SDK installation needed.</p>
+<p><strong><a href="https://infinuts.github.io/port2browser/">Play Mosslight — the live island adventure</a></strong> · No SDK installation needed.</p>
 
 <p>An open-source skill for understanding game files, choosing a porting route,<br/>and building a browser version you can actually play.</p>
 
@@ -45,16 +45,18 @@ A small browser game you can interact with, plus a report stating exactly what
 was built, tested, and left unresolved. The original examples use generated
 shapes and sound, so you can inspect and share them.
 
-![SDL Beacon after collecting and saving](docs/images/sdl-beacon.png)
+![Mosslight after restoring the island lighthouse](docs/images/mosslight.png)
 
-From the [real SDL port report](examples/sdl-beacon/port-report.md):
+From the [Mosslight port report](examples/mosslight/port-report.md):
 
-> Status: **playable slice** (one original scene; tested scope below).
-> Target: desktop Chromium/Firefox, keyboard, audio activation and durable saves.
+> Status: **playable slice** — complete original island game, tested scope below.
+> Target: desktop Chromium and Firefox; native C++ and raw/compressed Wasm.
 
-The live demo is that original example, not a claim that arbitrary game files
-convert automatically. [Try it](https://infinuts.github.io/port2browser/), then
-[inspect the source and reproduce it](examples/sdl-beacon/README.md).
+Explore, collect three sunstones, avoid thorns, and restore the lighthouse. The
+live demo runs locally in your browser, with generated artwork/sound and durable
+saves. [Try it](https://infinuts.github.io/port2browser/), then
+[reproduce the C++ port and compressed release](examples/mosslight/README.md).
+It demonstrates one original game, not automatic conversion of arbitrary files.
 
 ## Quick start
 
@@ -127,7 +129,8 @@ The examples use original MIT code, generated shapes, and generated sound.
 They are optional development material; installing the skill needs none of their
 toolchains or Node packages.
 
-- [SDL Beacon](examples/sdl-beacon/README.md): shared native C and Wasm gameplay.
+- [Mosslight](examples/mosslight/README.md): playable C++ island adventure, raw/optimized/gzip size comparison, native and compressed browser builds.
+- [SDL Beacon](examples/sdl-beacon/README.md): minimal native C and Wasm regression fixture.
 - [Godot Beacon](examples/godot-beacon/README.md): native GDScript scene exported with the matching web runtime.
 - [Electron Beacon](examples/electron-beacon/README.md): filesystem/IPC desktop
   services adapted to browser storage and menu handling.
@@ -149,6 +152,9 @@ npm ci
 npx playwright install chromium firefox
 # Build Godot with the pinned editor/templates first; see its README.
 python3 examples/godot-beacon/build.py web
+python3 examples/mosslight/build.py debug-web
+python3 examples/mosslight/build.py web
+python3 tools/build_demo.py --output examples/mosslight/build/demo
 npm run test:browser
 ```
 
@@ -156,6 +162,7 @@ npm run test:browser
 
 | Route | Evidence level | Tested scope |
 | --- | --- | --- |
+| C++/SDL2 → optimized/gzip Wasm | [Evaluated Mosslight adventure](examples/mosslight/port-report.md) | Chromium/Firefox versions and measured sizes in report; collision, three collectibles, hazards, completion, audio activation, focus, durable saves, corrupt-package rejection |
 | SDL2/C → Emscripten 4.0.16 / SDL2 2.32.8 | [Evaluated original example](examples/sdl-beacon/port-report.md) | Chromium 141.0.7390.37 / Firefox 142.0.1 on macOS 15.7.4; one scene, input, audio activation, focus, save/reload |
 | Electron 44.8.0 → browser JavaScript | [Evaluated original example](examples/electron-beacon/port-report.md) | Same browser versions/OS; gameplay plus menu and persistence; desktop filesystem/IPC smoke |
 | Godot 4.5.1 standard/GDScript → single-thread web export | [Evaluated original example](examples/godot-beacon/port-report.md) | Chromium 141.0.7390.37 / Firefox 142.0.1 on macOS 15.7.4; one scene, WebGL output, input, audio activation, save/reload |
