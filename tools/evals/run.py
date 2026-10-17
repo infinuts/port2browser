@@ -23,6 +23,15 @@ def sha_tree(root):
             for p in sorted(root.rglob('*')) if p.is_file() and '.git' not in p.parts}
 
 
+def copy_skill_bundle(install):
+    """Copy the treatment only, including locally routed task modules."""
+    install.mkdir(parents=True)
+    for file in ('SKILL.md', 'LICENSE'):
+        shutil.copy2(ROOT/file, install/file)
+    for directory in ('references', 'scripts', 'skills'):
+        shutil.copytree(ROOT/directory, install/directory, ignore=shutil.ignore_patterns('__pycache__'))
+
+
 def validate_result(value):
     if not isinstance(value, dict) or set(value) != {'status','engine','confidence','evidence','blockers','browser_tests'}:
         raise ValueError('missing or unexpected result fields')
@@ -176,6 +185,7 @@ def main(argv=None):
     version=subprocess.check_output([args.codex,'--version'],text=True).strip()
     revision=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     skill_hash=sha_tree(ROOT/'references')
+    skill_hash.update({'skills/'+k:v for k,v in sha_tree(ROOT/'skills').items() if '__pycache__' not in k})
     for name in ['SKILL.md', 'LICENSE']:
         skill_hash[name]=hashlib.sha256((ROOT/name).read_bytes()).hexdigest()
     records=[]
@@ -191,10 +201,8 @@ def main(argv=None):
             original=sha_tree(workspace/'input')
             text=prompt(case)
             if condition=='with_skill':
-                install=workspace/'.agents/skills/port2browser';install.mkdir(parents=True)
-                for file in ['SKILL.md','LICENSE']: shutil.copy2(ROOT/file,install/file)
-                for directory in ['references','scripts']:
-                    shutil.copytree(ROOT/directory,install/directory,ignore=shutil.ignore_patterns('__pycache__'))
+                install=workspace/'.agents/skills/port2browser'
+                copy_skill_bundle(install)
                 text='Use $port2browser at .agents/skills/port2browser/SKILL.md for this request.\n'+text
             (evidence/'prompt.txt').write_text(text)
             shutil.copy2(ROOT/'tools/evals/result.schema.json',workspace/'result.schema.json')
