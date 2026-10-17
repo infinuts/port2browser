@@ -33,7 +33,7 @@ jobs:
           python examples/mosslight/build.py web
           python examples/assaultcube/build.py
           python tools/build_demo.py
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: work/demo
   deploy:
