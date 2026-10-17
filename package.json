@@ -7,7 +7,7 @@
     "test:verification": "node --test tests/verification/plan.test.cjs && python3 tools/test_verifier.py --output test-results/reusable-verifier"
   },
   "devDependencies": {
-    "@playwright/test": "1.56.1",
+    "@playwright/test": "1.64.1",
     "pngjs": "7.0.0"
   }
 }
