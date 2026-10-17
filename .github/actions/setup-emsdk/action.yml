@@ -1,0 +1,14 @@
+name: Pinned Emscripten SDK
+description: Install Emscripten 4.0.16 from an immutable emsdk checkout
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: |
+        git init "$RUNNER_TEMP/emsdk"
+        git -C "$RUNNER_TEMP/emsdk" remote add origin https://github.com/emscripten-core/emsdk.git
+        git -C "$RUNNER_TEMP/emsdk" fetch --depth 1 origin 1c9a998ee5dd2e38aec0c5abbf23dffdb8f10d57
+        git -C "$RUNNER_TEMP/emsdk" checkout --detach FETCH_HEAD
+        test "$(git -C "$RUNNER_TEMP/emsdk" rev-parse HEAD)" = 1c9a998ee5dd2e38aec0c5abbf23dffdb8f10d57
+        "$RUNNER_TEMP/emsdk/emsdk" install 4.0.16
+        "$RUNNER_TEMP/emsdk/emsdk" activate 4.0.16

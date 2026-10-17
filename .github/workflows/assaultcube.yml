@@ -1,9 +1,9 @@
 name: AssaultCube browser demo
 on:
   push:
-    paths: ['examples/assaultcube/**', 'tests/browser-assaultcube/**', 'playwright.assaultcube.config.js', 'tools/package_assaultcube.py', 'scripts/serve.py', 'package*.json', '.github/workflows/assaultcube.yml']
+    paths: ['examples/assaultcube/**', 'tests/browser-assaultcube/**', 'playwright.assaultcube.config.js', 'tools/package_assaultcube.py', 'scripts/serve.py', 'package*.json', '.github/workflows/assaultcube.yml', '.github/actions/setup-emsdk/**']
   pull_request:
-    paths: ['examples/assaultcube/**', 'tests/browser-assaultcube/**', 'playwright.assaultcube.config.js', 'tools/package_assaultcube.py', 'scripts/serve.py', 'package*.json', '.github/workflows/assaultcube.yml']
+    paths: ['examples/assaultcube/**', 'tests/browser-assaultcube/**', 'playwright.assaultcube.config.js', 'tools/package_assaultcube.py', 'scripts/serve.py', 'package*.json', '.github/workflows/assaultcube.yml', '.github/actions/setup-emsdk/**']
   workflow_dispatch:
 permissions:
   contents: read
@@ -32,11 +32,10 @@ jobs:
           pulseaudio --start --exit-idle-time=-1
           pactl load-module module-null-sink sink_name=browser_tests
           pactl set-default-sink browser_tests
+      - name: Install pinned Emscripten
+        uses: ./.github/actions/setup-emsdk
       - name: Build pinned offline client
         run: |
-          git clone --depth 1 https://github.com/emscripten-core/emsdk.git "$RUNNER_TEMP/emsdk"
-          "$RUNNER_TEMP/emsdk/emsdk" install 4.0.16
-          "$RUNNER_TEMP/emsdk/emsdk" activate 4.0.16
           source "$RUNNER_TEMP/emsdk/emsdk_env.sh"
           python examples/assaultcube/build.py
       - name: Play local game files in Chromium and Firefox

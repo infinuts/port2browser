@@ -1,9 +1,9 @@
 name: Browser examples
 on:
   push:
-    paths: ['tools/build_demo.py', 'tools/evals/**', 'examples/**', 'README.md', 'CONTRIBUTING.md', 'CHANGELOG.md', 'SKILL.md', 'skills/**', 'references/**', 'tests/scenarios.md', 'tests/evaluation-*/**', 'tests/browser/**', 'playwright.config.js', 'package*.json', 'scripts/serve.py', '.github/workflows/examples.yml']
+    paths: ['tools/build_demo.py', 'tools/evals/**', 'examples/**', 'README.md', 'CONTRIBUTING.md', 'CHANGELOG.md', 'SKILL.md', 'skills/**', 'references/**', 'tests/scenarios.md', 'tests/evaluation-*/**', 'tests/browser/**', 'playwright.config.js', 'package*.json', 'scripts/serve.py', 'scripts/size_report.py', '.github/workflows/examples.yml', '.github/actions/setup-emsdk/**']
   pull_request:
-    paths: ['tools/build_demo.py', 'tools/evals/**', 'examples/**', 'README.md', 'CONTRIBUTING.md', 'CHANGELOG.md', 'SKILL.md', 'skills/**', 'references/**', 'tests/scenarios.md', 'tests/evaluation-*/**', 'tests/browser/**', 'playwright.config.js', 'package*.json', 'scripts/serve.py', '.github/workflows/examples.yml']
+    paths: ['tools/build_demo.py', 'tools/evals/**', 'examples/**', 'README.md', 'CONTRIBUTING.md', 'CHANGELOG.md', 'SKILL.md', 'skills/**', 'references/**', 'tests/scenarios.md', 'tests/evaluation-*/**', 'tests/browser/**', 'playwright.config.js', 'package*.json', 'scripts/serve.py', 'scripts/size_report.py', '.github/workflows/examples.yml', '.github/actions/setup-emsdk/**']
   workflow_dispatch:
 permissions:
   contents: read
@@ -22,6 +22,8 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
+      - name: Install pinned Emscripten
+        uses: ./.github/actions/setup-emsdk
       - name: Install development tools
         run: |
           npm ci
@@ -35,9 +37,6 @@ jobs:
           make install
           echo "$RUNNER_TEMP/sdl2/bin" >> "$GITHUB_PATH"
           cd "$GITHUB_WORKSPACE"
-          git clone --depth 1 https://github.com/emscripten-core/emsdk.git "$RUNNER_TEMP/emsdk"
-          "$RUNNER_TEMP/emsdk/emsdk" install 4.0.16
-          "$RUNNER_TEMP/emsdk/emsdk" activate 4.0.16
       - name: Install Godot 4.5.1 standard editor and single-thread web template
         run: |
           cd "$RUNNER_TEMP"
@@ -78,6 +77,8 @@ jobs:
         env:
           LIBGL_ALWAYS_SOFTWARE: 1
         run: xvfb-run -a npm run test:browser -- --headed
+      - name: Record raw and candidate-gzip size accounting
+        run: python scripts/size_report.py examples/mosslight/build/demo > test-results/mosslight-size-report.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:

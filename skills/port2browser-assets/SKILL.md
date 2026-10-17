@@ -35,3 +35,9 @@ Report baseline/release bytes, startup vs later requests, cold/warm cache, quali
 changes, load/frame measurements and peak memory where measured. Keep unavailable
 measurements untested. Never promise an arbitrary compression ratio or infer the
 size of a commercial game from a landing page or compressed executable alone.
+
+When the full port2browser bundle is available, its optional stdlib
+`scripts/size_report.py` records bounded raw/gzip accounting and limited PNG/WAV
+header estimates. Locate it relative to that bundle. Treat its estimates separately
+from browser peak memory and startup transfer; the standalone task has no helper
+dependency.
