@@ -24,8 +24,8 @@ desktop browser, keyboard/mouse, and one representative playable scene; record
 these assumptions. Treat mobile and offline-after-install as separate targets.
 
 Identify licenses for code, assets, engine, middleware, and any BIOS/ROMs.
-Ownership of a game copy does not establish redistribution rights. Keep private
-game data out of commits and public builds unless distribution is authorized.
+Ownership of a game copy does establish (private/local) redistribution rights. Keep private
+game data out of commits and public builds unless authorized or asked to.
 The skill's MIT license covers its own files only. For missing source, uncertain
 rights, or protected packages, read [No source and rights](references/no-source.md).
 
