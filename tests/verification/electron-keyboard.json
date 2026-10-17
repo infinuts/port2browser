@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "state": {
+    "path": "exampleState",
+    "call": true
+  },
+  "canvas": "canvas",
+  "frame_samples": 60,
+  "steps": [
+    {
+      "action": "click",
+      "selector": "#start"
+    },
+    {
+      "action": "expect",
+      "values": {
+        "started": 1,
+        "audioState": "running"
+      }
+    },
+    {
+      "action": "press",
+      "key": "ArrowRight",
+      "count": 8
+    },
+    {
+      "action": "expect",
+      "values": {
+        "x": 120
+      }
+    },
+    {
+      "action": "pixel",
+      "point": [
+        0.4,
+        0.61
+      ],
+      "rgb": [
+        56,
+        189,
+        248
+      ],
+      "tolerance": 2
+    },
+    {
+      "action": "press",
+      "key": "Space"
+    },
+    {
+      "action": "expect",
+      "values": {
+        "collected": 1,
+        "sounds": 1
+      }
+    },
+    {
+      "action": "audio",
+      "min_starts": 1
+    },
+    {
+      "action": "canvas"
+    },
+    {
+      "action": "down",
+      "key": "ArrowRight"
+    },
+    {
+      "action": "focus",
+      "selector": "#start"
+    },
+    {
+      "action": "up",
+      "key": "ArrowRight"
+    },
+    {
+      "action": "expect",
+      "values": {
+        "x": 132
+      }
+    },
+    {
+      "action": "click",
+      "selector": "#menu"
+    },
+    {
+      "action": "text",
+      "selector": "#menu-result",
+      "contains": "Continue"
+    },
+    {
+      "action": "click",
+      "selector": "canvas"
+    },
+    {
+      "action": "press",
+      "key": "s"
+    },
+    {
+      "action": "expect",
+      "values": {
+        "saving": 0,
+        "saves": 1
+      }
+    },
+    {
+      "action": "capture"
+    },
+    {
+      "action": "reload",
+      "preserve": [
+        "x",
+        "collected"
+      ]
+    },
+    {
+      "action": "expect",
+      "values": {
+        "x": 132,
+        "collected": 1
+      }
+    },
+    {
+      "action": "canvas"
+    }
+  ]
+}

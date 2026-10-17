@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "results": [
+    {
+      "name": "chromium-desktop",
+      "result": "pass",
+      "browser_version": "141.0.7390.37",
+      "evidence": "chromium-desktop/evidence.json"
+    },
+    {
+      "name": "firefox-desktop",
+      "result": "pass",
+      "browser_version": "142.0.1",
+      "evidence": "firefox-desktop/evidence.json"
+    },
+    {
+      "name": "webkit-desktop",
+      "result": "pass",
+      "browser_version": "26.0",
+      "evidence": "webkit-desktop/evidence.json"
+    },
+    {
+      "name": "chromium-pixel-7",
+      "result": "pass",
+      "browser_version": "141.0.7390.37",
+      "evidence": "chromium-pixel-7/evidence.json"
+    },
+    {
+      "name": "webkit-iphone-13",
+      "result": "pass",
+      "browser_version": "26.0",
+      "evidence": "webkit-iphone-13/evidence.json"
+    }
+  ],
+  "negative_tests": {
+    "blank_canvas": "fail",
+    "wrong_state": "fail",
+    "missing_browser": "untested"
+  },
+  "limitations": [
+    "Physical devices, shipping Safari and manual listening remain untested.",
+    "These results cover this original Electron game only, not every engine or mobile game."
+  ]
+}

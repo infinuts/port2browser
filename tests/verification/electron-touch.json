@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "state": {
+    "path": "exampleState",
+    "call": true
+  },
+  "canvas": "canvas",
+  "frame_samples": 60,
+  "steps": [
+    {
+      "action": "tap",
+      "selector": "#start"
+    },
+    {
+      "action": "expect",
+      "values": {
+        "started": 1
+      }
+    },
+    {
+      "action": "tap",
+      "selector": "[data-action=\"ArrowRight\"]"
+    },
+    {
+      "action": "tap",
+      "selector": "[data-action=\"ArrowRight\"]"
+    },
+    {
+      "action": "tap",
+      "selector": "[data-action=\"ArrowRight\"]"
+    },
+    {
+      "action": "tap",
+      "selector": "[data-action=\"ArrowRight\"]"
+    },
+    {
+      "action": "tap",
+      "selector": "[data-action=\"ArrowRight\"]"
+    },
+    {
+      "action": "tap",
+      "selector": "[data-action=\"ArrowRight\"]"
+    },
+    {
+      "action": "tap",
+      "selector": "[data-action=\"ArrowRight\"]"
+    },
+    {
+      "action": "tap",
+      "selector": "[data-action=\"ArrowRight\"]"
+    },
+    {
+      "action": "expect",
+      "values": {
+        "x": 120
+      }
+    },
+    {
+      "action": "tap",
+      "selector": "[data-action=\" \"]"
+    },
+    {
+      "action": "expect",
+      "values": {
+        "collected": 1
+      }
+    },
+    {
+      "action": "audio",
+      "min_starts": 1
+    },
+    {
+      "action": "canvas"
+    },
+    {
+      "action": "focus",
+      "selector": "#menu"
+    },
+    {
+      "action": "tap",
+      "selector": "#menu"
+    },
+    {
+      "action": "text",
+      "selector": "#menu-result",
+      "contains": "Continue"
+    },
+    {
+      "action": "tap",
+      "selector": "[data-action=\"s\"]"
+    },
+    {
+      "action": "expect",
+      "values": {
+        "saving": 0,
+        "saves": 1
+      }
+    },
+    {
+      "action": "reload",
+      "preserve": [
+        "x",
+        "collected"
+      ]
+    },
+    {
+      "action": "expect",
+      "values": {
+        "x": 120,
+        "collected": 1
+      }
+    },
+    {
+      "action": "canvas"
+    }
+  ]
+}

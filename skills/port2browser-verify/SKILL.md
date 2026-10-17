@@ -33,3 +33,10 @@ build-only. Preserve failing evidence and state exact blockers. A claimed playab
 slice with broken gameplay, fabricated browser results or unsupported compatibility
 assertions fails evaluation. Handoff a scoped result, evidence paths, reproducible
 commands and the next useful check; broad engine support requires separate runs.
+
+For repeatable checks, use the optional [JSON-plan verifier](references/verification.md)
+with caller-provided Node/Playwright/pngjs and installed browser binaries. It
+records configured assertions, screenshots, Web Audio starts, full-reload state
+and limited timing data. Keep tool packages outside the installed skill. Its
+pass result covers the authored sequence, not automatic game compatibility;
+WebKit/device emulation is distinct from shipping Safari or physical devices.

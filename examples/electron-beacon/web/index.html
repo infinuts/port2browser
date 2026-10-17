@@ -6,6 +6,12 @@
 <button id="start" disabled>Start audio and play</button><button id="menu">Menu</button>
 <p id="menu-result" aria-live="polite"></p><output id="status" aria-live="polite">Loading…</output>
 <canvas width="320" height="180" tabindex="0" aria-label="Beacon game"></canvas>
+<nav aria-label="Touch controls">
+<button data-action="ArrowLeft" aria-label="Move left">←</button>
+<button data-action="ArrowRight" aria-label="Move right">→</button>
+<button data-action=" " aria-label="Collect beacon">Collect</button>
+<button data-action="s" aria-label="Save progress">Save</button>
+</nav>
 <script src="platform.js"></script>
 <script src="../game.js"></script>
 </html>

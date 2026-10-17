@@ -1,7 +1,8 @@
 # Contributing
 
 Keep the installed `SKILL.md`, `references/`, `scripts/`, `skills/`, and `LICENSE` portable.
-Optional example toolchains and browser automation belong in development files;
+Optional example toolchains and browser packages belong in development files;
+the copied verifier script requires explicitly supplied Node packages, while
 the Python helpers continue to require only Python 3.10+ and the standard library.
 Use original or appropriately licensed fixtures. Do not submit proprietary game
 data. Keep engine clues inferred until supported by evidence.

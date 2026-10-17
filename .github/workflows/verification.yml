@@ -1,0 +1,40 @@
+name: Reusable browser verification
+on:
+  push:
+    paths: ['skills/port2browser-verify/**', 'tests/verification/**', 'tools/test_verifier.py', 'tools/verify_examples.cjs', 'examples/electron-beacon/**', 'scripts/serve.py', 'package*.json', '.github/workflows/verification.yml']
+  pull_request:
+    paths: ['skills/port2browser-verify/**', 'tests/verification/**', 'tools/test_verifier.py', 'tools/verify_examples.cjs', 'examples/electron-beacon/**', 'scripts/serve.py', 'package*.json', '.github/workflows/verification.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verifier:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium firefox webkit
+      - name: Start virtual audio output
+        run: |
+          sudo apt-get install -y pulseaudio
+          pulseaudio --start --exit-idle-time=-1
+          pactl load-module module-null-sink sink_name=verification
+          pactl set-default-sink verification
+      - run: node --test tests/verification/plan.test.cjs
+      - name: WebKit, Chromium, Firefox and touch-device emulation
+        run: python tools/test_verifier.py --output test-results/reusable-verifier
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: reusable-verifier-evidence
+          path: test-results/reusable-verifier/

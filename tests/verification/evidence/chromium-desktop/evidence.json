@@ -1,0 +1,258 @@
+{
+  "schema_version": 1,
+  "url": "http://127.0.0.1:50968/electron-beacon/web/",
+  "plan_sha256": "a16c9488d3f418495af6ad4b969810c77c6b1ba8827bfd726c5569f766841e31",
+  "result": "pass",
+  "coverage": {
+    "input": "pass",
+    "render": "pass",
+    "state": "pass",
+    "audio": "pass",
+    "focus": "pass",
+    "reload": "pass"
+  },
+  "steps": [
+    {
+      "index": 0,
+      "action": "click",
+      "result": "pass"
+    },
+    {
+      "index": 1,
+      "action": "expect",
+      "result": "pass",
+      "state": {
+        "x": 24,
+        "collected": 0,
+        "started": 1,
+        "sounds": 0,
+        "saving": 0,
+        "saves": 0,
+        "audioState": "running",
+        "menu": ""
+      }
+    },
+    {
+      "index": 2,
+      "action": "press",
+      "result": "pass"
+    },
+    {
+      "index": 3,
+      "action": "expect",
+      "result": "pass",
+      "state": {
+        "x": 120,
+        "collected": 0,
+        "started": 1,
+        "sounds": 0,
+        "saving": 0,
+        "saves": 0,
+        "audioState": "running",
+        "menu": ""
+      }
+    },
+    {
+      "index": 4,
+      "action": "pixel",
+      "result": "pass",
+      "pixel": [
+        56,
+        189,
+        248,
+        255
+      ],
+      "screenshot": "step-4.png"
+    },
+    {
+      "index": 5,
+      "action": "press",
+      "result": "pass"
+    },
+    {
+      "index": 6,
+      "action": "expect",
+      "result": "pass",
+      "state": {
+        "x": 120,
+        "collected": 1,
+        "started": 1,
+        "sounds": 1,
+        "saving": 0,
+        "saves": 0,
+        "audioState": "running",
+        "menu": ""
+      }
+    },
+    {
+      "index": 7,
+      "action": "audio",
+      "result": "pass",
+      "audio": {
+        "states": [
+          "running"
+        ],
+        "starts": 1
+      }
+    },
+    {
+      "index": 8,
+      "action": "canvas",
+      "result": "pass",
+      "sample_colors": 7,
+      "screenshot": "step-8.png"
+    },
+    {
+      "index": 9,
+      "action": "down",
+      "result": "pass"
+    },
+    {
+      "index": 10,
+      "action": "focus",
+      "result": "pass",
+      "active_element": {
+        "tag": "BUTTON",
+        "id": "start"
+      },
+      "scope": "element focus loss"
+    },
+    {
+      "index": 11,
+      "action": "up",
+      "result": "pass"
+    },
+    {
+      "index": 12,
+      "action": "expect",
+      "result": "pass",
+      "state": {
+        "x": 132,
+        "collected": 1,
+        "started": 1,
+        "sounds": 1,
+        "saving": 0,
+        "saves": 0,
+        "audioState": "running",
+        "menu": ""
+      }
+    },
+    {
+      "index": 13,
+      "action": "click",
+      "result": "pass"
+    },
+    {
+      "index": 14,
+      "action": "text",
+      "result": "pass"
+    },
+    {
+      "index": 15,
+      "action": "click",
+      "result": "pass"
+    },
+    {
+      "index": 16,
+      "action": "press",
+      "result": "pass"
+    },
+    {
+      "index": 17,
+      "action": "expect",
+      "result": "pass",
+      "state": {
+        "x": 132,
+        "collected": 1,
+        "started": 1,
+        "sounds": 1,
+        "saving": 0,
+        "saves": 1,
+        "audioState": "running",
+        "menu": "Continue with arrows, Space, and S."
+      }
+    },
+    {
+      "index": 18,
+      "action": "capture",
+      "result": "pass",
+      "screenshot": "step-18.png"
+    },
+    {
+      "index": 19,
+      "action": "reload",
+      "result": "pass",
+      "before": {
+        "x": 132,
+        "collected": 1
+      },
+      "after": {
+        "x": 132,
+        "collected": 1
+      }
+    },
+    {
+      "index": 20,
+      "action": "expect",
+      "result": "pass",
+      "state": {
+        "x": 132,
+        "collected": 1,
+        "started": 0,
+        "sounds": 0,
+        "saving": 0,
+        "saves": 0,
+        "audioState": "unavailable",
+        "menu": ""
+      }
+    },
+    {
+      "index": 21,
+      "action": "canvas",
+      "result": "pass",
+      "sample_colors": 4,
+      "screenshot": "step-21.png"
+    }
+  ],
+  "logs": [],
+  "errors": [],
+  "events_omitted": 0,
+  "manual_listening": "untested",
+  "limitations": [
+    "Configured checks only; passing does not establish full game playability or engine compatibility.",
+    "Frame callback intervals are not GPU/game frame times. Transfer sizes may be zero for cache/opaque resources.",
+    "Web Audio instrumentation observes contexts and oscillator/buffer starts; it is not audible-output measurement.",
+    "Device profiles emulate browser parameters, not physical phones or shipping Safari."
+  ],
+  "navigation_wall_ms": 11,
+  "performance": {
+    "navigation": {
+      "dom_content_loaded_ms": 6.1000000005587935,
+      "load_ms": 6.2000000001862645
+    },
+    "resources": {
+      "count": 2,
+      "transfer_bytes": 4799,
+      "encoded_bytes": 4199
+    },
+    "frame_callback_intervals": {
+      "status": "measured",
+      "samples": 60,
+      "p50_ms": 16.699999999999932,
+      "p95_ms": 16.799999999999955,
+      "max_ms": 16.800000000000068
+    }
+  },
+  "elapsed_ms": 1661,
+  "browser": "chromium",
+  "browser_version": "141.0.7390.37",
+  "playwright_version": "1.56.1",
+  "node_version": "v24.19.0",
+  "os": "darwin",
+  "os_release": "24.6.0",
+  "architecture": "arm64",
+  "date": "2026-10-17T14:57:14.905Z",
+  "device": null,
+  "physical_device": "untested",
+  "shipping_safari": "untested"
+}
