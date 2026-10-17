@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Add an AssaultCube 1.3.0.2 browser field test: patched upstream C++ engine,
+  offline bots, gesture-bound controls/audio and IDBFS settings. Stock media
+  are selected and verified locally; the public package contains no game media.
+- Add separate Chromium/Firefox gameplay checks and publication-boundary tests.
+
 - Add Mosslight, an original C++/SDL exploration game with hazards, collectibles,
   generated art/audio, completion and durable saves, as the live demo.
 - Add measured debug/release/gzip size comparisons and a static-host decoder.

@@ -2,7 +2,8 @@
   "name": "port2browser-development",
   "private": true,
   "scripts": {
-    "test:browser": "playwright test"
+    "test:browser": "playwright test",
+    "test:assaultcube": "playwright test --config playwright.assaultcube.config.js"
   },
   "devDependencies": {
     "@playwright/test": "1.56.1",

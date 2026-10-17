@@ -22,7 +22,7 @@ def build_demo(source, target, revision):
     (target/'version.json').write_text(json.dumps({'revision':revision,'example':'sdl-beacon','emscripten':'4.0.16'},indent=2)+'\n')
     (target/'.nojekyll').touch()
 
-def build_showcase(source, target, revision, reference, debug=None):
+def build_showcase(source, target, revision, reference, debug=None, assaultcube=None):
     """Package the game for header-free static hosting; preserve raw comparisons."""
     import gzip
     import hashlib
@@ -64,6 +64,13 @@ def build_showcase(source, target, revision, reference, debug=None):
     html=release['index.html'].replace(marker,b'<script src="packed-loader.js"></script>')
     html=html.replace(b'The development build loads uncompressed JS and Wasm.',b'This is the complete gzip release. <a href="uncompressed/">Try uncompressed</a> / <a href="beacon/">Minimal Beacon</a> / <a href="size-report.json">Size manifest</a>.')
     html=html.replace(b'/blob/codex/demo-evals-godot/',('/blob/'+revision+'/').encode()).replace(b'/tree/codex/demo-evals-godot/',('/tree/'+revision+'/').encode())
+    if assaultcube is not None:
+        try:
+            from tools.package_assaultcube import package_client
+        except ModuleNotFoundError:
+            from package_assaultcube import package_client
+        package_client(assaultcube,target/'assaultcube',revision)
+        html=html.replace(b'<a href="beacon/">Minimal Beacon</a>',b'<a href="beacon/">Minimal Beacon</a> / <a href="assaultcube/">AssaultCube (local game files)</a>')
     core_bytes=len(html)+len(loader)+sum(v['bytes'] for v in packed.values())
     html=html.replace(b'Original artwork &amp; generated sound.',b'Original artwork & generated sound.')
     html=html.replace(b'Original artwork & generated sound.',f'{core_bytes/1024:.1f} KiB game payload / gzip release'.encode())
@@ -94,5 +101,5 @@ if __name__=='__main__':
     args=parser.parse_args()
     revision=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     debug=ROOT/'examples/mosslight/build/debug-web'
-    report=build_showcase(ROOT/'examples/mosslight/build/web',args.output.resolve(),revision,ROOT/'examples/sdl-beacon/build/web',debug if debug.is_dir() else None)
+    report=build_showcase(ROOT/'examples/mosslight/build/web',args.output.resolve(),revision,ROOT/'examples/sdl-beacon/build/web',debug if debug.is_dir() else None,ROOT/'examples/assaultcube/build/web' if (ROOT/'examples/assaultcube/build/web').is_dir() else None)
     print(json.dumps(report,indent=2))

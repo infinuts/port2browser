@@ -1,0 +1,1259 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-17",
+  "upstream_revision": "1ece5af7533983bb8f827616381d282470793d90",
+  "base_skill_revision": "ac992b69b178f1e4890673f844d2191b5b8c2e5a",
+  "scope": "Local browser smoke; not an agent benchmark, public deployment or full-game certification.",
+  "os": "macOS 15.7.4",
+  "emscripten": "4.0.16",
+  "playwright": "1.56.1",
+  "commands": [
+    "python3 examples/assaultcube/build.py --source ../assaultcube",
+    "ASSAULTCUBE_DATA=../assaultcube npm run test:assaultcube"
+  ],
+  "source_sha256": {
+    "browser.patch": "3c231109c96ef09f19035046d36de75e0167dc690a2fad342f732efca3403c47",
+    "build.py": "33d1e4a6cb427cc8cadaa0da1d2c2f322a63bc79539e2f7a4da959432f4f7f32",
+    "web_bridge.cpp": "157303c152f6ec07f2db0c2d314cbff6531b7904f015ed5aafd5d3b38daecb5f",
+    "immediate.js": "c6e81055450f1ece9cb7345d847d9d67207b4403a72e7651c5ad5a603c9bc24c",
+    "runtime_fixes.py": "dd3f0279f15cbd5357d3eeaef01a8a08a57043eb1bc86862e79ae7a813bc0cb7",
+    "runtime.js": "d6bdab6ef8959e4a2b2f6a7e95ede32d97a10abfb5d50811bbc778b46bce16b9",
+    "launcher.js": "5afde67517fda9739b4f92d36b63754f2bfb132541fd50deb31bf48ef76c388e",
+    "index.html": "cce0a46e5f6c379aef453d0ea66a3fd3580a5414eb41f30775d2e3f654b20ca3"
+  },
+  "artifact_bytes": {
+    "index.html": 4965,
+    "ac.js": 407401,
+    "ac.wasm": 1949208,
+    "assets.json": 272287,
+    "launcher.js": 6092,
+    "NOTICE.md": 2639
+  },
+  "local_media_bytes": 53524892,
+  "manual_listening": "untested",
+  "combat_balance_and_long_sessions": "untested",
+  "runs": [
+    {
+      "browser": "141.0.7390.37",
+      "platform": "darwin",
+      "phases": {
+        "started": {
+          "x": 98,
+          "y": 98,
+          "z": 6.875,
+          "yaw": 270,
+          "pitch": 0,
+          "health": 100,
+          "state": 0,
+          "mode": 8,
+          "map_bytes": 12629,
+          "bots": 3,
+          "bot_motion": 1519.698,
+          "shots": 0,
+          "magazine": 20,
+          "gun": 6,
+          "sounds": 7,
+          "millis": 10233,
+          "moving": 0
+        },
+        "gameplay": {
+          "x": 89.323,
+          "y": 88.573,
+          "z": 6.5,
+          "yaw": 273,
+          "pitch": 5.095,
+          "health": 100,
+          "state": 0,
+          "mode": 8,
+          "map_bytes": 12629,
+          "bots": 3,
+          "bot_motion": 1426.033,
+          "shots": 3,
+          "magazine": 17,
+          "gun": 6,
+          "sounds": 18,
+          "millis": 12082,
+          "moving": 0
+        },
+        "audioContext": "running",
+        "rendered": {
+          "colors": 4065,
+          "lit": 7023
+        },
+        "restored": {
+          "x": 169.1,
+          "y": 169.7,
+          "z": 12.5,
+          "yaw": 251,
+          "pitch": 0,
+          "health": 100,
+          "state": 0,
+          "mode": 0,
+          "map_bytes": 12629,
+          "bots": 0,
+          "bot_motion": 0,
+          "shots": 0,
+          "magazine": 20,
+          "gun": 6,
+          "sounds": 2,
+          "millis": 1632,
+          "moving": 0
+        }
+      },
+      "test_configuration": "upstream botsshoot 0 during input checks; bots still navigate",
+      "result": "pass",
+      "errors": [],
+      "requests": [
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:8878/"
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:8878/launcher.js"
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:8878/ac.js"
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:8878/assets.json"
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:8878/ac.wasm"
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:8878/"
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:8878/launcher.js"
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:8878/ac.js"
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:8878/assets.json"
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:8878/ac.wasm"
+        }
+      ],
+      "logs": [
+        {
+          "level": "error",
+          "text": "WARNING: using emscripten GL emulation. This is a collection of limited workarounds, do not expect it to work."
+        },
+        {
+          "level": "log",
+          "text": "parsing commandline argument 1: \"-t0\""
+        },
+        {
+          "level": "log",
+          "text": "parsing commandline argument 2: \"-w960\""
+        },
+        {
+          "level": "log",
+          "text": "parsing commandline argument 3: \"-h600\""
+        },
+        {
+          "level": "log",
+          "text": "parsing commandline argument 4: \"--home=/profile\""
+        },
+        {
+          "level": "log",
+          "text": "Using home directory: /profile/"
+        },
+        {
+          "level": "log",
+          "text": "parsing commandline argument 5: \"--loadmap=ac_desert\""
+        },
+        {
+          "level": "log",
+          "text": "parsing commandline argument 6: \"-eautodownload 0; showmenuonstartup 0; mapstartonce = []; consize 0\""
+        },
+        {
+          "level": "log",
+          "text": "private/entropy.dat not found."
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/clientlog.txt"
+        },
+        {
+          "level": "log",
+          "text": "init: sdl (2.32.8)"
+        },
+        {
+          "level": "log",
+          "text": "init: net (1.3.6)"
+        },
+        {
+          "level": "log",
+          "text": "init: world (-(1302))"
+        },
+        {
+          "level": "log",
+          "text": "init: video: sdl"
+        },
+        {
+          "level": "log",
+          "text": "init: video: mode"
+        },
+        {
+          "level": "log",
+          "text": "WARNING: using emscripten GL immediate mode emulation. This is very limited in what it supports"
+        },
+        {
+          "level": "log",
+          "text": "init: video: misc"
+        },
+        {
+          "level": "log",
+          "text": "init: gl"
+        },
+        {
+          "level": "log",
+          "text": "Renderer: WebKit WebGL (WebKit)"
+        },
+        {
+          "level": "log",
+          "text": "Driver: OpenGL ES 2.0 (WebGL 1.0 (OpenGL ES 2.0 Chromium))"
+        },
+        {
+          "level": "log",
+          "text": "TODO: glShadeModel"
+        },
+        {
+          "level": "log",
+          "text": "init: console"
+        },
+        {
+          "level": "log",
+          "text": "init: sound"
+        },
+        {
+          "level": "log",
+          "text": "Sound: Emscripten OpenAL / WebAudio (Emscripten)"
+        },
+        {
+          "level": "log",
+          "text": "Driver: 1.1"
+        },
+        {
+          "level": "log",
+          "text": "init: cfg"
+        },
+        {
+          "level": "log",
+          "text": "init: models"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/playermodels/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "DrawElements doesn't actually prepareClientAttributes properly."
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/weapons/knife/world/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/weapons/pistol/world/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/weapons/carbine/world/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/weapons/shotgun/world/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/weapons/subgun/world/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/weapons/sniper/world/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/weapons/assault/world/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/weapons/grenade/world/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/pickups/nades/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "GL_TEXTURE0 coords are supplied, but that texture unit is disabled in the fixed-function pipeline."
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/pickups/pistolclips/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/pickups/ammobox/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/pickups/nade/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/pickups/health/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/pickups/helmet/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/pickups/kevlar/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/pickups/akimbo/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/misc/gib01/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/misc/gib02/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/misc/gib03/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/weapons/grenade/static/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "init: docs"
+        },
+        {
+          "level": "log",
+          "text": "init: localconnect"
+        },
+        {
+          "level": "log",
+          "text": "own IP: 0.0.0.0, censored own IP: 0.0.0.0, --, clock offset -497845 hours -35 minutes"
+        },
+        {
+          "level": "log",
+          "text": "auth challenge: SERVINFOCHALLENGE<(0) cn: 0 c: 0.0.0.0 (--) s: 0.0.0.0:0 3b6a27bcceb6a42d62a3a8d02a6f0d73653215771de243a63ac048a18b59da29 st: 0 ct: 29870735 (-2068524831)>"
+        },
+        {
+          "level": "log",
+          "text": "init: mainloop"
+        },
+        {
+          "level": "log",
+          "text": "could not read \"private/authprivate.cfg\""
+        },
+        {
+          "level": "log",
+          "text": "read map packages/maps/official/ac_desert.cgz rev 19 (2 milliseconds)"
+        },
+        {
+          "level": "log",
+          "text": "Desert Village by Arghvark & makkE"
+        },
+        {
+          "level": "log",
+          "text": "loaded textures (26 milliseconds)"
+        },
+        {
+          "level": "log",
+          "text": "loaded mapmodels (26 milliseconds)"
+        },
+        {
+          "level": "log",
+          "text": "loaded mapsounds (92 milliseconds)"
+        },
+        {
+          "level": "log",
+          "text": "game mode is \"TDM\""
+        },
+        {
+          "level": "log",
+          "text": "unarmed called a vote: load map ac_desert in mode BDM"
+        },
+        {
+          "level": "log",
+          "text": "vote passed"
+        },
+        {
+          "level": "log",
+          "text": "read map packages/maps/official/ac_desert.cgz rev 19 (65 milliseconds)"
+        },
+        {
+          "level": "log",
+          "text": "Desert Village by Arghvark & makkE"
+        },
+        {
+          "level": "log",
+          "text": "loaded textures (0 milliseconds)"
+        },
+        {
+          "level": "log",
+          "text": "loaded mapmodels (0 milliseconds)"
+        },
+        {
+          "level": "log",
+          "text": "loaded mapsounds (0 milliseconds)"
+        },
+        {
+          "level": "log",
+          "text": "Waypoints for map ac_desert loaded"
+        },
+        {
+          "level": "log",
+          "text": "game mode is \"BDM\""
+        },
+        {
+          "level": "log",
+          "text": "Bot Deathmatch: It's every man and A.I. for themselves! Dismantle those bots!"
+        },
+        {
+          "level": "log",
+          "text": "time remaining: 10 minutes"
+        },
+        {
+          "level": "log",
+          "text": "Reading bot_skill.cfg file... "
+        },
+        {
+          "level": "log",
+          "text": "done"
+        },
+        {
+          "level": "log",
+          "text": "Bot connected: Bones"
+        },
+        {
+          "level": "log",
+          "text": "Bot connected: PMB"
+        },
+        {
+          "level": "log",
+          "text": "Bot connected: Oldy"
+        },
+        {
+          "level": "log",
+          "text": "Bots won't shoot"
+        },
+        {
+          "level": "warning",
+          "text": "[.WebGL-0x104004e4800] GL_INVALID_OPERATION: glReadPixelsRobustANGLE: Invalid format and type combination."
+        },
+        {
+          "level": "warning",
+          "text": "[.WebGL-0x104004e4800] GL_INVALID_OPERATION: glReadPixelsRobustANGLE: Invalid format and type combination."
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/config/saved.cfg"
+        },
+        {
+          "level": "error",
+          "text": "WARNING: using emscripten GL emulation. This is a collection of limited workarounds, do not expect it to work."
+        },
+        {
+          "level": "log",
+          "text": "parsing commandline argument 1: \"-t0\""
+        },
+        {
+          "level": "log",
+          "text": "parsing commandline argument 2: \"-w960\""
+        },
+        {
+          "level": "log",
+          "text": "parsing commandline argument 3: \"-h600\""
+        },
+        {
+          "level": "log",
+          "text": "parsing commandline argument 4: \"--home=/profile\""
+        },
+        {
+          "level": "log",
+          "text": "Using home directory: /profile/"
+        },
+        {
+          "level": "log",
+          "text": "parsing commandline argument 5: \"--loadmap=ac_desert\""
+        },
+        {
+          "level": "log",
+          "text": "parsing commandline argument 6: \"-eautodownload 0; showmenuonstartup 0; mapstartonce = []; consize 0\""
+        },
+        {
+          "level": "log",
+          "text": "private/entropy.dat not found."
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/clientlog.txt"
+        },
+        {
+          "level": "log",
+          "text": "init: sdl (2.32.8)"
+        },
+        {
+          "level": "log",
+          "text": "init: net (1.3.6)"
+        },
+        {
+          "level": "log",
+          "text": "init: world (-(1302))"
+        },
+        {
+          "level": "log",
+          "text": "init: video: sdl"
+        },
+        {
+          "level": "log",
+          "text": "init: video: mode"
+        },
+        {
+          "level": "log",
+          "text": "WARNING: using emscripten GL immediate mode emulation. This is very limited in what it supports"
+        },
+        {
+          "level": "log",
+          "text": "init: video: misc"
+        },
+        {
+          "level": "log",
+          "text": "init: gl"
+        },
+        {
+          "level": "log",
+          "text": "Renderer: WebKit WebGL (WebKit)"
+        },
+        {
+          "level": "log",
+          "text": "Driver: OpenGL ES 2.0 (WebGL 1.0 (OpenGL ES 2.0 Chromium))"
+        },
+        {
+          "level": "log",
+          "text": "TODO: glShadeModel"
+        },
+        {
+          "level": "log",
+          "text": "init: console"
+        },
+        {
+          "level": "log",
+          "text": "init: sound"
+        },
+        {
+          "level": "log",
+          "text": "Sound: Emscripten OpenAL / WebAudio (Emscripten)"
+        },
+        {
+          "level": "log",
+          "text": "Driver: 1.1"
+        },
+        {
+          "level": "log",
+          "text": "init: cfg"
+        },
+        {
+          "level": "log",
+          "text": "init: models"
+        },
+        {
+          "level": "log",
+          "text": "init: docs"
+        },
+        {
+          "level": "log",
+          "text": "init: localconnect"
+        },
+        {
+          "level": "log",
+          "text": "own IP: 0.0.0.0, censored own IP: 0.0.0.0, --, clock offset -497845 hours -35 minutes"
+        },
+        {
+          "level": "log",
+          "text": "auth challenge: SERVINFOCHALLENGE<(0) cn: 0 c: 0.0.0.0 (--) s: 0.0.0.0:0 3b6a27bcceb6a42d62a3a8d02a6f0d73653215771de243a63ac048a18b59da29 st: 0 ct: 29870735 (-507203547)>"
+        },
+        {
+          "level": "log",
+          "text": "init: mainloop"
+        },
+        {
+          "level": "log",
+          "text": "could not read \"private/authprivate.cfg\""
+        },
+        {
+          "level": "log",
+          "text": "read map packages/maps/official/ac_desert.cgz rev 19 (1 milliseconds)"
+        },
+        {
+          "level": "log",
+          "text": "Desert Village by Arghvark & makkE"
+        },
+        {
+          "level": "log",
+          "text": "loaded textures (26 milliseconds)"
+        },
+        {
+          "level": "log",
+          "text": "loaded mapmodels (26 milliseconds)"
+        },
+        {
+          "level": "log",
+          "text": "loaded mapsounds (93 milliseconds)"
+        },
+        {
+          "level": "log",
+          "text": "game mode is \"TDM\""
+        },
+        {
+          "level": "log",
+          "text": "DrawElements doesn't actually prepareClientAttributes properly."
+        },
+        {
+          "level": "log",
+          "text": "GL_TEXTURE0 coords are supplied, but that texture unit is disabled in the fixed-function pipeline."
+        }
+      ]
+    },
+    {
+      "browser": "142.0.1",
+      "platform": "darwin",
+      "phases": {
+        "started": {
+          "x": 118,
+          "y": 182,
+          "z": 4.5,
+          "yaw": 56,
+          "pitch": 0,
+          "health": 100,
+          "state": 0,
+          "mode": 8,
+          "map_bytes": 12629,
+          "bots": 3,
+          "bot_motion": 1460.933,
+          "shots": 0,
+          "magazine": 20,
+          "gun": 6,
+          "sounds": 6,
+          "millis": 12375,
+          "moving": 0
+        },
+        "gameplay": {
+          "x": 141.101,
+          "y": 179.092,
+          "z": 4.5,
+          "yaw": 81.545,
+          "pitch": 4.419,
+          "health": 100,
+          "state": 0,
+          "mode": 8,
+          "map_bytes": 12629,
+          "bots": 3,
+          "bot_motion": 1560.384,
+          "shots": 5,
+          "magazine": 15,
+          "gun": 6,
+          "sounds": 32,
+          "millis": 20188,
+          "moving": 0
+        },
+        "audioContext": "running",
+        "rendered": {
+          "colors": 7373,
+          "lit": 10994
+        },
+        "restored": {
+          "x": 83,
+          "y": 77,
+          "z": 6.5,
+          "yaw": 89,
+          "pitch": 0,
+          "health": 100,
+          "state": 0,
+          "mode": 0,
+          "map_bytes": 12629,
+          "bots": 0,
+          "bot_motion": 0,
+          "shots": 0,
+          "magazine": 20,
+          "gun": 6,
+          "sounds": 4,
+          "millis": 4895,
+          "moving": 0
+        }
+      },
+      "test_configuration": "upstream botsshoot 0 during input checks; bots still navigate",
+      "result": "pass",
+      "errors": [],
+      "requests": [
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:8878/"
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:8878/launcher.js"
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:8878/ac.js"
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:8878/assets.json"
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:8878/ac.wasm"
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:8878/"
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:8878/launcher.js"
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:8878/ac.js"
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:8878/assets.json"
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:8878/ac.wasm"
+        }
+      ],
+      "logs": [
+        {
+          "level": "error",
+          "text": "WARNING: using emscripten GL emulation. This is a collection of limited workarounds, do not expect it to work."
+        },
+        {
+          "level": "log",
+          "text": "parsing commandline argument 1: \"-t0\""
+        },
+        {
+          "level": "log",
+          "text": "parsing commandline argument 2: \"-w960\""
+        },
+        {
+          "level": "log",
+          "text": "parsing commandline argument 3: \"-h600\""
+        },
+        {
+          "level": "log",
+          "text": "parsing commandline argument 4: \"--home=/profile\""
+        },
+        {
+          "level": "log",
+          "text": "Using home directory: /profile/"
+        },
+        {
+          "level": "log",
+          "text": "parsing commandline argument 5: \"--loadmap=ac_desert\""
+        },
+        {
+          "level": "log",
+          "text": "parsing commandline argument 6: \"-eautodownload 0; showmenuonstartup 0; mapstartonce = []; consize 0\""
+        },
+        {
+          "level": "log",
+          "text": "private/entropy.dat not found."
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/clientlog.txt"
+        },
+        {
+          "level": "log",
+          "text": "init: sdl (2.32.8)"
+        },
+        {
+          "level": "log",
+          "text": "init: net (1.3.6)"
+        },
+        {
+          "level": "log",
+          "text": "init: world (-(1302))"
+        },
+        {
+          "level": "log",
+          "text": "init: video: sdl"
+        },
+        {
+          "level": "log",
+          "text": "init: video: mode"
+        },
+        {
+          "level": "log",
+          "text": "WARNING: using emscripten GL immediate mode emulation. This is very limited in what it supports"
+        },
+        {
+          "level": "log",
+          "text": "init: video: misc"
+        },
+        {
+          "level": "log",
+          "text": "init: gl"
+        },
+        {
+          "level": "log",
+          "text": "Renderer: Apple M1, or similar (Mozilla)"
+        },
+        {
+          "level": "log",
+          "text": "Driver: OpenGL ES 2.0 (WebGL 1.0)"
+        },
+        {
+          "level": "log",
+          "text": "TODO: glShadeModel"
+        },
+        {
+          "level": "log",
+          "text": "init: console"
+        },
+        {
+          "level": "log",
+          "text": "init: sound"
+        },
+        {
+          "level": "log",
+          "text": "Sound: Emscripten OpenAL / WebAudio (Emscripten)"
+        },
+        {
+          "level": "log",
+          "text": "Driver: 1.1"
+        },
+        {
+          "level": "log",
+          "text": "init: cfg"
+        },
+        {
+          "level": "log",
+          "text": "init: models"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/playermodels/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "DrawElements doesn't actually prepareClientAttributes properly."
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/weapons/knife/world/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/weapons/pistol/world/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/weapons/carbine/world/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/weapons/shotgun/world/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/weapons/subgun/world/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/weapons/sniper/world/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/weapons/assault/world/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/weapons/grenade/world/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/pickups/nades/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "GL_TEXTURE0 coords are supplied, but that texture unit is disabled in the fixed-function pipeline."
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/pickups/pistolclips/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/pickups/ammobox/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/pickups/nade/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/pickups/health/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/pickups/helmet/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/pickups/kevlar/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/pickups/akimbo/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/misc/gib01/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/misc/gib02/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/misc/gib03/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/packages/models/weapons/grenade/static/shadows.dat"
+        },
+        {
+          "level": "log",
+          "text": "init: docs"
+        },
+        {
+          "level": "log",
+          "text": "init: localconnect"
+        },
+        {
+          "level": "log",
+          "text": "own IP: 0.0.0.0, censored own IP: 0.0.0.0, --, clock offset -497845 hours -35 minutes"
+        },
+        {
+          "level": "log",
+          "text": "auth challenge: SERVINFOCHALLENGE<(0) cn: 0 c: 0.0.0.0 (--) s: 0.0.0.0:0 3b6a27bcceb6a42d62a3a8d02a6f0d73653215771de243a63ac048a18b59da29 st: 0 ct: 29870735 (187377717)>"
+        },
+        {
+          "level": "log",
+          "text": "init: mainloop"
+        },
+        {
+          "level": "log",
+          "text": "could not read \"private/authprivate.cfg\""
+        },
+        {
+          "level": "log",
+          "text": "read map packages/maps/official/ac_desert.cgz rev 19 (8 milliseconds)"
+        },
+        {
+          "level": "log",
+          "text": "Desert Village by Arghvark & makkE"
+        },
+        {
+          "level": "log",
+          "text": "loaded textures (154 milliseconds)"
+        },
+        {
+          "level": "log",
+          "text": "loaded mapmodels (141 milliseconds)"
+        },
+        {
+          "level": "log",
+          "text": "loaded mapsounds (792 milliseconds)"
+        },
+        {
+          "level": "log",
+          "text": "game mode is \"TDM\""
+        },
+        {
+          "level": "warning",
+          "text": "[JavaScript Warning: \"WebGL warning: copyTexSubImage: Texture has not been initialized prior to a partial upload, forcing the browser to clear it. This may be slow.\"]"
+        },
+        {
+          "level": "warning",
+          "text": "[JavaScript Warning: \"WebGL warning: copyTexSubImage: Tex image TEXTURE_2D level 0 is incurring lazy initialization.\"]"
+        },
+        {
+          "level": "log",
+          "text": "unarmed called a vote: load map ac_desert in mode BDM"
+        },
+        {
+          "level": "log",
+          "text": "vote passed"
+        },
+        {
+          "level": "log",
+          "text": "read map packages/maps/official/ac_desert.cgz rev 19 (11 milliseconds)"
+        },
+        {
+          "level": "log",
+          "text": "Desert Village by Arghvark & makkE"
+        },
+        {
+          "level": "log",
+          "text": "loaded textures (0 milliseconds)"
+        },
+        {
+          "level": "log",
+          "text": "loaded mapmodels (0 milliseconds)"
+        },
+        {
+          "level": "log",
+          "text": "loaded mapsounds (0 milliseconds)"
+        },
+        {
+          "level": "log",
+          "text": "Waypoints for map ac_desert loaded"
+        },
+        {
+          "level": "log",
+          "text": "game mode is \"BDM\""
+        },
+        {
+          "level": "log",
+          "text": "Bot Deathmatch: It's every man and A.I. for themselves! Dismantle those bots!"
+        },
+        {
+          "level": "log",
+          "text": "time remaining: 10 minutes"
+        },
+        {
+          "level": "log",
+          "text": "Reading bot_skill.cfg file... "
+        },
+        {
+          "level": "log",
+          "text": "done"
+        },
+        {
+          "level": "log",
+          "text": "Bot connected: Pwned"
+        },
+        {
+          "level": "log",
+          "text": "Bot connected: Corporal_Clegg"
+        },
+        {
+          "level": "log",
+          "text": "Bot connected: Dunno"
+        },
+        {
+          "level": "log",
+          "text": "Bots won't shoot"
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/config/saved.cfg"
+        },
+        {
+          "level": "error",
+          "text": "WARNING: using emscripten GL emulation. This is a collection of limited workarounds, do not expect it to work."
+        },
+        {
+          "level": "log",
+          "text": "parsing commandline argument 1: \"-t0\""
+        },
+        {
+          "level": "log",
+          "text": "parsing commandline argument 2: \"-w960\""
+        },
+        {
+          "level": "log",
+          "text": "parsing commandline argument 3: \"-h600\""
+        },
+        {
+          "level": "log",
+          "text": "parsing commandline argument 4: \"--home=/profile\""
+        },
+        {
+          "level": "log",
+          "text": "Using home directory: /profile/"
+        },
+        {
+          "level": "log",
+          "text": "parsing commandline argument 5: \"--loadmap=ac_desert\""
+        },
+        {
+          "level": "log",
+          "text": "parsing commandline argument 6: \"-eautodownload 0; showmenuonstartup 0; mapstartonce = []; consize 0\""
+        },
+        {
+          "level": "log",
+          "text": "private/entropy.dat not found."
+        },
+        {
+          "level": "log",
+          "text": "writing to file: /profile/clientlog.txt"
+        },
+        {
+          "level": "log",
+          "text": "init: sdl (2.32.8)"
+        },
+        {
+          "level": "log",
+          "text": "init: net (1.3.6)"
+        },
+        {
+          "level": "log",
+          "text": "init: world (-(1302))"
+        },
+        {
+          "level": "log",
+          "text": "init: video: sdl"
+        },
+        {
+          "level": "log",
+          "text": "init: video: mode"
+        },
+        {
+          "level": "log",
+          "text": "WARNING: using emscripten GL immediate mode emulation. This is very limited in what it supports"
+        },
+        {
+          "level": "log",
+          "text": "init: video: misc"
+        },
+        {
+          "level": "log",
+          "text": "init: gl"
+        },
+        {
+          "level": "log",
+          "text": "Renderer: Apple M1, or similar (Mozilla)"
+        },
+        {
+          "level": "log",
+          "text": "Driver: OpenGL ES 2.0 (WebGL 1.0)"
+        },
+        {
+          "level": "log",
+          "text": "TODO: glShadeModel"
+        },
+        {
+          "level": "log",
+          "text": "init: console"
+        },
+        {
+          "level": "log",
+          "text": "init: sound"
+        },
+        {
+          "level": "log",
+          "text": "Sound: Emscripten OpenAL / WebAudio (Emscripten)"
+        },
+        {
+          "level": "log",
+          "text": "Driver: 1.1"
+        },
+        {
+          "level": "log",
+          "text": "init: cfg"
+        },
+        {
+          "level": "log",
+          "text": "init: models"
+        },
+        {
+          "level": "log",
+          "text": "init: docs"
+        },
+        {
+          "level": "log",
+          "text": "init: localconnect"
+        },
+        {
+          "level": "log",
+          "text": "own IP: 0.0.0.0, censored own IP: 0.0.0.0, --, clock offset -497845 hours -35 minutes"
+        },
+        {
+          "level": "log",
+          "text": "auth challenge: SERVINFOCHALLENGE<(0) cn: 0 c: 0.0.0.0 (--) s: 0.0.0.0:0 3b6a27bcceb6a42d62a3a8d02a6f0d73653215771de243a63ac048a18b59da29 st: 0 ct: 29870735 (1910960196)>"
+        },
+        {
+          "level": "log",
+          "text": "init: mainloop"
+        },
+        {
+          "level": "log",
+          "text": "could not read \"private/authprivate.cfg\""
+        },
+        {
+          "level": "log",
+          "text": "read map packages/maps/official/ac_desert.cgz rev 19 (8 milliseconds)"
+        },
+        {
+          "level": "log",
+          "text": "Desert Village by Arghvark & makkE"
+        },
+        {
+          "level": "log",
+          "text": "loaded textures (156 milliseconds)"
+        },
+        {
+          "level": "log",
+          "text": "loaded mapmodels (142 milliseconds)"
+        },
+        {
+          "level": "log",
+          "text": "loaded mapsounds (787 milliseconds)"
+        },
+        {
+          "level": "log",
+          "text": "game mode is \"TDM\""
+        },
+        {
+          "level": "log",
+          "text": "DrawElements doesn't actually prepareClientAttributes properly."
+        },
+        {
+          "level": "log",
+          "text": "GL_TEXTURE0 coords are supplied, but that texture unit is disabled in the fixed-function pipeline."
+        },
+        {
+          "level": "warning",
+          "text": "[JavaScript Warning: \"WebGL warning: copyTexSubImage: Texture has not been initialized prior to a partial upload, forcing the browser to clear it. This may be slow.\"]"
+        },
+        {
+          "level": "warning",
+          "text": "[JavaScript Warning: \"WebGL warning: copyTexSubImage: Tex image TEXTURE_2D level 0 is incurring lazy initialization.\"]"
+        }
+      ]
+    }
+  ]
+}

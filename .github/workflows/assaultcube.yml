@@ -1,0 +1,50 @@
+name: AssaultCube browser demo
+on:
+  push:
+    paths: ['examples/assaultcube/**', 'tests/browser-assaultcube/**', 'playwright.assaultcube.config.js', 'tools/package_assaultcube.py', 'scripts/serve.py', 'package*.json', '.github/workflows/assaultcube.yml']
+  pull_request:
+    paths: ['examples/assaultcube/**', 'tests/browser-assaultcube/**', 'playwright.assaultcube.config.js', 'tools/package_assaultcube.py', 'scripts/serve.py', 'package*.json', '.github/workflows/assaultcube.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      LIBGL_ALWAYS_SOFTWARE: '1'
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Install browser test dependencies
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium firefox
+          sudo apt-get install -y xvfb pulseaudio libgl1-mesa-dri
+          pulseaudio --start --exit-idle-time=-1
+          pactl load-module module-null-sink sink_name=browser_tests
+          pactl set-default-sink browser_tests
+      - name: Build pinned offline client
+        run: |
+          git clone --depth 1 https://github.com/emscripten-core/emsdk.git "$RUNNER_TEMP/emsdk"
+          "$RUNNER_TEMP/emsdk/emsdk" install 4.0.16
+          "$RUNNER_TEMP/emsdk/emsdk" activate 4.0.16
+          source "$RUNNER_TEMP/emsdk/emsdk_env.sh"
+          python examples/assaultcube/build.py
+      - name: Play local game files in Chromium and Firefox
+        run: xvfb-run -a npm run test:assaultcube
+      - name: Retain browser evidence and failures
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: assaultcube-browser-evidence
+          path: test-results/
+          if-no-files-found: warn
