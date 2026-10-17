@@ -51,7 +51,7 @@ class TaskSkillTests(unittest.TestCase):
         catalog = json.loads((ROOT / 'references/engine-routes.json').read_text())
         self.assertEqual(catalog['schema_version'], 1)
         engines = catalog['engines']
-        self.assertEqual(len(engines), 28)
+        self.assertEqual(len(engines), 36)
         self.assertEqual(len({e['id'] for e in engines}), len(engines))
         mapping = {}
         for engine in engines:

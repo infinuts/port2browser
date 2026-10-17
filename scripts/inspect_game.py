@@ -12,27 +12,37 @@ import sys
 
 SCHEMA_VERSION = 1
 # Navigation only; this mapping neither loads skills nor asserts compatibility.
-ENGINE_TASK_SKILLS = {'bevy': 'port2browser-frameworks',
+ENGINE_TASK_SKILLS = {'ags': 'port2browser-open-runtime',
+ 'bevy': 'port2browser-frameworks',
  'cocos-creator': 'port2browser-export',
  'construct': 'port2browser-export',
  'defold': 'port2browser-export',
+ 'ebitengine': 'port2browser-frameworks',
  'electron': 'port2browser-web',
+ 'emulation': 'port2browser-open-runtime',
+ 'flash': 'port2browser-open-runtime',
+ 'flutter-flame': 'port2browser-frameworks',
  'fna': 'port2browser-frameworks',
  'gamemaker': 'port2browser-export',
  'gdevelop': 'port2browser-export',
  'godot': 'port2browser-export',
+ 'haxeflixel': 'port2browser-frameworks',
  'heaps': 'port2browser-frameworks',
+ 'java-applet': 'port2browser-open-runtime',
  'libgdx': 'port2browser-frameworks',
  'love': 'port2browser-frameworks',
  'macroquad': 'port2browser-frameworks',
  'monogame': 'port2browser-frameworks',
  'nw': 'port2browser-web',
+ 'open-engine': 'port2browser-open-runtime',
  'openfl': 'port2browser-frameworks',
  'phaser': 'port2browser-web',
  'pixi.js': 'port2browser-web',
  'pygame': 'port2browser-frameworks',
+ 'raylib': 'port2browser-native',
  'renpy': 'port2browser-export',
  'rpg-maker': 'port2browser-web',
+ 'scummvm': 'port2browser-open-runtime',
  'sdl': 'port2browser-native',
  'three': 'port2browser-web',
  'unity': 'port2browser-export',
@@ -98,9 +108,10 @@ def inspect_game(root, max_entries=20000, max_depth=32):
     warnings, build_files, binaries = [], [], []
     counts = {"entries": 0, "files": 0, "bytes": 0, "skipped_directories": 0, "skipped_links": 0}
     truncated = False
-    omissions = {"evidence": 0, "build_files": 0, "binaries": 0, "warnings": 0, "metadata": 0}
+    omissions = {"evidence": 0, "build_files": 0, "binaries": 0, "warnings": 0, "metadata": 0, "runtime_clues": 0}
     scan_errors = {"stat": 0, "read": 0, "directory": 0}
     metadata = []
+    runtime_clues = []
     metadata_sample_limits = 0
 
     def warn(message):
@@ -133,6 +144,14 @@ def inspect_game(root, max_entries=20000, max_depth=32):
             metadata.append({"engine": engine, "path": relative, "field": field, "value": value})
         else:
             omissions["metadata"] += 1
+
+    def runtime_clue(kind, relative, format, basis):
+        clue(kind, relative, f"{format}; {basis}; verify exact game/platform/runtime")
+        if len(runtime_clues) < 100:
+            runtime_clues.append({"path": relative, "kind": kind, "format": format,
+                                  "confidence": "inferred", "basis": basis})
+        else:
+            omissions["runtime_clues"] += 1
 
     def text_metadata(path, info, engine):
         nonlocal metadata_sample_limits
@@ -299,9 +318,35 @@ def inspect_game(root, max_entries=20000, max_depth=32):
                                                     warn(f"invalid dependency version for {engine}: {relative}")
                             except (ValueError, UnicodeError, RecursionError):
                                 warn(f"invalid JSON or decoder nesting limit: {relative}")
+                    # No archive extraction or decompression; only bounded header or filename clues.
+                    if suffix in {".wad", ".pk3", ".nes", ".gba", ".gb", ".gbc", ".iso", ".dsk", ".swf", ".com"}:
+                        sample = read_sample(path, HEADER_BYTES) if suffix in {".wad", ".pk3", ".nes", ".swf"} else b""
+                        if suffix == ".wad":
+                            format = "Doom-style WAD" if sample[:4] in {b"IWAD", b"PWAD"} else "WAD extension only (ambiguous data)"
+                            runtime_clue("open-engine", relative, format, "header" if sample[:4] in {b"IWAD", b"PWAD"} else "filename")
+                        elif suffix == ".pk3":
+                            runtime_clue("open-engine", relative, "PK3 archive (game/mod and engine unverified)", "ZIP signature" if sample.startswith(b"PK\x03\x04") else "filename only")
+                        elif suffix == ".swf":
+                            magic = sample[:3]
+                            format = {b"FWS":"SWF", b"CWS":"SWF compressed (zlib)", b"ZWS":"SWF compressed (LZMA)"}.get(magic)
+                            if format and len(sample) >= 8:
+                                observed("flash", relative, "swf_version", sample[3])
+                                runtime_clue("flash", relative, format, "header; payload not decoded")
+                            else:
+                                runtime_clue("flash", relative, "SWF extension only", "filename; unrecognized header")
+                                warn(f"unrecognized or incomplete SWF header: {relative}")
+                        elif suffix == ".nes":
+                            runtime_clue("emulation", relative, "iNES-style ROM" if sample.startswith(b"NES\x1a") else "NES extension only", "header" if sample.startswith(b"NES\x1a") else "filename")
+                        else:
+                            format = {".gba":"GBA extension only", ".gb":"GB extension only", ".gbc":"GBC extension only", ".iso":"ISO extension only; platform unknown", ".dsk":"disk image extension; platform unknown", ".com":"raw COM extension; no identifying magic"}[suffix]
+                            runtime_clue("emulation", relative, format, "filename only; contents/platform unverified")
                     if suffix in BINARY_SUFFIXES or (not suffix and info.st_mode & stat.S_IXUSR):
                         if len(binaries) < 100:
-                            detected = binary_info(read_sample(path, HEADER_BYTES))
+                            header = read_sample(path, HEADER_BYTES)
+                            detected = binary_info(header)
+                            if (detected and detected["format"].startswith("MZ (")
+                                    and len(header) >= 64 and suffix in {".exe", ".com", ""}):
+                                runtime_clue("emulation", relative, "MZ container; DOS/NE/PE unresolved", "bounded header; not proof of DOS compatibility")
                             if detected:
                                 binaries.append({"path": relative, **detected})
                         else:
@@ -318,6 +363,7 @@ def inspect_game(root, max_entries=20000, max_depth=32):
         "schema_version": SCHEMA_VERSION,
         "task_hints": [{"engine": engine, "skill": ENGINE_TASK_SKILLS[engine], "status": "investigate"}
                        for engine in sorted(candidates) if engine in ENGINE_TASK_SKILLS],
+        "runtime_clues": sorted(runtime_clues, key=lambda item: (item["path"], item["kind"])),
         "metadata": sorted(metadata, key=lambda item: (item["engine"], item["path"], item["field"])),
         "omitted": omissions,
         "scan_errors": scan_errors,
@@ -338,6 +384,7 @@ def inspect_game(root, max_entries=20000, max_depth=32):
         "limitations": [
             "Filename/dependency clues do not confirm engine, editable source, rights or browser support.",
             "Archives are not opened; dependencies and binary imports are not fully analyzed.",
+            "Runtime clues are capped at 100; ROM/disk suffixes and unresolved MZ do not establish platform or browser compatibility.",
             "Links/reparse points, special files and common dependency/VCS directories are skipped.",
             "Evidence is capped at 10 paths per candidate; build_files and binaries at 100 each; warnings at 100.",
             "Traversal uses filesystem order; keep the input tree unchanged while scanning.",

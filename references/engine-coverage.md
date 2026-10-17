@@ -40,6 +40,14 @@ their engine has some browser backend.
 | Custom native engines | [port2browser-native](../skills/port2browser-native/references/renderers.md) | Full dependency graph, source/rights and actual web backend |
 | Compatible open engines | [port2browser-open-runtime](../skills/port2browser-open-runtime/SKILL.md) | Exact game/data format compatibility and separate rights |
 | Legacy emulation | [port2browser-open-runtime](../skills/port2browser-open-runtime/SKILL.md) | Exact platform/backend support, game data/firmware rights and usable performance |
+| raylib | [port2browser-native](../skills/port2browser-native/references/raylib.md) | Rebuildable game/raylib source and matching web graphics backend |
+| Go / Ebitengine | [port2browser-frameworks](../skills/port2browser-frameworks/references/go.md) | Go/module source, matching wasm_exec.js and compatible packages |
+| HaxeFlixel | [port2browser-frameworks](../skills/port2browser-frameworks/references/haxeflixel.md) | Editable Haxe project and matching Lime/OpenFL/addons |
+| Flash / Ruffle | [port2browser-open-runtime](../skills/port2browser-open-runtime/references/data-runtimes.md) | Exact SWF/APIs/resources and a proven compatible Ruffle revision |
+| Java applets / CheerpJ | [port2browser-open-runtime](../skills/port2browser-open-runtime/references/data-runtimes.md) | Applet/JAR and dependencies, matching runtime and deployment terms |
+| ScummVM | [port2browser-open-runtime](../skills/port2browser-open-runtime/references/data-runtimes.md) | Supported exact game edition/data and browser build including its engine |
+| Adventure Game Studio | [port2browser-open-runtime](../skills/port2browser-open-runtime/references/data-runtimes.md) | Matching editable project or compatible game data, runtime/plugins |
+| Flutter / Flame | [port2browser-frameworks](../skills/port2browser-frameworks/references/flutter.md) | Editable Dart/Flutter project with compatible web plugins and renderer |
 
 For every game, prove an actual scene before expanding scope. Record renderer,
 plugins, OS/services, threading, asset/decoded-memory budgets, data rights and
@@ -47,8 +55,8 @@ browser evidence. Web export availability is distinct from project availability,
 rebuildable dependencies, feasible performance and preserved gameplay.
 
 The machine-readable [catalog](engine-routes.json) supplies identifiers and
-prerequisites, not scores or a `supported` boolean. Inspector task hints remain
-inferred leads. Unknown engines still enter recon/route selection rather than
+prerequisites, not scores or a `supported` boolean. Catalog candidate IDs are navigation labels; the inspector detects only a
+subset, not every catalog entry. Inspector task hints remain inferred leads. Unknown engines still enter recon/route selection rather than
 being excluded or assigned invented compatibility.
 
 The task-folder/playbook organization is inspired by

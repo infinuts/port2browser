@@ -290,7 +290,9 @@
     {
       "id": "open-engine",
       "label": "Compatible open engines",
-      "candidate_ids": [],
+      "candidate_ids": [
+        "open-engine"
+      ],
       "task_skill": "port2browser-open-runtime",
       "guide": "skills/port2browser-open-runtime/SKILL.md",
       "coverage": "documented_route",
@@ -299,11 +301,101 @@
     {
       "id": "emulation",
       "label": "Legacy emulation",
-      "candidate_ids": [],
+      "candidate_ids": [
+        "emulation"
+      ],
       "task_skill": "port2browser-open-runtime",
       "guide": "skills/port2browser-open-runtime/SKILL.md",
       "coverage": "documented_route",
       "requires": "Exact platform/backend support, game data/firmware rights and usable performance"
+    },
+    {
+      "id": "raylib",
+      "label": "raylib",
+      "candidate_ids": [
+        "raylib"
+      ],
+      "task_skill": "port2browser-native",
+      "guide": "skills/port2browser-native/references/raylib.md",
+      "coverage": "documented_route",
+      "requires": "Rebuildable game/raylib source and matching web graphics backend"
+    },
+    {
+      "id": "ebitengine",
+      "label": "Go / Ebitengine",
+      "candidate_ids": [
+        "ebitengine"
+      ],
+      "task_skill": "port2browser-frameworks",
+      "guide": "skills/port2browser-frameworks/references/go.md",
+      "coverage": "documented_route",
+      "requires": "Go/module source, matching wasm_exec.js and compatible packages"
+    },
+    {
+      "id": "haxeflixel",
+      "label": "HaxeFlixel",
+      "candidate_ids": [
+        "haxeflixel"
+      ],
+      "task_skill": "port2browser-frameworks",
+      "guide": "skills/port2browser-frameworks/references/haxeflixel.md",
+      "coverage": "documented_route",
+      "requires": "Editable Haxe project and matching Lime/OpenFL/addons"
+    },
+    {
+      "id": "flash",
+      "label": "Flash / Ruffle",
+      "candidate_ids": [
+        "flash"
+      ],
+      "task_skill": "port2browser-open-runtime",
+      "guide": "skills/port2browser-open-runtime/references/data-runtimes.md",
+      "coverage": "documented_route",
+      "requires": "Exact SWF/APIs/resources and a proven compatible Ruffle revision"
+    },
+    {
+      "id": "java-applet",
+      "label": "Java applets / CheerpJ",
+      "candidate_ids": [
+        "java-applet"
+      ],
+      "task_skill": "port2browser-open-runtime",
+      "guide": "skills/port2browser-open-runtime/references/data-runtimes.md",
+      "coverage": "documented_route",
+      "requires": "Applet/JAR and dependencies, matching runtime and deployment terms"
+    },
+    {
+      "id": "scummvm",
+      "label": "ScummVM",
+      "candidate_ids": [
+        "scummvm"
+      ],
+      "task_skill": "port2browser-open-runtime",
+      "guide": "skills/port2browser-open-runtime/references/data-runtimes.md",
+      "coverage": "documented_route",
+      "requires": "Supported exact game edition/data and browser build including its engine"
+    },
+    {
+      "id": "ags",
+      "label": "Adventure Game Studio",
+      "candidate_ids": [
+        "ags"
+      ],
+      "task_skill": "port2browser-open-runtime",
+      "guide": "skills/port2browser-open-runtime/references/data-runtimes.md",
+      "coverage": "documented_route",
+      "requires": "Matching editable project or compatible game data, runtime/plugins"
+    },
+    {
+      "id": "flutter-flame",
+      "label": "Flutter / Flame",
+      "candidate_ids": [
+        "flutter-flame"
+      ],
+      "task_skill": "port2browser-frameworks",
+      "guide": "skills/port2browser-frameworks/references/flutter.md",
+      "coverage": "documented_route",
+      "requires": "Editable Dart/Flutter project with compatible web plugins and renderer"
     }
   ]
 }

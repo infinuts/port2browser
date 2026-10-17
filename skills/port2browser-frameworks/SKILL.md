@@ -33,3 +33,6 @@ bytecode alone does not establish legal, complete, buildable project source.
 Handoff: language/framework/backend revisions, target feature choices, patches,
 content conversion rules, reproducible commands, browser tests and remaining
 native-only features. Report untested routes as investigated, not supported games.
+
+Additional playbooks: [Go/Ebitengine](references/go.md), [HaxeFlixel](references/haxeflixel.md),
+and [Flutter/Flame](references/flutter.md).

@@ -147,8 +147,8 @@ export, native and framework skills.
 | [verify](skills/port2browser-verify/SKILL.md) | Actual browser input, output, state, audio, focus and reload evidence |
 | [release](skills/port2browser-release/SKILL.md) | Allowlisted packaging, hosting and accurate port reports |
 
-The [28-route catalog](references/engine-coverage.md) documents prerequisites,
-first probes and blockers. These are engineering workflows, not 28 demonstrated
+The [36-route catalog](references/engine-coverage.md) documents prerequisites,
+first probes and blockers. These are engineering workflows, not 36 demonstrated
 ports. Modern games require their own assessment of source access, renderer,
 shaders, plugins, middleware, asset memory and online services. An Unreal 4 HTML5
 fork does not establish UE5 support; a desktop mod loader does not establish a

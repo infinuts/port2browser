@@ -32,3 +32,6 @@ If the runtime does not support the required platform or game version, report
 the mismatch and next needed resource. Do not download unauthorized BIOS/ROMs,
 keys or protected game packages, or bypass activation/anti-cheat as a port step.
 Handoff runtime revisions, input hashes, commands, rights boundaries and evidence.
+
+For Flash/Ruffle, Java applets/CheerpJ, ScummVM, AGS and ambiguous data formats,
+read the [data/runtime playbooks](references/data-runtimes.md).

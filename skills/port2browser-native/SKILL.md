@@ -32,3 +32,5 @@ Build with useful diagnostics first. Compare a repeatable gameplay sequence with
 the native version when available. Verify the release build again after LTO,
 stripping, asset conversion or compression. Retain patches, exact commands,
 source revisions, download/decoded-memory measurements and browser evidence.
+
+For raylib source, use the [raylib web playbook](references/raylib.md).
