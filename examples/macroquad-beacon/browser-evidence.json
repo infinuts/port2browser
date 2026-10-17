@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "recorded": "2026-10-17",
+  "source_base_revision": "8c8ccc86e3f5c08f494a2cd9bb066226ba2674c4",
+  "tested_worktree_identified_by_hashes": true,
+  "source_sha256": {
+    "Cargo.lock": "e64b51f38d2a2cccbf8b51d3c5baa19bc259562277810b7fe94db04186022987",
+    "Cargo.toml": "bc210a4781e35c66060aab66cec730ec485e652746b28f88ed247f49f97cc852",
+    "NOTICE.md": "82d24736dbbbe82957ef0be12f69fc25d2865d59f5f23205069b5608d037ee07",
+    "ProggyClean-LICENSE.txt": "fe61d069df303c697e04200f5f8232c2cb09dd3572f4357b323469f7d592d142",
+    "build.py": "b039b00e560d46ceea7446436ac1f47c94e176943ec63d4b6971a5df176d91af",
+    "index.html": "1050b75b185ef9030f143a538318a3edfdf11ebf6caf1303cd05e11a2c3f90dc",
+    "platform.js": "99fb6c8fa94870d59cdb630ac0f29374a8f1f90b6be96c121c4255d134e72998",
+    "rust-toolchain.toml": "786ee110c9435e186f7b8ce09d23281ad2ab2b0224483f52df1adc00ef44599e",
+    "src/main.rs": "361762a84f3e6a23188c6c1d68b2072f4274d1c73299f4c3ad9d356d3605ef71",
+    "verification.json": "c7a9bdf7b75cfd624925d1a5fb4ac27076b4e8090998335cc749bfa7159a65b3"
+  },
+  "browser_artifact_sha256": {
+    "LICENSE": "b0742a03a529f0fe49341f173632934280ce9e99aeaee4555f516e22391799f8",
+    "NOTICE.md": "82d24736dbbbe82957ef0be12f69fc25d2865d59f5f23205069b5608d037ee07",
+    "THIRD-PARTY-LICENSES.txt": "b0232d307c19c1bdc846fc09b219565706f211c4c2e998a52fb2fcd6dbee5fe4",
+    "index.html": "1050b75b185ef9030f143a538318a3edfdf11ebf6caf1303cd05e11a2c3f90dc",
+    "macroquad-beacon.wasm": "5982b7e67979b89c5da319bebaed1e565ba73f6861a15333ea504182fa727df6",
+    "mq_js_bundle.js": "f4189c03de0b10cef3b710bdcadb22df7b835ccab5de52a3714e896e4fc48cd7",
+    "platform.js": "99fb6c8fa94870d59cdb630ac0f29374a8f1f90b6be96c121c4255d134e72998"
+  },
+  "runs": [
+    {
+      "browser": "chromium",
+      "version": "141.0.7390.37",
+      "result": "pass",
+      "os": "darwin",
+      "os_release": "24.6.0",
+      "architecture": "arm64",
+      "headed": true,
+      "coverage": {
+        "input": "pass",
+        "render": "pass",
+        "state": "pass",
+        "audio": "pass",
+        "focus": "pass",
+        "reload": "pass"
+      },
+      "performance": {
+        "navigation": {
+          "dom_content_loaded_ms": 17.200000000186265,
+          "load_ms": 17.200000000186265
+        },
+        "resources": {
+          "count": 3,
+          "transfer_bytes": 463609,
+          "encoded_bytes": 462709
+        },
+        "frame_callback_intervals": {
+          "status": "measured",
+          "samples": 60,
+          "p50_ms": 8.300000000000011,
+          "p95_ms": 8.900000000000006,
+          "max_ms": 9
+        }
+      },
+      "evidence": "evidence/chromium/evidence.json"
+    },
+    {
+      "browser": "firefox",
+      "version": "142.0.1",
+      "result": "pass",
+      "os": "darwin",
+      "os_release": "24.6.0",
+      "architecture": "arm64",
+      "headed": true,
+      "coverage": {
+        "input": "pass",
+        "render": "pass",
+        "state": "pass",
+        "audio": "pass",
+        "focus": "pass",
+        "reload": "pass"
+      },
+      "performance": {
+        "navigation": {
+          "dom_content_loaded_ms": 130,
+          "load_ms": 130
+        },
+        "resources": {
+          "count": 3,
+          "transfer_bytes": 463609,
+          "encoded_bytes": 462709
+        },
+        "frame_callback_intervals": {
+          "status": "measured",
+          "samples": 60,
+          "p50_ms": 8.319999999999993,
+          "p95_ms": 9,
+          "max_ms": 9.259999999999991
+        }
+      },
+      "evidence": "evidence/firefox/evidence.json"
+    }
+  ],
+  "native_build": "compiled native Rust binary",
+  "native_runtime": "untested",
+  "manual_listening": "untested",
+  "physical_mobile": "untested",
+  "safari_webkit": "untested",
+  "clean_snapshot_build": "native and browser builds passed from a staged-tree export, with empty example build directories"
+}

@@ -1,0 +1,6 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>LOVE Beacon</title><link rel="icon" href="data:,">
+<style>body{background:#0f172a;color:#e2e8f0;font:18px system-ui;max-width:48rem;margin:2rem auto}canvas{width:640px;max-width:100%;border:2px solid #64748b}button{font:inherit;padding:.6rem}</style>
+<h1>LÖVE Beacon</h1><p>Activate audio, press Enter, then Right eight times, Space to collect, S to save.</p>
+<button id="start" disabled>Activate audio and focus game</button><output id="status" aria-live="polite">Loading LÖVE…</output>
+<p><canvas id="canvas" width="640" height="360" tabindex="0" aria-label="LOVE game"></canvas></p>
+<script src="platform.js"></script><script src="game.js"></script><script src="love.js" onload="Love(Module)"></script>

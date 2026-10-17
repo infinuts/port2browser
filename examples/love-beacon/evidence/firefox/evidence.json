@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "url": "http://127.0.0.1:51481/love-beacon/",
+  "plan_sha256": "c501574511b06e25f83ecc639410283c0517cc6980430832b9eeb1c6e4ed3c15",
+  "result": "pass",
+  "coverage": {
+    "input": "pass",
+    "render": "pass",
+    "state": "pass",
+    "audio": "pass",
+    "focus": "pass",
+    "reload": "pass"
+  },
+  "steps": [
+    {
+      "index": 0,
+      "action": "click",
+      "result": "pass"
+    },
+    {
+      "index": 1,
+      "action": "press",
+      "result": "pass"
+    },
+    {
+      "index": 2,
+      "action": "expect",
+      "result": "pass",
+      "state": {
+        "x": 24,
+        "collected": 0,
+        "started": 1,
+        "sounds": 0,
+        "saves": 0,
+        "focused": 1,
+        "engine": "11.4.0",
+        "ready": 1,
+        "saving": 0
+      }
+    },
+    {
+      "index": 3,
+      "action": "press",
+      "result": "pass"
+    },
+    {
+      "index": 4,
+      "action": "expect",
+      "result": "pass",
+      "state": {
+        "x": 120,
+        "collected": 0,
+        "started": 1,
+        "sounds": 0,
+        "saves": 0,
+        "focused": 1,
+        "engine": "11.4.0",
+        "ready": 1,
+        "saving": 0
+      }
+    },
+    {
+      "index": 5,
+      "action": "pixel",
+      "result": "pass",
+      "pixel": [
+        56,
+        189,
+        248,
+        255
+      ],
+      "screenshot": "step-5.png"
+    },
+    {
+      "index": 6,
+      "action": "press",
+      "result": "pass"
+    },
+    {
+      "index": 7,
+      "action": "expect",
+      "result": "pass",
+      "state": {
+        "x": 120,
+        "collected": 1,
+        "started": 1,
+        "sounds": 1,
+        "saves": 0,
+        "focused": 1,
+        "engine": "11.4.0",
+        "ready": 1,
+        "saving": 0
+      }
+    },
+    {
+      "index": 8,
+      "action": "audio",
+      "result": "pass",
+      "audio": {
+        "states": [
+          "running"
+        ],
+        "starts": 1
+      }
+    },
+    {
+      "index": 9,
+      "action": "canvas",
+      "result": "pass",
+      "sample_colors": 12,
+      "screenshot": "step-9.png"
+    },
+    {
+      "index": 10,
+      "action": "down",
+      "result": "pass"
+    },
+    {
+      "index": 11,
+      "action": "focus",
+      "result": "pass",
+      "active_element": {
+        "tag": "BUTTON",
+        "id": "start"
+      },
+      "scope": "element focus loss"
+    },
+    {
+      "index": 12,
+      "action": "up",
+      "result": "pass"
+    },
+    {
+      "index": 13,
+      "action": "expect",
+      "result": "pass",
+      "state": {
+        "x": 132,
+        "collected": 1,
+        "started": 1,
+        "sounds": 1,
+        "saves": 0,
+        "focused": 1,
+        "engine": "11.4.0",
+        "ready": 1,
+        "saving": 0
+      }
+    },
+    {
+      "index": 14,
+      "action": "click",
+      "result": "pass"
+    },
+    {
+      "index": 15,
+      "action": "press",
+      "result": "pass"
+    },
+    {
+      "index": 16,
+      "action": "expect",
+      "result": "pass",
+      "state": {
+        "x": 132,
+        "collected": 1,
+        "started": 1,
+        "sounds": 1,
+        "saves": 1,
+        "focused": 1,
+        "engine": "11.4.0",
+        "ready": 1,
+        "saving": 0
+      }
+    },
+    {
+      "index": 17,
+      "action": "capture",
+      "result": "pass",
+      "screenshot": "step-17.png"
+    },
+    {
+      "index": 18,
+      "action": "reload",
+      "result": "pass",
+      "before": {
+        "x": 132,
+        "collected": 1
+      },
+      "after": {
+        "x": 132,
+        "collected": 1
+      }
+    },
+    {
+      "index": 19,
+      "action": "expect",
+      "result": "pass",
+      "state": {
+        "x": 132,
+        "collected": 1,
+        "started": 1,
+        "sounds": 1,
+        "saves": 1,
+        "focused": 1,
+        "engine": "11.4.0",
+        "ready": 1,
+        "saving": 0
+      }
+    },
+    {
+      "index": 20,
+      "action": "canvas",
+      "result": "pass",
+      "sample_colors": 13,
+      "screenshot": "step-20.png"
+    }
+  ],
+  "logs": [],
+  "errors": [],
+  "events_omitted": 0,
+  "manual_listening": "untested",
+  "limitations": [
+    "Configured checks only; passing does not establish full game playability or engine compatibility.",
+    "Frame callback intervals are not GPU/game frame times. Transfer sizes may be zero for cache/opaque resources.",
+    "Web Audio instrumentation observes contexts and oscillator/buffer starts; it is not audible-output measurement.",
+    "Device profiles emulate browser parameters, not physical phones or shipping Safari."
+  ],
+  "navigation_wall_ms": 154,
+  "performance": {
+    "navigation": {
+      "dom_content_loaded_ms": 154,
+      "load_ms": 154
+    },
+    "resources": {
+      "count": 5,
+      "transfer_bytes": 5052020,
+      "encoded_bytes": 5050520
+    },
+    "frame_callback_intervals": {
+      "status": "measured",
+      "samples": 60,
+      "p50_ms": 8.32000000000005,
+      "p95_ms": 9.240000000000009,
+      "max_ms": 9.279999999999973
+    }
+  },
+  "elapsed_ms": 1720,
+  "browser": "firefox",
+  "browser_version": "142.0.1",
+  "playwright_version": "1.56.1",
+  "node_version": "v24.19.0",
+  "os": "darwin",
+  "os_release": "24.6.0",
+  "architecture": "arm64",
+  "date": "2026-10-17T15:21:12.593Z",
+  "device": null,
+  "physical_device": "untested",
+  "shipping_safari": "untested"
+}

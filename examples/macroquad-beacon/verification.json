@@ -1,0 +1,198 @@
+{
+  "schema_version": 1,
+  "state": {
+    "path": "exampleState",
+    "call": true
+  },
+  "canvas": "canvas",
+  "frame_samples": 60,
+  "steps": [
+    {
+      "action": "click",
+      "selector": "#start"
+    },
+    {
+      "action": "expect",
+      "values": {
+        "started": 1
+      }
+    },
+    {
+      "action": "press",
+      "key": "ArrowRight"
+    },
+    {
+      "action": "expect",
+      "values": {
+        "x": 36
+      }
+    },
+    {
+      "action": "press",
+      "key": "ArrowRight"
+    },
+    {
+      "action": "expect",
+      "values": {
+        "x": 48
+      }
+    },
+    {
+      "action": "press",
+      "key": "ArrowRight"
+    },
+    {
+      "action": "expect",
+      "values": {
+        "x": 60
+      }
+    },
+    {
+      "action": "press",
+      "key": "ArrowRight"
+    },
+    {
+      "action": "expect",
+      "values": {
+        "x": 72
+      }
+    },
+    {
+      "action": "press",
+      "key": "ArrowRight"
+    },
+    {
+      "action": "expect",
+      "values": {
+        "x": 84
+      }
+    },
+    {
+      "action": "press",
+      "key": "ArrowRight"
+    },
+    {
+      "action": "expect",
+      "values": {
+        "x": 96
+      }
+    },
+    {
+      "action": "press",
+      "key": "ArrowRight"
+    },
+    {
+      "action": "expect",
+      "values": {
+        "x": 108
+      }
+    },
+    {
+      "action": "press",
+      "key": "ArrowRight"
+    },
+    {
+      "action": "expect",
+      "values": {
+        "x": 120
+      }
+    },
+    {
+      "action": "expect",
+      "values": {
+        "x": 120
+      }
+    },
+    {
+      "action": "pixel",
+      "point": [
+        0.4,
+        0.61
+      ],
+      "rgb": [
+        56,
+        189,
+        248
+      ],
+      "tolerance": 2
+    },
+    {
+      "action": "press",
+      "key": "Space"
+    },
+    {
+      "action": "expect",
+      "values": {
+        "collected": 1,
+        "sounds": 1
+      }
+    },
+    {
+      "action": "audio",
+      "min_starts": 1
+    },
+    {
+      "action": "canvas"
+    },
+    {
+      "action": "down",
+      "key": "ArrowRight"
+    },
+    {
+      "action": "expect",
+      "values": {
+        "x": 132
+      }
+    },
+    {
+      "action": "focus",
+      "selector": "#start"
+    },
+    {
+      "action": "up",
+      "key": "ArrowRight"
+    },
+    {
+      "action": "expect",
+      "values": {
+        "x": 132
+      }
+    },
+    {
+      "action": "click",
+      "selector": "canvas"
+    },
+    {
+      "action": "press",
+      "key": "s"
+    },
+    {
+      "action": "expect",
+      "values": {
+        "saving": 0,
+        "saves": 1
+      }
+    },
+    {
+      "action": "capture"
+    },
+    {
+      "action": "reload",
+      "preserve": [
+        "x",
+        "collected"
+      ]
+    },
+    {
+      "action": "expect",
+      "values": {
+        "x": 132,
+        "collected": 1
+      }
+    },
+    {
+      "action": "canvas"
+    }
+  ],
+  "timeout_ms": 10000
+}
