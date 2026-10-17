@@ -129,6 +129,7 @@ The examples use original MIT code, generated shapes, and generated sound.
 They are optional development material; installing the skill needs none of their
 toolchains or Node packages.
 
+- [AssaultCube](examples/assaultcube/README.md): experimental C++/Wasm offline bot match using locally selected, hash-verified upstream game media. Includes browser instructions and a separate license notice.
 - [Mosslight](examples/mosslight/README.md): playable C++ island adventure, raw/optimized/gzip size comparison, native and compressed browser builds.
 - [SDL Beacon](examples/sdl-beacon/README.md): minimal native C and Wasm regression fixture.
 - [Godot Beacon](examples/godot-beacon/README.md): native GDScript scene exported with the matching web runtime.
@@ -162,6 +163,7 @@ npm run test:browser
 
 | Route | Evidence level | Tested scope |
 | --- | --- | --- |
+| AssaultCube 1.3.0.2 C++ → Wasm/WebGL | [Tested offline slice](examples/assaultcube/port-report.md) | Chromium 141.0.7390.37 / Firefox 142.0.1; one map, three bots, movement/aim/fire, audio activation, focus and settings reload; stock media selected locally |
 | C++/SDL2 → optimized/gzip Wasm | [Evaluated Mosslight adventure](examples/mosslight/port-report.md) | Chromium/Firefox versions and measured sizes in report; collision, three collectibles, hazards, completion, audio activation, focus, durable saves, corrupt-package rejection |
 | SDL2/C → Emscripten 4.0.16 / SDL2 2.32.8 | [Evaluated original example](examples/sdl-beacon/port-report.md) | Chromium 141.0.7390.37 / Firefox 142.0.1 on macOS 15.7.4; one scene, input, audio activation, focus, save/reload |
 | Electron 44.8.0 → browser JavaScript | [Evaluated original example](examples/electron-beacon/port-report.md) | Same browser versions/OS; gameplay plus menu and persistence; desktop filesystem/IPC smoke |
