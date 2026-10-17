@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Add an optional reusable JSON-plan browser verifier with retained state/render,
+  Web Audio, focus, reload and limited timing evidence; unavailable tools stay untested.
+- Add shared-action touch controls to Electron Beacon and separate WebKit/mobile
+  emulation regressions, without claiming shipping-Safari or physical-device support.
+
 - Pin emsdk checkout and compiler installation through one CI setup action.
 - Add a security reporting policy and Dependabot for Actions/npm updates.
 - Add single-byte-range GETs and optional per-response throttling to the local

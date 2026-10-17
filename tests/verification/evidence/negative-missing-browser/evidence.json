@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "browser": "chromium",
+  "device": null,
+  "result": "untested",
+  "reason": "Error: browserType.launch: Executable doesn't exist at <task-workspace>/outputs/verifier-recorded-2026-10-17/empty-browser-cache/chromium_headless_shell-1194/chrome-mac/headless_shell\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝",
+  "physical_device": "untested",
+  "shipping_safari": "untested"
+}

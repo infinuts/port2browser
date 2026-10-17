@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "test:browser": "playwright test",
-    "test:assaultcube": "playwright test --config playwright.assaultcube.config.js"
+    "test:assaultcube": "playwright test --config playwright.assaultcube.config.js",
+    "test:verification": "node --test tests/verification/plan.test.cjs && python3 tools/test_verifier.py --output test-results/reusable-verifier"
   },
   "devDependencies": {
     "@playwright/test": "1.56.1",

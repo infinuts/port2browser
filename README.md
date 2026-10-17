@@ -316,6 +316,21 @@ The server binds `127.0.0.1` and supports Wasm MIME types, already compressed
 gzip/Brotli files, and optional COOP/COEP headers. It is a local test server;
 test HTTPS and deployment configuration separately. Stop it with Ctrl+C.
 
+## Reuse browser verification
+
+The optional [verification helper](skills/port2browser-verify/references/verification.md)
+runs a URL plus a JSON input/state plan with Playwright. It retains screenshots,
+console/network errors, Web Audio evidence, element-focus checks, reload
+persistence and limited navigation/frame-callback measurements. It supports
+Chromium, Firefox, WebKit and compatible device profiles. Node/Playwright/pngjs
+remain optional; installed Python helpers still use only the standard library.
+
+The Electron example has touch buttons using the same gameplay actions as the
+keyboard. Its new matrix checks WebKit desktop and Pixel/iPhone browser emulation,
+including touch, sound, menu and reload saves. Those checks do not establish
+physical-device or shipping-Safari support, nor mobile controls for the other games.
+See [the scoped verification record](tests/verification/README.md).
+
 ## FAQ
 
 <details>

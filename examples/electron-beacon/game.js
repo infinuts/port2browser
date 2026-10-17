@@ -35,23 +35,29 @@
       document.querySelector('#menu-result').textContent = state.menu;
     } catch (error) { console.error(error); }
   };
-  canvas.addEventListener('keydown', async event => {
-    if (['ArrowRight', 'ArrowLeft', ' '].includes(event.key)) event.preventDefault();
-    if (!state.started || event.repeat) return;
-    if (event.key === 'ArrowRight' && state.x < 288) state.x += 12;
-    if (event.key === 'ArrowLeft' && state.x > 0) state.x -= 12;
-    if (event.key === ' ' && Math.abs(state.x - 120) <= 12 && !state.collected) {
+  async function act(key) {
+    if (!state.started) return;
+    if (key === 'ArrowRight' && state.x < 288) state.x += 12;
+    if (key === 'ArrowLeft' && state.x > 0) state.x -= 12;
+    if (key === ' ' && Math.abs(state.x - 120) <= 12 && !state.collected) {
       state.collected = 1;
       const oscillator = audio.createOscillator(), gain = audio.createGain();
       oscillator.frequency.value = 440; gain.gain.value = 0.15;
       oscillator.connect(gain).connect(audio.destination);
       oscillator.start(); oscillator.stop(audio.currentTime + 0.25); state.sounds++;
     }
-    if (event.key.toLowerCase() === 's' && state.saving !== 1) {
+    if (key.toLowerCase() === 's' && state.saving !== 1) {
       state.saving = 1; draw();
       try { await platform.save({ x: state.x, collected: state.collected }); state.saving = 0; state.saves++; }
       catch (error) { state.saving = -1; console.error(error); }
     }
     draw();
+  }
+  canvas.addEventListener('keydown', event => {
+    if (['ArrowRight', 'ArrowLeft', ' '].includes(event.key)) event.preventDefault();
+    if (!event.repeat) void act(event.key);
   });
+  for (const button of document.querySelectorAll('[data-action]')) {
+    button.onclick = async () => { await act(button.dataset.action); canvas.focus(); };
+  }
 })();

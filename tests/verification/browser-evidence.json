@@ -1,0 +1,227 @@
+{
+  "schema_version": 1,
+  "recorded": "2026-10-17",
+  "source_base_revision": "6fd93e63f55702d3201df84dcb3074056527a8c3",
+  "tested_worktree_identified_by_hashes": true,
+  "source_sha256": {
+    "skills/port2browser-verify/scripts/verify.cjs": "d8157c9928350cc6bff28680cd2e5bef2a00d9be4d1a9e867a388bd4e3c29d4a",
+    "tools/verify_examples.cjs": "4905c65f9fb32219db5d62b6e7c6c00b46acbd0f935333a42254ad9fdbc1c9f6",
+    "tools/test_verifier.py": "068f5000a2a831eccc1ed104c2e7b0d56584824fb53c1535f7a43ee8766522c2",
+    "examples/electron-beacon/game.js": "87b7f909eba06b0819d4d4222d1177c7e2cd26ec6344b8f855a356c72f989128",
+    "examples/electron-beacon/web/index.html": "108d4db7fea51af50d82df4fb5c763e3443ee7a94bf4f03341ecd5ef1a42771f",
+    "examples/electron-beacon/web/platform.js": "947a35f0c392f0fc3ad6a56f84886a76f46cacb1f5680800c05f8431ef4ef553",
+    "tests/verification/electron-keyboard.json": "2da9e4c10eefcd487c449bf36ba55517852237d251e3a769154c88576b1fe19b",
+    "tests/verification/electron-touch.json": "50151be07d82869143c3515411ca74706b1beccd066a31f4d8152418b21a4a7e"
+  },
+  "summary": {
+    "schema_version": 1,
+    "results": [
+      {
+        "name": "chromium-desktop",
+        "result": "pass",
+        "browser_version": "141.0.7390.37",
+        "evidence": "chromium-desktop/evidence.json"
+      },
+      {
+        "name": "firefox-desktop",
+        "result": "pass",
+        "browser_version": "142.0.1",
+        "evidence": "firefox-desktop/evidence.json"
+      },
+      {
+        "name": "webkit-desktop",
+        "result": "pass",
+        "browser_version": "26.0",
+        "evidence": "webkit-desktop/evidence.json"
+      },
+      {
+        "name": "chromium-pixel-7",
+        "result": "pass",
+        "browser_version": "141.0.7390.37",
+        "evidence": "chromium-pixel-7/evidence.json"
+      },
+      {
+        "name": "webkit-iphone-13",
+        "result": "pass",
+        "browser_version": "26.0",
+        "evidence": "webkit-iphone-13/evidence.json"
+      }
+    ],
+    "negative_tests": {
+      "blank_canvas": "fail",
+      "wrong_state": "fail",
+      "missing_browser": "untested"
+    },
+    "limitations": [
+      "Physical devices, shipping Safari and manual listening remain untested.",
+      "These results cover this original Electron game only, not every engine or mobile game."
+    ]
+  },
+  "runs": {
+    "chromium-desktop": {
+      "browser": "chromium",
+      "version": "141.0.7390.37",
+      "device": null,
+      "result": "pass",
+      "coverage": {
+        "input": "pass",
+        "render": "pass",
+        "state": "pass",
+        "audio": "pass",
+        "focus": "pass",
+        "reload": "pass"
+      },
+      "performance": {
+        "navigation": {
+          "dom_content_loaded_ms": 6.1000000005587935,
+          "load_ms": 6.2000000001862645
+        },
+        "resources": {
+          "count": 2,
+          "transfer_bytes": 4799,
+          "encoded_bytes": 4199
+        },
+        "frame_callback_intervals": {
+          "status": "measured",
+          "samples": 60,
+          "p50_ms": 16.699999999999932,
+          "p95_ms": 16.799999999999955,
+          "max_ms": 16.800000000000068
+        }
+      },
+      "evidence": "evidence/chromium-desktop/evidence.json"
+    },
+    "firefox-desktop": {
+      "browser": "firefox",
+      "version": "142.0.1",
+      "device": null,
+      "result": "pass",
+      "coverage": {
+        "input": "pass",
+        "render": "pass",
+        "state": "pass",
+        "audio": "pass",
+        "focus": "pass",
+        "reload": "pass"
+      },
+      "performance": {
+        "navigation": {
+          "dom_content_loaded_ms": 126,
+          "load_ms": 126
+        },
+        "resources": {
+          "count": 2,
+          "transfer_bytes": 4799,
+          "encoded_bytes": 4199
+        },
+        "frame_callback_intervals": {
+          "status": "measured",
+          "samples": 60,
+          "p50_ms": 8.339999999999975,
+          "p95_ms": 9.120000000000005,
+          "max_ms": 9.339999999999918
+        }
+      },
+      "evidence": "evidence/firefox-desktop/evidence.json"
+    },
+    "webkit-desktop": {
+      "browser": "webkit",
+      "version": "26.0",
+      "device": null,
+      "result": "pass",
+      "coverage": {
+        "input": "pass",
+        "render": "pass",
+        "state": "pass",
+        "audio": "pass",
+        "focus": "pass",
+        "reload": "pass"
+      },
+      "performance": {
+        "navigation": {
+          "dom_content_loaded_ms": 8,
+          "load_ms": 8
+        },
+        "resources": {
+          "count": 2,
+          "transfer_bytes": 4799,
+          "encoded_bytes": 4199
+        },
+        "frame_callback_intervals": {
+          "status": "measured",
+          "samples": 60,
+          "p50_ms": 17,
+          "p95_ms": 18,
+          "max_ms": 20
+        }
+      },
+      "evidence": "evidence/webkit-desktop/evidence.json"
+    },
+    "chromium-pixel-7": {
+      "browser": "chromium",
+      "version": "141.0.7390.37",
+      "device": "Pixel 7",
+      "result": "pass",
+      "coverage": {
+        "input": "pass",
+        "render": "pass",
+        "state": "pass",
+        "audio": "pass",
+        "focus": "pass",
+        "reload": "pass"
+      },
+      "performance": {
+        "navigation": {
+          "dom_content_loaded_ms": 10.200000000186265,
+          "load_ms": 10.400000000372529
+        },
+        "resources": {
+          "count": 2,
+          "transfer_bytes": 4799,
+          "encoded_bytes": 4199
+        },
+        "frame_callback_intervals": {
+          "status": "measured",
+          "samples": 60,
+          "p50_ms": 16.69999999999999,
+          "p95_ms": 16.80000000000001,
+          "max_ms": 16.800000000000068
+        }
+      },
+      "evidence": "evidence/chromium-pixel-7/evidence.json"
+    },
+    "webkit-iphone-13": {
+      "browser": "webkit",
+      "version": "26.0",
+      "device": "iPhone 13",
+      "result": "pass",
+      "coverage": {
+        "input": "pass",
+        "render": "pass",
+        "state": "pass",
+        "audio": "pass",
+        "focus": "pass",
+        "reload": "pass"
+      },
+      "performance": {
+        "navigation": {
+          "dom_content_loaded_ms": 8,
+          "load_ms": 8
+        },
+        "resources": {
+          "count": 2,
+          "transfer_bytes": 4799,
+          "encoded_bytes": 4199
+        },
+        "frame_callback_intervals": {
+          "status": "measured",
+          "samples": 60,
+          "p50_ms": 17,
+          "p95_ms": 18,
+          "max_ms": 22
+        }
+      },
+      "evidence": "evidence/webkit-iphone-13/evidence.json"
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "url": "http://127.0.0.1:50968/electron-beacon/web/",
+  "plan_sha256": "45b54801854b8062bdca5a32f76dda85dc8eaca023a5c2644b856eeefd6771dd",
+  "result": "fail",
+  "coverage": {
+    "input": "untested",
+    "render": "untested",
+    "state": "untested",
+    "audio": "untested",
+    "focus": "untested",
+    "reload": "untested"
+  },
+  "steps": [
+    {
+      "index": 0,
+      "action": "expect",
+      "result": "fail"
+    }
+  ],
+  "logs": [],
+  "errors": [],
+  "events_omitted": 0,
+  "manual_listening": "untested",
+  "limitations": [
+    "Configured checks only; passing does not establish full game playability or engine compatibility.",
+    "Frame callback intervals are not GPU/game frame times. Transfer sizes may be zero for cache/opaque resources.",
+    "Web Audio instrumentation observes contexts and oscillator/buffer starts; it is not audible-output measurement.",
+    "Device profiles emulate browser parameters, not physical phones or shipping Safari."
+  ],
+  "navigation_wall_ms": 8,
+  "error": "AssertionError [ERR_ASSERTION]: state.x\n\n24 !== 999\n",
+  "elapsed_ms": 257,
+  "browser": "chromium",
+  "browser_version": "141.0.7390.37",
+  "playwright_version": "1.56.1",
+  "node_version": "v24.19.0",
+  "os": "darwin",
+  "os_release": "24.6.0",
+  "architecture": "arm64",
+  "date": "2026-10-17T14:57:24.328Z",
+  "device": null,
+  "physical_device": "untested",
+  "shipping_safari": "untested"
+}
