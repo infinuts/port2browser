@@ -1,10 +1,10 @@
 name: Live game demo
 on:
   push:
-    branches: [main, codex/demo-evals-godot]
-    paths: ['examples/sdl-beacon/**', 'examples/mosslight/**', 'tools/build_demo.py', '.github/workflows/demo.yml']
+    branches: [main]
+    paths: ['examples/sdl-beacon/**', 'examples/mosslight/**', 'examples/assaultcube/**', 'tools/package_assaultcube.py', 'tools/build_demo.py', '.github/workflows/demo.yml']
   pull_request:
-    paths: ['examples/sdl-beacon/**', 'examples/mosslight/**', 'tools/build_demo.py', '.github/workflows/demo.yml']
+    paths: ['examples/sdl-beacon/**', 'examples/mosslight/**', 'examples/assaultcube/**', 'tools/package_assaultcube.py', 'tools/build_demo.py', '.github/workflows/demo.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -32,6 +32,7 @@ jobs:
           python examples/sdl-beacon/build.py web
           python examples/mosslight/build.py debug-web
           python examples/mosslight/build.py web
+          python examples/assaultcube/build.py
           python tools/build_demo.py
       - uses: actions/upload-pages-artifact@v4
         with:
@@ -48,6 +49,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/configure-pages@v5
-      - name: Publish original demo
+      - name: Publish demos (AssaultCube code only; no stock media)
         uses: actions/deploy-pages@v4
         id: deployment

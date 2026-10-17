@@ -8,6 +8,10 @@
   investigation-only task navigation in schema-version-1 inspection reports.
 - Add bundle/collection packaging checks and include task modules in evaluation
   treatment copies and revision hashes. No new agent benchmark is claimed.
+- Add an AssaultCube 1.3.0.2 browser field test: patched upstream C++ engine,
+  offline bots, gesture-bound controls/audio and IDBFS settings. Stock media
+  are selected and verified locally; the public package contains no game media.
+- Add separate Chromium/Firefox gameplay checks and publication-boundary tests.
 
 - Add Mosslight, an original C++/SDL exploration game with hazards, collectibles,
   generated art/audio, completion and durable saves, as the live demo.

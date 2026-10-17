@@ -45,8 +45,10 @@ modern games, native plugins or proprietary binaries can run in a browser.
    instructions. Inspect hooks before building; do not execute unknown inputs
    just to identify them.
 2. Record code, media, engine, middleware and firmware permissions separately.
-   Ownership is not redistribution permission. Keep private game data, keys and
-   saves out of public artifacts. Do not bypass DRM, activation or anti-cheat.
+   Respect the user's authorized local/private processing scope and distinguish
+   it from publication. Include game data in public artifacts only within the
+   requested scope and applicable distribution terms; keep keys and private saves
+   out. Do not bypass DRM, activation or anti-cheat.
 3. Confirm engine/runtime versions against matching primary documentation. Keep
    candidates inferred and record conflicting clues. Extraction, mod hooks and
    a running interpreter do not establish a complete buildable project.
