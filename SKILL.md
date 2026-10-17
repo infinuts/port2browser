@@ -82,6 +82,11 @@ python "<skill-dir>/scripts/inspect_game.py" "<game-directory>"
 python "<skill-dir>/scripts/serve.py" "<web-output>" --port 8000
 ```
 
+For raw/gzip accounting and explicitly limited PNG/WAV memory estimates, use the
+optional `scripts/size_report.py` on the dedicated output; read
+[helper reports](references/helper-reports.md). The server's `--throttle` accepts
+KiB/s per response, not latency or shared-bandwidth simulation.
+
 Review inspector limits/warnings using [Inspection JSON](references/inspection-json.md).
 Add `--isolate` to the server only when the chosen runtime needs it. The server
 is a loopback development helper, not production hosting.

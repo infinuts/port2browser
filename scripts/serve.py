@@ -5,6 +5,10 @@ import argparse
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 import mimetypes
+import math
+import os
+import re
+import time
 from pathlib import Path
 import stat
 import sys
@@ -26,9 +30,11 @@ class GameHandler(SimpleHTTPRequestHandler):
         ".pck": "application/octet-stream",
     }
 
-    def __init__(self, *args, directory, isolate=False, **kwargs):
+    def __init__(self, *args, directory, isolate=False, throttle=0, **kwargs):
         self.build_root = Path(directory).resolve()
         self.isolate = isolate
+        self.throttle = throttle
+        self.byte_range = None
         super().__init__(*args, directory=str(self.build_root), **kwargs)
 
     def allowed_request(self):
@@ -69,7 +75,62 @@ class GameHandler(SimpleHTTPRequestHandler):
                     if link_or_reparse(index):
                         self.send_error(403, "Linked index is not served")
                         return None
+        # RFC 9110 permits ignoring unsupported/malformed or multipart ranges.
+        # If-Range/conditional requests use the base handler's full response;
+        # we do not issue a strong validator suitable for resuming changed files.
+        self.byte_range = None
+        header = self.headers.get("Range", "")
+        if (self.command == "GET" and header and len(header) <= 256
+                and not any(self.headers.get(h) for h in
+                            ("If-Range", "If-Modified-Since", "If-None-Match"))
+                and local_path.is_file()):
+            match = re.fullmatch(r"bytes=([0-9]*)-([0-9]*)", header.strip())
+            if match and any(match.groups()):
+                try:
+                    stream = local_path.open("rb")
+                except OSError:
+                    self.send_error(404, "File not found")
+                    return None
+                info = os.fstat(stream.fileno())
+                size = info.st_size
+                first, last = match.groups()
+                if first:
+                    start, end = int(first), min(int(last) if last else size-1, size-1)
+                else:
+                    length = int(last)
+                    start, end = max(0, size-length), size-1
+                if start >= size or end < start:
+                    stream.close()
+                    self.send_response(416)
+                    self.send_header("Content-Range", f"bytes */{size}")
+                    self.send_header("Content-Length", "0")
+                    self.end_headers()
+                    return None
+                self.byte_range = (start, end)
+                stream.seek(start)
+                self.send_response(206)
+                self.send_header("Content-Type", self.guess_type(local_path))
+                self.send_header("Content-Range", f"bytes {start}-{end}/{size}")
+                self.send_header("Content-Length", str(end-start+1))
+                self.send_header("Last-Modified", self.date_time_string(info.st_mtime))
+                self.end_headers()
+                return stream
         return super().send_head()
+
+    def copyfile(self, source, outputfile):
+        remaining = None if self.byte_range is None else self.byte_range[1]-self.byte_range[0]+1
+        started, sent = time.monotonic(), 0
+        chunk_size = min(65536, max(1, int(self.throttle / 10))) if self.throttle else 65536
+        while remaining is None or remaining > 0:
+            data = source.read(chunk_size if remaining is None else min(chunk_size, remaining))
+            if not data:
+                break
+            sent += len(data)
+            if self.throttle:
+                time.sleep(max(0, sent/self.throttle - (time.monotonic()-started)))
+            outputfile.write(data)
+            if remaining is not None:
+                remaining -= len(data)
 
     def list_directory(self, path):
         self.send_error(403, "No index.html; directory listing is disabled")
@@ -88,7 +149,8 @@ class GameHandler(SimpleHTTPRequestHandler):
     def end_headers(self):
         # Encode only successful, explicitly requested compressed resources.
         # send_response stores the current status, including HEAD responses.
-        if getattr(self, "response_status", 0) == 200:
+        if getattr(self, "response_status", 0) in (200, 206):
+            self.send_header("Accept-Ranges", "bytes")
             path = unquote(urlsplit(self.path).path).lower()
             if path.endswith(".gz"):
                 self.send_header("Content-Encoding", "gzip")
@@ -106,11 +168,13 @@ class GameHandler(SimpleHTTPRequestHandler):
         super().send_response(code, message)
 
 
-def make_server(directory, port=8000, isolate=False):
+def make_server(directory, port=8000, isolate=False, throttle=0):
+    if not math.isfinite(throttle) or throttle < 0:
+        raise ValueError("throttle must be finite and nonnegative bytes/second")
     directory = Path(directory).absolute()
     if link_or_reparse(directory) or not directory.is_dir():
         raise ValueError("build directory must be a real directory, not a link/reparse point")
-    handler = partial(GameHandler, directory=directory, isolate=isolate)
+    handler = partial(GameHandler, directory=directory, isolate=isolate, throttle=throttle)
     return ThreadingHTTPServer(("127.0.0.1", port), handler)
 
 
@@ -119,11 +183,13 @@ def main(argv=None):
     parser.add_argument("directory", type=Path, help="dedicated web build directory")
     parser.add_argument("--port", type=int, default=8000, help="loopback port (default: 8000; 0 chooses a free port)")
     parser.add_argument("--isolate", action="store_true", help="add COOP/COEP for runtimes using SharedArrayBuffer")
+    parser.add_argument("--throttle", type=float, default=0, metavar="KIB_PER_SECOND",
+                        help="per-response transfer limit in KiB/s (0 disables; not network latency simulation)")
     args = parser.parse_args(argv)
     if not 0 <= args.port <= 65535:
         parser.error("port must be between 0 and 65535")
     try:
-        with make_server(args.directory, args.port, args.isolate) as server:
+        with make_server(args.directory, args.port, args.isolate, args.throttle * 1024) as server:
             print(f"Serving {args.directory.resolve()} at http://127.0.0.1:{server.server_port}/", flush=True)
             print(f"Cross-origin isolation: {'on' if args.isolate else 'off'}. Stop with Ctrl+C.", flush=True)
             server.serve_forever()

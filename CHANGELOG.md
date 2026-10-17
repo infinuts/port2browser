@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Pin emsdk checkout and compiler installation through one CI setup action.
+- Add a security reporting policy and Dependabot for Actions/npm updates.
+- Add single-byte-range GETs and optional per-response throttling to the local
+  server, retaining compressed MIME/encoding, isolation and path restrictions.
+- Add bounded stdlib raw/gzip size reports with explicit PNG/WAV memory estimates,
+  and link an actual agent-produced port report from the README.
+
 - Split porting guidance into a router and 12 independently packageable task
   skills, with version-scoped playbooks for 28 engine/runtime routes.
 - Add bounded Defold, Construct, GDevelop and Rust dependency clues, plus

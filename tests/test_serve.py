@@ -1,4 +1,5 @@
 import gzip
+import io
 from http.client import HTTPConnection
 from pathlib import Path
 import subprocess
@@ -36,10 +37,10 @@ class ServerTests(unittest.TestCase):
         self.server.server_close()
         self.thread.join(timeout=5)
 
-    def request(self, path, method="GET"):
+    def request(self, path, method="GET", headers=None):
         connection = HTTPConnection("127.0.0.1", self.server.server_port, timeout=5)
         try:
-            connection.request(method, path)
+            connection.request(method, path, headers=headers or {})
             response = connection.getresponse()
             return response.status, response.headers, response.read()
         finally:
@@ -68,6 +69,53 @@ class ServerTests(unittest.TestCase):
         status, headers, _ = self.request("/game.wasm%2egz")
         self.assertEqual(status, 200)
         self.assertEqual(headers["Content-Encoding"], "gzip")
+
+    def test_single_ranges_open_ended_suffix_clamping_and_head(self):
+        for value, expected in [('bytes=0-3',b'\0asm'), ('bytes=4-',b'\x01\0\0\0'),
+                                ('bytes=-3',b'\0\0\0'), ('bytes=6-99',b'\0\0')]:
+            status, headers, body = self.request('/game.wasm', headers={'Range':value})
+            self.assertEqual(status,206)
+            self.assertEqual(body,expected)
+            self.assertEqual(int(headers['Content-Length']),len(expected))
+            self.assertEqual(headers['Accept-Ranges'],'bytes')
+            self.assertEqual(headers['Content-Type'],'application/wasm')
+            self.assertEqual(headers['Cross-Origin-Embedder-Policy'],'require-corp')
+        status, headers, body = self.request('/game.wasm','HEAD',{'Range':'bytes=0-3'})
+        self.assertEqual(status,200)  # Range applies to GET only.
+        self.assertEqual(headers['Content-Length'],'8')
+        self.assertEqual(body,b'')
+
+    def test_unsatisfiable_invalid_multiple_and_conditional_ranges(self):
+        (self.root/'empty.dat').write_bytes(b'')
+        for path,value in [('/game.wasm','bytes=8-'),('/game.wasm','bytes=-0'),('/empty.dat','bytes=0-')]:
+            status,headers,body=self.request(path,headers={'Range':value})
+            self.assertEqual(status,416)
+            self.assertTrue(headers['Content-Range'].startswith('bytes */'))
+            self.assertEqual(body,b'')
+        for value in ['bytes=0-1,4-5','items=0-3','bytes=bad','bytes=-','x'*300]:
+            self.assertEqual(self.request('/game.wasm',headers={'Range':value})[0],200)
+        self.assertEqual(self.request('/game.wasm',headers={'Range':'bytes=0-1','If-Range':'unmatched'})[0],200)
+        self.assertEqual(self.request('/%2eenv',headers={'Range':'bytes=0-1'})[0],403)
+
+    def test_ranges_address_compressed_representation_and_preserve_encoding(self):
+        original=(self.root/'game.wasm.gz').read_bytes()
+        status,headers,body=self.request('/game.wasm.gz',headers={'Range':'bytes=0-3'})
+        self.assertEqual(status,206)
+        self.assertEqual(headers['Content-Encoding'],'gzip')
+        self.assertEqual(body,original[:4])
+        self.assertEqual(headers['Content-Range'],f'bytes 0-3/{len(original)}')
+
+    def test_throttle_accounts_for_file_bytes_and_rejects_invalid_limits(self):
+        handler=object.__new__(GameHandler)
+        handler.throttle=100
+        handler.byte_range=(0,19)
+        target=io.BytesIO()
+        with patch('scripts.serve.time.monotonic',return_value=0), patch('scripts.serve.time.sleep') as sleep:
+            handler.copyfile(io.BytesIO(b'x'*30),target)
+        self.assertEqual(target.getvalue(),b'x'*20)
+        self.assertEqual([call.args[0] for call in sleep.call_args_list],[0.1,0.2])
+        for invalid in [-1,float('inf'),float('nan')]:
+            with self.assertRaises(ValueError):make_server(self.root,port=0,throttle=invalid)
 
     def test_compressed_404_is_not_mislabeled(self):
         status, headers, _ = self.request("/missing.wasm.gz")

@@ -1,6 +1,6 @@
 # Contributing
 
-Keep the installed `SKILL.md`, `references/`, `scripts/`, and `LICENSE` portable.
+Keep the installed `SKILL.md`, `references/`, `scripts/`, `skills/`, and `LICENSE` portable.
 Optional example toolchains and browser automation belong in development files;
 the Python helpers continue to require only Python 3.10+ and the standard library.
 Use original or appropriately licensed fixtures. Do not submit proprietary game
@@ -78,3 +78,13 @@ Run `python -m unittest discover -s tests -v`. The suite checks all task manifes
 resource links, engine navigation, and bundle/collection installs outside the
 checkout. Follow the existing evaluation policy before releasing workflow
 changes; packaging tests do not replace agent evaluations.
+
+## Toolchain refreshes
+
+Emscripten's compiler version and emsdk's immutable checkout are pinned together
+in `.github/actions/setup-emsdk/action.yml`. Refresh deliberately: review upstream
+release notes, change the checkout/version, rebuild native/web examples and run
+both browsers before merging. Keep the prior report scoped to its recorded
+versions. Dependabot proposes Actions/npm updates weekly/monthly; engine and
+compiler upgrades remain explicit PRs. Review pinned tools at least quarterly or
+when an upstream security/compatibility issue affects an example.

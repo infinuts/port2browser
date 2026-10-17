@@ -2,9 +2,9 @@ name: Live game demo
 on:
   push:
     branches: [main]
-    paths: ['examples/sdl-beacon/**', 'examples/mosslight/**', 'examples/assaultcube/**', 'tools/package_assaultcube.py', 'tools/build_demo.py', '.github/workflows/demo.yml']
+    paths: ['examples/sdl-beacon/**', 'examples/mosslight/**', 'examples/assaultcube/**', 'tools/package_assaultcube.py', 'tools/build_demo.py', '.github/workflows/demo.yml', '.github/actions/setup-emsdk/**']
   pull_request:
-    paths: ['examples/sdl-beacon/**', 'examples/mosslight/**', 'examples/assaultcube/**', 'tools/package_assaultcube.py', 'tools/build_demo.py', '.github/workflows/demo.yml']
+    paths: ['examples/sdl-beacon/**', 'examples/mosslight/**', 'examples/assaultcube/**', 'tools/package_assaultcube.py', 'tools/build_demo.py', '.github/workflows/demo.yml', '.github/actions/setup-emsdk/**']
   workflow_dispatch:
 permissions:
   contents: read
@@ -22,12 +22,11 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
+      - name: Install pinned Emscripten
+        uses: ./.github/actions/setup-emsdk
       - name: Install pinned SDK and build
         shell: bash
         run: |
-          git clone --depth 1 https://github.com/emscripten-core/emsdk.git "$RUNNER_TEMP/emsdk"
-          "$RUNNER_TEMP/emsdk/emsdk" install 4.0.16
-          "$RUNNER_TEMP/emsdk/emsdk" activate 4.0.16
           source "$RUNNER_TEMP/emsdk/emsdk_env.sh"
           python examples/sdl-beacon/build.py web
           python examples/mosslight/build.py debug-web

@@ -37,7 +37,7 @@ mapping the platform dependencies, and getting a small slice playable in a brows
 When the files are not enough, the result is a concrete explanation of what is missing.
 
 The repository contains a portable routing skill, 12 task skills, engine-specific
-playbooks, and two optional Python helpers. Your agent uses its own tools to do the engineering.
+playbooks, and three optional Python helpers. Your agent uses its own tools to do the engineering.
 
 ## What you get
 
@@ -57,6 +57,9 @@ live demo runs locally in your browser, with generated artwork/sound and durable
 saves. [Try it](https://infinuts.github.io/port2browser/), then
 [reproduce the C++ port and compressed release](examples/mosslight/README.md).
 It demonstrates one original game, not automatic conversion of arbitrary files.
+For an agent-produced handoff, read the [actual JavaScript pilot report](tests/evaluation-results/paired/reports/javascript-1-with_skill/PORT_REPORT.md).
+It reported `build_only`; separate browser replay evidence is recorded in the
+[paired pilot](tests/evaluation-results/paired/README.md).
 
 ## Quick start
 
@@ -297,6 +300,18 @@ a decompiler, full dependency resolver, license checker, or sandbox. Keep the
 input tree unchanged during inspection. Output may include private paths and
 filenames, so review it before sharing.
 
+The optional [size reporter](references/helper-reports.md) streams raw/gzip file
+accounting and labels PNG/WAV decoded-memory estimates separately from measurements:
+
+```sh
+python /path/to/port2browser/scripts/size_report.py ./build-web > sizes.json
+python /path/to/port2browser/scripts/serve.py ./build-web --throttle 512
+```
+
+The server supports single byte-range GETs for media seeking and a per-response
+KiB/s throttle. Multipart and conditional ranges fall back to the normal response;
+the throttle does not simulate latency or shared network bandwidth.
+
 The server binds `127.0.0.1` and supports Wasm MIME types, already compressed
 gzip/Brotli files, and optional COOP/COEP headers. It is a local test server;
 test HTTPS and deployment configuration separately. Stop it with Ctrl+C.
@@ -385,7 +400,9 @@ related changes together so regressions can be traced and reverted.
 
 For additive inspection fields and partial-scan interpretation, see the
 [JSON contract](references/inspection-json.md). For release versions and update
-instructions, see the [changelog](CHANGELOG.md).
+instructions, see the [changelog](CHANGELOG.md). Report vulnerabilities using the
+[security policy](SECURITY.md). CI pins both Emscripten 4.0.16 and its emsdk
+checkout in [one setup action](.github/actions/setup-emsdk/action.yml).
 
 ## License and inspiration
 
