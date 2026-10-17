@@ -1,0 +1,16 @@
+[package]
+name = "macroquad-beacon"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+macroquad = { version = "=0.4.14", default-features = false }
+
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+macroquad = { version = "=0.4.14", default-features = false, features = ["audio"] }
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1

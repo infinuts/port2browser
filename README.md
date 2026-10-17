@@ -173,12 +173,16 @@ modular workflow and does not establish its effectiveness.
 
 ## Try an original example
 
-The examples use original MIT code, generated shapes, and generated sound.
+The original fixtures use MIT game logic, generated shapes, and generated sound.
+Engine runtimes/fonts retain their own terms. AssaultCube uses upstream source
+and locally selected game media.
 They are optional development material; installing the skill needs none of their
 toolchains or Node packages.
 
 - [AssaultCube](examples/assaultcube/README.md): experimental C++/Wasm offline bot match using locally selected, hash-verified upstream game media. Includes browser instructions and a separate license notice.
 - [Mosslight](examples/mosslight/README.md): playable C++ island adventure, raw/optimized/gzip size comparison, native and compressed browser builds.
+- [Macroquad Beacon](examples/macroquad-beacon/README.md): Rust/Macroquad source compiled to Wasm with IndexedDB/Web Audio adaptation.
+- [LÖVE Beacon](examples/love-beacon/README.md): Lua in a pinned love.js runtime, explicit audio activation and awaited IDBFS saves.
 - [SDL Beacon](examples/sdl-beacon/README.md): minimal native C and Wasm regression fixture.
 - [Godot Beacon](examples/godot-beacon/README.md): native GDScript scene exported with the matching web runtime.
 - [Electron Beacon](examples/electron-beacon/README.md): filesystem/IPC desktop
@@ -216,6 +220,8 @@ npm run test:browser
 | SDL2/C → Emscripten 4.0.16 / SDL2 2.32.8 | [Evaluated original example](examples/sdl-beacon/port-report.md) | Chromium 141.0.7390.37 / Firefox 142.0.1 on macOS 15.7.4; one scene, input, audio activation, focus, save/reload |
 | Electron 44.8.0 → browser JavaScript | [Evaluated original example](examples/electron-beacon/port-report.md) | Same browser versions/OS; gameplay plus menu and persistence; desktop filesystem/IPC smoke |
 | Godot 4.5.1 standard/GDScript → single-thread web export | [Evaluated original example](examples/godot-beacon/port-report.md) | Chromium 141.0.7390.37 / Firefox 142.0.1 on macOS 15.7.4; one scene, WebGL output, input, audio activation, save/reload |
+| Macroquad 0.4.14 / Rust 1.85.1 → Wasm | [Evaluated original example](examples/macroquad-beacon/port-report.md) | Chromium 141.0.7390.37 / Firefox 142.0.1, macOS; actual input/render, sound activation, element focus and full-reload save |
+| LÖVE 11.4 / love.js 11.4.1 compatibility → Wasm | [Evaluated original example](examples/love-beacon/port-report.md) | Same browsers/OS; Lua gameplay, actual rendered pixels, OpenAL starts and awaited IDBFS reload persistence |
 | Shipped Unity files without a project | [Blocked synthetic assessment](tests/evaluation-results/2026-10-16.md) | Missing editable project; filename clues remain inferred |
 | Godot descriptor with missing native dependency | [Blocked synthetic assessment](tests/evaluation-results/2026-10-16.md) | Missing source/web extension build; config format 5 is not an engine version |
 | Other engine exporters, emulation, open engines and reconstruction | Investigation only | No completed port bundled for these routes; verify the exact input/runtime |

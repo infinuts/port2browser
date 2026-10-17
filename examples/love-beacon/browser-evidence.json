@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "recorded": "2026-10-17",
+  "source_base_revision": "8c8ccc86e3f5c08f494a2cd9bb066226ba2674c4",
+  "tested_worktree_identified_by_hashes": true,
+  "source_sha256": {
+    "NOTICE.md": "52dc88b179ce6b938e4015e11ab53df2eb7283364d39fd2f0c68b61205110826",
+    "THIRD-PARTY-LICENSES.txt": "a8007511eab78a9be804467cbe1b9ea65ddc869df94e414283e603ae3b7ff362",
+    "build.py": "2e893618a8ca6ee7282414a2669165b0308bc486a1ac75781fbcbd759429b202",
+    "game/conf.lua": "0e1da91285c33fb46c4148e8526bc36529dd5edda0641ffd7421356bce2eb488",
+    "game/main.lua": "10dc701b6d08a7cc04ee678c8f88c204dd17d88d68812757af44825c9aee1e67",
+    "index.html": "2bc8ce9643f311413752d714a3983c76dedd4d6bb842c073f785d975a93667d9",
+    "platform.js": "0f9d51c0bce91343156668b3957aff7adc0021eadbeb476305a1155a1fbd4842",
+    "verification.json": "3206dd0a6ff8a7d73b4584bf88a11047113bcf7a4296e927464626394ac23ae7"
+  },
+  "browser_artifact_sha256": {
+    "LICENSE": "b0742a03a529f0fe49341f173632934280ce9e99aeaee4555f516e22391799f8",
+    "NOTICE.md": "52dc88b179ce6b938e4015e11ab53df2eb7283364d39fd2f0c68b61205110826",
+    "THIRD-PARTY-LICENSES.txt": "a8007511eab78a9be804467cbe1b9ea65ddc869df94e414283e603ae3b7ff362",
+    "game.data": "23815216daf4df65b7dd5cc2b5b783e5f26aae0b9b4e6a06311204f2277dd32a",
+    "game.js": "2e9bd8dc9bf9854f1903b80a0ee5b7fe86368aeb16a84e84efa242cb6246048f",
+    "index.html": "2bc8ce9643f311413752d714a3983c76dedd4d6bb842c073f785d975a93667d9",
+    "love.js": "63459ab28e5718ac4c89f660803b7620ba4f766efc6f0c50a7508dccaa5b9b5c",
+    "love.js-LICENSE": "048a347cd98ed9b362599f7f9e55e6c8cff7f5017037b3a07713cfd447f5d883",
+    "love.wasm": "ecc9e098bb8af918d20fbe3f26d23495c5184ff6b5d203d2e4b27bf17a771d6f",
+    "platform.js": "0f9d51c0bce91343156668b3957aff7adc0021eadbeb476305a1155a1fbd4842",
+    "runtime-adaptation.json": "9766bf7ad118ac54cca528ffbfd3d1cc97433e272a8cd82762a64b5b98e8f85c"
+  },
+  "runs": [
+    {
+      "browser": "chromium",
+      "version": "141.0.7390.37",
+      "result": "pass",
+      "os": "darwin",
+      "os_release": "24.6.0",
+      "architecture": "arm64",
+      "headed": true,
+      "coverage": {
+        "input": "pass",
+        "render": "pass",
+        "state": "pass",
+        "audio": "pass",
+        "focus": "pass",
+        "reload": "pass"
+      },
+      "performance": {
+        "navigation": {
+          "dom_content_loaded_ms": 35,
+          "load_ms": 35.299999999813735
+        },
+        "resources": {
+          "count": 5,
+          "transfer_bytes": 5052020,
+          "encoded_bytes": 5050520
+        },
+        "frame_callback_intervals": {
+          "status": "measured",
+          "samples": 60,
+          "p50_ms": 8.300000000000011,
+          "p95_ms": 9,
+          "max_ms": 9.300000000000011
+        }
+      },
+      "evidence": "evidence/chromium/evidence.json"
+    },
+    {
+      "browser": "firefox",
+      "version": "142.0.1",
+      "result": "pass",
+      "os": "darwin",
+      "os_release": "24.6.0",
+      "architecture": "arm64",
+      "headed": true,
+      "coverage": {
+        "input": "pass",
+        "render": "pass",
+        "state": "pass",
+        "audio": "pass",
+        "focus": "pass",
+        "reload": "pass"
+      },
+      "performance": {
+        "navigation": {
+          "dom_content_loaded_ms": 154,
+          "load_ms": 154
+        },
+        "resources": {
+          "count": 5,
+          "transfer_bytes": 5052020,
+          "encoded_bytes": 5050520
+        },
+        "frame_callback_intervals": {
+          "status": "measured",
+          "samples": 60,
+          "p50_ms": 8.32000000000005,
+          "p95_ms": 9.240000000000009,
+          "max_ms": 9.279999999999973
+        }
+      },
+      "evidence": "evidence/firefox/evidence.json"
+    }
+  ],
+  "native_build": "packaged deterministic .love archive; engine not rebuilt",
+  "native_runtime": "untested",
+  "manual_listening": "untested",
+  "physical_mobile": "untested",
+  "safari_webkit": "untested",
+  "clean_snapshot_build": "native and browser builds passed from a staged-tree export, with empty example build directories"
+}

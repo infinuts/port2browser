@@ -1,0 +1,50 @@
+name: Additional runtime examples
+on:
+  push:
+    paths: ['examples/macroquad-beacon/**', 'examples/love-beacon/**', 'tools/test_runtime_examples.py', 'skills/port2browser-verify/**', 'scripts/serve.py', 'package*.json', '.github/workflows/runtime-examples.yml']
+  pull_request:
+    paths: ['examples/macroquad-beacon/**', 'examples/love-beacon/**', 'tools/test_runtime_examples.py', 'skills/port2browser-verify/**', 'scripts/serve.py', 'package*.json', '.github/workflows/runtime-examples.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  runtime-games:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      LIBGL_ALWAYS_SOFTWARE: '1'
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Install pinned Rust and browser tools
+        run: |
+          rustup toolchain install 1.85.1 --profile minimal
+          rustup target add wasm32-unknown-unknown --toolchain 1.85.1
+          cargo +1.85.1 --version
+          npm ci
+          npx playwright install --with-deps chromium firefox
+          sudo apt-get install -y libasound2-dev xvfb pulseaudio libgl1-mesa-dri
+          pulseaudio --start --exit-idle-time=-1
+          pactl load-module module-null-sink sink_name=runtime_games
+          pactl set-default-sink runtime_games
+      - name: Build native and browser packages from locked inputs
+        run: |
+          python examples/macroquad-beacon/build.py native
+          python examples/macroquad-beacon/build.py web
+          python examples/love-beacon/build.py native
+          python examples/love-beacon/build.py web
+      - name: Real gameplay in Chromium and Firefox
+        run: xvfb-run -a python tools/test_runtime_examples.py --headed --output test-results/runtime-games
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: runtime-game-browser-evidence
+          path: test-results/runtime-games/

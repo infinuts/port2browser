@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Add original Macroquad and LÖVE examples with locked/checksummed runtime inputs,
+  native packages, real gameplay/render/audio/focus/reload verification in both
+  desktop browsers and scoped source/artifact evidence. LÖVE saves await IDBFS
+  commits instead of relying on an unload hook.
+
 - Add inferred open-engine/emulation/Flash data clues with bounded headers and
   explicit ambiguity, caps and schema-version-1 provenance.
 - Extend the catalog to 36 routes with raylib, Ebitengine, HaxeFlixel, Flash/Ruffle,

@@ -1,0 +1,499 @@
+{
+  "schema_version": 1,
+  "url": "http://127.0.0.1:51481/macroquad-beacon/",
+  "plan_sha256": "4e477307203f2db9e5b0f8b17be215cf7485c18dc7561e46e5d4619059a0ead1",
+  "result": "pass",
+  "coverage": {
+    "input": "pass",
+    "render": "pass",
+    "state": "pass",
+    "audio": "pass",
+    "focus": "pass",
+    "reload": "pass"
+  },
+  "steps": [
+    {
+      "index": 0,
+      "action": "click",
+      "result": "pass"
+    },
+    {
+      "index": 1,
+      "action": "expect",
+      "result": "pass",
+      "state": {
+        "ready": 1,
+        "x": 24,
+        "collected": 0,
+        "started": 1,
+        "sounds": 0,
+        "saving": 0,
+        "saves": 0,
+        "audioState": "running"
+      }
+    },
+    {
+      "index": 2,
+      "action": "press",
+      "result": "pass"
+    },
+    {
+      "index": 3,
+      "action": "expect",
+      "result": "pass",
+      "state": {
+        "ready": 1,
+        "x": 36,
+        "collected": 0,
+        "started": 1,
+        "sounds": 0,
+        "saving": 0,
+        "saves": 0,
+        "audioState": "running"
+      }
+    },
+    {
+      "index": 4,
+      "action": "press",
+      "result": "pass"
+    },
+    {
+      "index": 5,
+      "action": "expect",
+      "result": "pass",
+      "state": {
+        "ready": 1,
+        "x": 48,
+        "collected": 0,
+        "started": 1,
+        "sounds": 0,
+        "saving": 0,
+        "saves": 0,
+        "audioState": "running"
+      }
+    },
+    {
+      "index": 6,
+      "action": "press",
+      "result": "pass"
+    },
+    {
+      "index": 7,
+      "action": "expect",
+      "result": "pass",
+      "state": {
+        "ready": 1,
+        "x": 60,
+        "collected": 0,
+        "started": 1,
+        "sounds": 0,
+        "saving": 0,
+        "saves": 0,
+        "audioState": "running"
+      }
+    },
+    {
+      "index": 8,
+      "action": "press",
+      "result": "pass"
+    },
+    {
+      "index": 9,
+      "action": "expect",
+      "result": "pass",
+      "state": {
+        "ready": 1,
+        "x": 72,
+        "collected": 0,
+        "started": 1,
+        "sounds": 0,
+        "saving": 0,
+        "saves": 0,
+        "audioState": "running"
+      }
+    },
+    {
+      "index": 10,
+      "action": "press",
+      "result": "pass"
+    },
+    {
+      "index": 11,
+      "action": "expect",
+      "result": "pass",
+      "state": {
+        "ready": 1,
+        "x": 84,
+        "collected": 0,
+        "started": 1,
+        "sounds": 0,
+        "saving": 0,
+        "saves": 0,
+        "audioState": "running"
+      }
+    },
+    {
+      "index": 12,
+      "action": "press",
+      "result": "pass"
+    },
+    {
+      "index": 13,
+      "action": "expect",
+      "result": "pass",
+      "state": {
+        "ready": 1,
+        "x": 96,
+        "collected": 0,
+        "started": 1,
+        "sounds": 0,
+        "saving": 0,
+        "saves": 0,
+        "audioState": "running"
+      }
+    },
+    {
+      "index": 14,
+      "action": "press",
+      "result": "pass"
+    },
+    {
+      "index": 15,
+      "action": "expect",
+      "result": "pass",
+      "state": {
+        "ready": 1,
+        "x": 108,
+        "collected": 0,
+        "started": 1,
+        "sounds": 0,
+        "saving": 0,
+        "saves": 0,
+        "audioState": "running"
+      }
+    },
+    {
+      "index": 16,
+      "action": "press",
+      "result": "pass"
+    },
+    {
+      "index": 17,
+      "action": "expect",
+      "result": "pass",
+      "state": {
+        "ready": 1,
+        "x": 120,
+        "collected": 0,
+        "started": 1,
+        "sounds": 0,
+        "saving": 0,
+        "saves": 0,
+        "audioState": "running"
+      }
+    },
+    {
+      "index": 18,
+      "action": "expect",
+      "result": "pass",
+      "state": {
+        "ready": 1,
+        "x": 120,
+        "collected": 0,
+        "started": 1,
+        "sounds": 0,
+        "saving": 0,
+        "saves": 0,
+        "audioState": "running"
+      }
+    },
+    {
+      "index": 19,
+      "action": "pixel",
+      "result": "pass",
+      "pixel": [
+        56,
+        189,
+        248,
+        255
+      ],
+      "screenshot": "step-19.png"
+    },
+    {
+      "index": 20,
+      "action": "press",
+      "result": "pass"
+    },
+    {
+      "index": 21,
+      "action": "expect",
+      "result": "pass",
+      "state": {
+        "ready": 1,
+        "x": 120,
+        "collected": 1,
+        "started": 1,
+        "sounds": 1,
+        "saving": 0,
+        "saves": 0,
+        "audioState": "running"
+      }
+    },
+    {
+      "index": 22,
+      "action": "audio",
+      "result": "pass",
+      "audio": {
+        "states": [
+          "running"
+        ],
+        "starts": 1
+      }
+    },
+    {
+      "index": 23,
+      "action": "canvas",
+      "result": "pass",
+      "sample_colors": 12,
+      "screenshot": "step-23.png"
+    },
+    {
+      "index": 24,
+      "action": "down",
+      "result": "pass"
+    },
+    {
+      "index": 25,
+      "action": "expect",
+      "result": "pass",
+      "state": {
+        "ready": 1,
+        "x": 132,
+        "collected": 1,
+        "started": 1,
+        "sounds": 1,
+        "saving": 0,
+        "saves": 0,
+        "audioState": "running"
+      }
+    },
+    {
+      "index": 26,
+      "action": "focus",
+      "result": "pass",
+      "active_element": {
+        "tag": "BUTTON",
+        "id": "start"
+      },
+      "scope": "element focus loss"
+    },
+    {
+      "index": 27,
+      "action": "up",
+      "result": "pass"
+    },
+    {
+      "index": 28,
+      "action": "expect",
+      "result": "pass",
+      "state": {
+        "ready": 1,
+        "x": 132,
+        "collected": 1,
+        "started": 1,
+        "sounds": 1,
+        "saving": 0,
+        "saves": 0,
+        "audioState": "running"
+      }
+    },
+    {
+      "index": 29,
+      "action": "click",
+      "result": "pass"
+    },
+    {
+      "index": 30,
+      "action": "press",
+      "result": "pass"
+    },
+    {
+      "index": 31,
+      "action": "expect",
+      "result": "pass",
+      "state": {
+        "ready": 1,
+        "x": 132,
+        "collected": 1,
+        "started": 1,
+        "sounds": 1,
+        "saving": 0,
+        "saves": 1,
+        "audioState": "running"
+      }
+    },
+    {
+      "index": 32,
+      "action": "capture",
+      "result": "pass",
+      "screenshot": "step-32.png"
+    },
+    {
+      "index": 33,
+      "action": "reload",
+      "result": "pass",
+      "before": {
+        "x": 132,
+        "collected": 1
+      },
+      "after": {
+        "x": 132,
+        "collected": 1
+      }
+    },
+    {
+      "index": 34,
+      "action": "expect",
+      "result": "pass",
+      "state": {
+        "ready": 1,
+        "x": 132,
+        "collected": 1,
+        "started": 0,
+        "sounds": 0,
+        "saving": 0,
+        "saves": 0,
+        "audioState": "unavailable"
+      }
+    },
+    {
+      "index": 35,
+      "action": "canvas",
+      "result": "pass",
+      "sample_colors": 12,
+      "screenshot": "step-35.png"
+    }
+  ],
+  "logs": [
+    {
+      "type": "warning",
+      "text": "No glRenderbufferStorageMultisample function in gl.js"
+    },
+    {
+      "type": "warning",
+      "text": "No glDeleteRenderbuffers function in gl.js"
+    },
+    {
+      "type": "warning",
+      "text": "No glFramebufferRenderbuffer function in gl.js"
+    },
+    {
+      "type": "warning",
+      "text": "No glCheckFramebufferStatus function in gl.js"
+    },
+    {
+      "type": "warning",
+      "text": "No glReadBuffer function in gl.js"
+    },
+    {
+      "type": "warning",
+      "text": "No glBlitFramebuffer function in gl.js"
+    },
+    {
+      "type": "log",
+      "text": "Plugin macroquad_audio is present in JS bundle, but is not used in the rust code."
+    },
+    {
+      "type": "log",
+      "text": "Plugin sapp_jsutils is present in JS bundle, but is not used in the rust code."
+    },
+    {
+      "type": "log",
+      "text": "Plugin quad_net is present in JS bundle, but is not used in the rust code."
+    },
+    {
+      "type": "log",
+      "text": "Plugin beacon_platform is present in JS bundle, but is not used in the rust code."
+    },
+    {
+      "type": "warning",
+      "text": "No glRenderbufferStorageMultisample function in gl.js"
+    },
+    {
+      "type": "warning",
+      "text": "No glDeleteRenderbuffers function in gl.js"
+    },
+    {
+      "type": "warning",
+      "text": "No glFramebufferRenderbuffer function in gl.js"
+    },
+    {
+      "type": "warning",
+      "text": "No glCheckFramebufferStatus function in gl.js"
+    },
+    {
+      "type": "warning",
+      "text": "No glReadBuffer function in gl.js"
+    },
+    {
+      "type": "warning",
+      "text": "No glBlitFramebuffer function in gl.js"
+    },
+    {
+      "type": "log",
+      "text": "Plugin macroquad_audio is present in JS bundle, but is not used in the rust code."
+    },
+    {
+      "type": "log",
+      "text": "Plugin sapp_jsutils is present in JS bundle, but is not used in the rust code."
+    },
+    {
+      "type": "log",
+      "text": "Plugin quad_net is present in JS bundle, but is not used in the rust code."
+    },
+    {
+      "type": "log",
+      "text": "Plugin beacon_platform is present in JS bundle, but is not used in the rust code."
+    }
+  ],
+  "errors": [],
+  "events_omitted": 0,
+  "manual_listening": "untested",
+  "limitations": [
+    "Configured checks only; passing does not establish full game playability or engine compatibility.",
+    "Frame callback intervals are not GPU/game frame times. Transfer sizes may be zero for cache/opaque resources.",
+    "Web Audio instrumentation observes contexts and oscillator/buffer starts; it is not audible-output measurement.",
+    "Device profiles emulate browser parameters, not physical phones or shipping Safari."
+  ],
+  "navigation_wall_ms": 180,
+  "performance": {
+    "navigation": {
+      "dom_content_loaded_ms": 130,
+      "load_ms": 130
+    },
+    "resources": {
+      "count": 3,
+      "transfer_bytes": 463609,
+      "encoded_bytes": 462709
+    },
+    "frame_callback_intervals": {
+      "status": "measured",
+      "samples": 60,
+      "p50_ms": 8.319999999999993,
+      "p95_ms": 9,
+      "max_ms": 9.259999999999991
+    }
+  },
+  "elapsed_ms": 1822,
+  "browser": "firefox",
+  "browser_version": "142.0.1",
+  "playwright_version": "1.56.1",
+  "node_version": "v24.19.0",
+  "os": "darwin",
+  "os_release": "24.6.0",
+  "architecture": "arm64",
+  "date": "2026-10-17T15:21:06.443Z",
+  "device": null,
+  "physical_device": "untested",
+  "shipping_safari": "untested"
+}
