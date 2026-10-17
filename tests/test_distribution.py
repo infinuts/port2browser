@@ -33,7 +33,7 @@ class DistributionTests(unittest.TestCase):
         self.assertEqual(fields["license"], "MIT")
 
     def test_markdown_local_links_resolve(self):
-        documents = [ROOT / "README.md", ROOT / "SKILL.md", ROOT / "CONTRIBUTING.md", ROOT / "CHANGELOG.md", *ROOT.glob("references/*.md"), *ROOT.glob("tests/**/*.md"), *ROOT.glob("examples/*/*.md")]
+        documents = [ROOT / "README.md", ROOT / "SKILL.md", ROOT / "CONTRIBUTING.md", ROOT / "CHANGELOG.md", *ROOT.glob("references/*.md"), *ROOT.glob("skills/**/*.md"), *ROOT.glob("tests/**/*.md"), *ROOT.glob("examples/*/*.md")]
         for document in documents:
             for link in re.findall(r"\[[^\]]+\]\(([^)]+)\)", document.read_text(encoding="utf-8")):
                 parsed = urlsplit(link)

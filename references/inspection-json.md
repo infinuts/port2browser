@@ -55,3 +55,18 @@ or web support. Metadata has a separate cap of 100 records.
 Traversal and retained subsets use filesystem order; sorting the final arrays
 does not make limited scans deterministic across machines. Keep the input tree
 unchanged. See the complete and limited JSON snapshots under `tests/reports/`.
+
+## Task navigation (additive)
+
+`task_hints` is a list of `{engine, skill, status}` objects for observed candidates
+with a documented task skill. `status` is always `investigate`; `skill` is an Agent
+Skill name, not an executable path. Hints neither confirm the engine nor assert
+web compatibility, project completeness or installation. Unknown inputs may have
+no hints. Consumers may ignore this field and keep using `schema_version: 1`.
+
+Defold project/bootstrap sections, Construct project suffixes, GDevelop-style
+JSON fields and Bevy/Macroquad dependency declarations add inferred clues. Text
+reads retain the 64 KiB bound, scan-error accounting and malformed-input warnings.
+Rust parsing is deliberately a declaration heuristic, not a TOML resolver; it
+can miss aliases, dependency subtables and workspace inheritance. Archive contents
+and build instructions are never executed to infer a route.

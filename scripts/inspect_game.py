@@ -11,6 +11,32 @@ import stat
 import sys
 
 SCHEMA_VERSION = 1
+# Navigation only; this mapping neither loads skills nor asserts compatibility.
+ENGINE_TASK_SKILLS = {'bevy': 'port2browser-frameworks',
+ 'cocos-creator': 'port2browser-export',
+ 'construct': 'port2browser-export',
+ 'defold': 'port2browser-export',
+ 'electron': 'port2browser-web',
+ 'fna': 'port2browser-frameworks',
+ 'gamemaker': 'port2browser-export',
+ 'gdevelop': 'port2browser-export',
+ 'godot': 'port2browser-export',
+ 'heaps': 'port2browser-frameworks',
+ 'libgdx': 'port2browser-frameworks',
+ 'love': 'port2browser-frameworks',
+ 'macroquad': 'port2browser-frameworks',
+ 'monogame': 'port2browser-frameworks',
+ 'nw': 'port2browser-web',
+ 'openfl': 'port2browser-frameworks',
+ 'phaser': 'port2browser-web',
+ 'pixi.js': 'port2browser-web',
+ 'pygame': 'port2browser-frameworks',
+ 'renpy': 'port2browser-export',
+ 'rpg-maker': 'port2browser-web',
+ 'sdl': 'port2browser-native',
+ 'three': 'port2browser-web',
+ 'unity': 'port2browser-export',
+ 'unreal': 'port2browser-export'}
 HEADER_BYTES = 4096
 TEXT_BYTES = 65536
 SKIP_DIRS = {".git", ".svn", "node_modules", ".venv", "venv", "__pycache__"}
@@ -149,6 +175,40 @@ def inspect_game(root, max_entries=20000, max_depth=32):
             elif re.search(r"^config/features\s*=", text, re.MULTILINE):
                 warn(f"invalid Godot features: {relative}")
 
+    def project_clues(path, info):
+        nonlocal metadata_sample_limits
+        relative = path.relative_to(root).as_posix()
+        if info.st_size > TEXT_BYTES:
+            metadata_sample_limits += 1
+            warn(f"metadata exceeds sample limit: {relative}")
+            return
+        try:
+            text = read_sample(path, TEXT_BYTES).decode("utf-8-sig")
+        except UnicodeError:
+            warn(f"invalid UTF-8 metadata: {relative}")
+            return
+        name = path.name.lower()
+        if name == "game.project":
+            if re.search(r"^\[project\]\s*$", text, re.MULTILINE) and re.search(r"^\[bootstrap\]\s*$", text, re.MULTILINE):
+                clue("defold", relative, "Defold-style project and bootstrap sections; verify editor/runtime")
+        elif name == "cargo.toml":
+            section = ""
+            for line in text.splitlines():
+                stripped = line.strip()
+                if stripped.startswith("["):
+                    section = stripped
+                if re.fullmatch(r"\[(?:(?:target\.[^\]]+\.)?(?:dependencies|dev-dependencies|build-dependencies)|workspace\.dependencies)\]", section):
+                    match = re.match(r'^(bevy|macroquad)\s*=', stripped)
+                    if match:
+                        clue(match[1], relative, "declared Rust dependency; may be tooling, verify features/backend")
+        elif name == "game.json":
+            try:
+                value = json.loads(text)
+                if isinstance(value, dict) and isinstance(value.get("gdVersion"), dict) and isinstance(value.get("layouts"), list):
+                    clue("gdevelop", relative, "GDevelop-style version and layouts fields; verify complete project")
+            except (ValueError, RecursionError):
+                warn(f"invalid JSON or decoder nesting limit: {relative}")
+
     def visit(directory, depth):
         nonlocal truncated, metadata_sample_limits
         try:
@@ -211,6 +271,10 @@ def inspect_game(root, max_entries=20000, max_depth=32):
                         clue("love", relative, "possible LÖVE project/package; verify version and contents")
                     if suffix == ".yyp" or name == "data.win":
                         clue("gamemaker", relative, "possible GameMaker project/runner data")
+                    if suffix in {".c3p", ".c3proj", ".capx"}:
+                        clue("construct", relative, "possible Construct project; verify format and editor version")
+                    if name in {"game.project", "cargo.toml", "game.json"}:
+                        project_clues(path, info)
                     if name == "package.json":
                         if info.st_size > TEXT_BYTES:
                             metadata_sample_limits += 1
@@ -252,6 +316,8 @@ def inspect_game(root, max_entries=20000, max_depth=32):
         warn("scan limit reached; inventory is partial")
     return {
         "schema_version": SCHEMA_VERSION,
+        "task_hints": [{"engine": engine, "skill": ENGINE_TASK_SKILLS[engine], "status": "investigate"}
+                       for engine in sorted(candidates) if engine in ENGINE_TASK_SKILLS],
         "metadata": sorted(metadata, key=lambda item: (item["engine"], item["path"], item["field"])),
         "omitted": omissions,
         "scan_errors": scan_errors,

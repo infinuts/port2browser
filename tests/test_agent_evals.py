@@ -4,7 +4,7 @@ import sys
 import tempfile
 import unittest
 
-from tools.evals.run import grade, run_process, validate_result, within, summarize
+from tools.evals.run import grade, run_process, validate_result, within, summarize, copy_skill_bundle
 
 
 class EvalGradingTests(unittest.TestCase):
@@ -15,6 +15,15 @@ class EvalGradingTests(unittest.TestCase):
         (self.root/'input/marker.txt').write_text('synthetic')
         self.report={'status':'blocked','engine':'unity','confidence':'inferred','evidence':['input/marker.txt'],
                      'blockers':['Missing editable source project'],'browser_tests':[]}
+
+    def test_treatment_contains_router_resources_and_all_task_skills(self):
+        install = self.root / 'treatment'
+        copy_skill_bundle(install)
+        self.assertEqual(len(list((install/'skills').glob('*/SKILL.md'))), 12)
+        self.assertTrue((install/'references/engine-routes.json').is_file())
+        self.assertTrue((install/'scripts/inspect_game.py').is_file())
+        self.assertFalse((install/'examples').exists())
+        self.assertFalse((install/'tools').exists())
 
     def test_blocked_assessment_passes_with_evidence(self):
         self.assertTrue(grade('shipped-unity',self.report,self.root,[])['pass'])

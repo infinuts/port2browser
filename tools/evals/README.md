@@ -25,7 +25,8 @@ workspace-write, fresh ephemeral sessions, ignored user config, structured final
 JSON, and a JSONL tool transcript. It never disables the sandbox or reads/copies
 credentials. Timeout kills the agent process tree. Temporary workspaces are
 outside the repository so parent skills/checklists and reference solutions are
-not supplied. Only the treatment receives the portable skill directory and an
+not supplied. Only the treatment receives the portable skill directory (router, references,
+helpers and nested task skills) and an
 explicit instruction to use it. This evaluates **explicit invocation**, not
 skill auto-discovery or trigger precision. Inputs are identical across conditions.
 
@@ -62,3 +63,12 @@ Outputs include JSONL, stderr, prompts, structured reports, cited artifacts and
 builds. Review these for private paths/account metadata before publishing. Only
 reviewed summaries belong in `tests/evaluation-results/paired/`. A small pilot
 with no observed gap does not establish that the skill helps or hurts.
+
+## Modular workflow revisions
+
+Treatment hashes include the task skills as well as the router, shared references
+and helpers. A changed module changes the treatment: previous pilot results do
+not measure this new guidance. Ordinary CI checks treatment copying and packaging;
+run and review a fresh paired evaluation before releasing a workflow revision.
+Separately discovered task skills are a different invocation condition and must
+be evaluated separately if effectiveness claims are made for that layout.

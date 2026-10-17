@@ -1,0 +1,309 @@
+{
+  "schema_version": 1,
+  "purpose": "Navigation and prerequisites only; not automatic compatibility or a game support claim.",
+  "reviewed": "2026-10-17",
+  "engines": [
+    {
+      "id": "unity",
+      "label": "Unity",
+      "candidate_ids": [
+        "unity"
+      ],
+      "task_skill": "port2browser-export",
+      "guide": "skills/port2browser-export/references/unity.md",
+      "coverage": "documented_route",
+      "requires": "Complete matching editor project; web-compatible plugins"
+    },
+    {
+      "id": "godot",
+      "label": "Godot",
+      "candidate_ids": [
+        "godot"
+      ],
+      "task_skill": "port2browser-export",
+      "guide": "skills/port2browser-export/references/godot.md",
+      "coverage": "documented_route",
+      "requires": "Matching editor/templates, supported renderer/language/extensions"
+    },
+    {
+      "id": "unreal",
+      "label": "Unreal",
+      "candidate_ids": [
+        "unreal"
+      ],
+      "task_skill": "port2browser-export",
+      "guide": "skills/port2browser-export/references/unreal.md",
+      "coverage": "documented_route",
+      "requires": "Exact compatible HTML5 fork and editable project; UE5 not assumed"
+    },
+    {
+      "id": "defold",
+      "label": "Defold",
+      "candidate_ids": [
+        "defold"
+      ],
+      "task_skill": "port2browser-export",
+      "guide": "skills/port2browser-export/references/defold.md",
+      "coverage": "documented_route",
+      "requires": "Complete collection/project and HTML5-compatible extensions"
+    },
+    {
+      "id": "cocos",
+      "label": "Cocos Creator",
+      "candidate_ids": [
+        "cocos-creator"
+      ],
+      "task_skill": "port2browser-export",
+      "guide": "skills/port2browser-export/references/cocos.md",
+      "coverage": "documented_route",
+      "requires": "Matching Creator generation, project and web plugins"
+    },
+    {
+      "id": "gamemaker",
+      "label": "GameMaker",
+      "candidate_ids": [
+        "gamemaker"
+      ],
+      "task_skill": "port2browser-export",
+      "guide": "skills/port2browser-export/references/authoring.md",
+      "coverage": "documented_route",
+      "requires": "Editable project, exporter access and compatible extensions"
+    },
+    {
+      "id": "construct",
+      "label": "Construct",
+      "candidate_ids": [
+        "construct"
+      ],
+      "task_skill": "port2browser-export",
+      "guide": "skills/port2browser-export/references/authoring.md",
+      "coverage": "documented_route",
+      "requires": "Matching project generation/addons and Web exporter"
+    },
+    {
+      "id": "gdevelop",
+      "label": "GDevelop",
+      "candidate_ids": [
+        "gdevelop"
+      ],
+      "task_skill": "port2browser-export",
+      "guide": "skills/port2browser-export/references/authoring.md",
+      "coverage": "documented_route",
+      "requires": "Complete events/layouts/resources and compatible extensions"
+    },
+    {
+      "id": "renpy",
+      "label": "RenPy",
+      "candidate_ids": [
+        "renpy"
+      ],
+      "task_skill": "port2browser-export",
+      "guide": "skills/port2browser-export/references/renpy.md",
+      "coverage": "documented_route",
+      "requires": "Matching editable project/SDK and supported Python/codecs"
+    },
+    {
+      "id": "love",
+      "label": "LOVE",
+      "candidate_ids": [
+        "love"
+      ],
+      "task_skill": "port2browser-frameworks",
+      "guide": "skills/port2browser-frameworks/references/scripted.md",
+      "coverage": "documented_route",
+      "requires": "Version-compatible love.js backend; native modules audited"
+    },
+    {
+      "id": "pygame",
+      "label": "Pygame/Python",
+      "candidate_ids": [
+        "pygame"
+      ],
+      "task_skill": "port2browser-frameworks",
+      "guide": "skills/port2browser-frameworks/references/scripted.md",
+      "coverage": "documented_route",
+      "requires": "Matching pygame-web runtime and Wasm-built modules"
+    },
+    {
+      "id": "openfl",
+      "label": "OpenFL",
+      "candidate_ids": [
+        "openfl"
+      ],
+      "task_skill": "port2browser-frameworks",
+      "guide": "skills/port2browser-frameworks/references/scripted.md",
+      "coverage": "documented_route",
+      "requires": "Haxe project and HTML5-compatible libraries"
+    },
+    {
+      "id": "heaps",
+      "label": "Heaps",
+      "candidate_ids": [
+        "heaps"
+      ],
+      "task_skill": "port2browser-frameworks",
+      "guide": "skills/port2browser-frameworks/references/scripted.md",
+      "coverage": "documented_route",
+      "requires": "Haxe source, compatible JS backend and resources"
+    },
+    {
+      "id": "bevy",
+      "label": "Bevy",
+      "candidate_ids": [
+        "bevy"
+      ],
+      "task_skill": "port2browser-frameworks",
+      "guide": "skills/port2browser-frameworks/references/rust.md",
+      "coverage": "documented_route",
+      "requires": "Rust source/lockfile and chosen web renderer/features"
+    },
+    {
+      "id": "macroquad",
+      "label": "Macroquad",
+      "candidate_ids": [
+        "macroquad"
+      ],
+      "task_skill": "port2browser-frameworks",
+      "guide": "skills/port2browser-frameworks/references/rust.md",
+      "coverage": "documented_route",
+      "requires": "Rust source and matching Wasm/JS bundle"
+    },
+    {
+      "id": "libgdx",
+      "label": "libGDX",
+      "candidate_ids": [
+        "libgdx"
+      ],
+      "task_skill": "port2browser-frameworks",
+      "guide": "skills/port2browser-frameworks/references/java.md",
+      "coverage": "documented_route",
+      "requires": "Source and compatible GWT/HTML module/libraries"
+    },
+    {
+      "id": "monogame",
+      "label": "MonoGame/XNA",
+      "candidate_ids": [
+        "monogame"
+      ],
+      "task_skill": "port2browser-frameworks",
+      "guide": "skills/port2browser-frameworks/references/dotnet.md",
+      "coverage": "documented_route",
+      "requires": "Rebuildable source and proven browser framework/content backend"
+    },
+    {
+      "id": "fna",
+      "label": "FNA",
+      "candidate_ids": [
+        "fna"
+      ],
+      "task_skill": "port2browser-frameworks",
+      "guide": "skills/port2browser-frameworks/references/dotnet.md",
+      "coverage": "documented_route",
+      "requires": "Source and proven browser graphics/audio/native-library backend"
+    },
+    {
+      "id": "electron",
+      "label": "Electron",
+      "candidate_ids": [
+        "electron"
+      ],
+      "task_skill": "port2browser-web",
+      "guide": "skills/port2browser-web/SKILL.md",
+      "coverage": "documented_route",
+      "requires": "Browser gameplay source and replacements for desktop services"
+    },
+    {
+      "id": "nw",
+      "label": "NW.js",
+      "candidate_ids": [
+        "nw"
+      ],
+      "task_skill": "port2browser-web",
+      "guide": "skills/port2browser-web/SKILL.md",
+      "coverage": "documented_route",
+      "requires": "Browser runtime plus compatible Node/native API substitutions"
+    },
+    {
+      "id": "rpg-maker",
+      "label": "RPG Maker MV/MZ",
+      "candidate_ids": [
+        "rpg-maker"
+      ],
+      "task_skill": "port2browser-web",
+      "guide": "skills/port2browser-web/SKILL.md",
+      "coverage": "documented_route",
+      "requires": "Matching JavaScript runtime and browser-compatible plugins"
+    },
+    {
+      "id": "phaser",
+      "label": "Phaser",
+      "candidate_ids": [
+        "phaser"
+      ],
+      "task_skill": "port2browser-web",
+      "guide": "skills/port2browser-web/SKILL.md",
+      "coverage": "documented_route",
+      "requires": "Browser entrypoint, plugins, physics and complete resources"
+    },
+    {
+      "id": "pixi",
+      "label": "PixiJS",
+      "candidate_ids": [
+        "pixi.js"
+      ],
+      "task_skill": "port2browser-web",
+      "guide": "skills/port2browser-web/SKILL.md",
+      "coverage": "documented_route",
+      "requires": "Actual game logic/runtime around renderer library and complete resources"
+    },
+    {
+      "id": "three",
+      "label": "Three.js",
+      "candidate_ids": [
+        "three"
+      ],
+      "task_skill": "port2browser-web",
+      "guide": "skills/port2browser-web/SKILL.md",
+      "coverage": "documented_route",
+      "requires": "Actual game/runtime, graphics features and complete resources"
+    },
+    {
+      "id": "sdl",
+      "label": "SDL/C/C++",
+      "candidate_ids": [
+        "sdl"
+      ],
+      "task_skill": "port2browser-native",
+      "guide": "skills/port2browser-native/references/renderers.md",
+      "coverage": "documented_route",
+      "requires": "Rebuildable game/dependencies and viable renderer"
+    },
+    {
+      "id": "native",
+      "label": "Custom native engines",
+      "candidate_ids": [],
+      "task_skill": "port2browser-native",
+      "guide": "skills/port2browser-native/references/renderers.md",
+      "coverage": "documented_route",
+      "requires": "Full dependency graph, source/rights and actual web backend"
+    },
+    {
+      "id": "open-engine",
+      "label": "Compatible open engines",
+      "candidate_ids": [],
+      "task_skill": "port2browser-open-runtime",
+      "guide": "skills/port2browser-open-runtime/SKILL.md",
+      "coverage": "documented_route",
+      "requires": "Exact game/data format compatibility and separate rights"
+    },
+    {
+      "id": "emulation",
+      "label": "Legacy emulation",
+      "candidate_ids": [],
+      "task_skill": "port2browser-open-runtime",
+      "guide": "skills/port2browser-open-runtime/SKILL.md",
+      "coverage": "documented_route",
+      "requires": "Exact platform/backend support, game data/firmware rights and usable performance"
+    }
+  ]
+}

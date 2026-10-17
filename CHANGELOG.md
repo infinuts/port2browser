@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Split porting guidance into a router and 12 independently packageable task
+  skills, with version-scoped playbooks for 28 engine/runtime routes.
+- Add bounded Defold, Construct, GDevelop and Rust dependency clues, plus
+  investigation-only task navigation in schema-version-1 inspection reports.
+- Add bundle/collection packaging checks and include task modules in evaluation
+  treatment copies and revision hashes. No new agent benchmark is claimed.
+
 - Add Mosslight, an original C++/SDL exploration game with hazards, collectibles,
   generated art/audio, completion and durable saves, as the live demo.
 - Add measured debug/release/gzip size comparisons and a static-host decoder.

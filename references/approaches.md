@@ -1,5 +1,9 @@
 # Pick the cheapest route that can preserve the game
 
+For engine-specific prerequisites and focused task skills, see the
+[engine coverage catalog](engine-coverage.md). Its entries are investigation
+routes, not compatibility guarantees.
+
 Start with an engine's existing exporter. For a source port, prove the hardest
 dependency early. For a binary-only game, establish a compatible runtime before
 planning platform changes. Prefer a maintained port over starting another one,

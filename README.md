@@ -36,8 +36,8 @@ Give your agent the files. port2browser guides it through finding the engine,
 mapping the platform dependencies, and getting a small slice playable in a browser.
 When the files are not enough, the result is a concrete explanation of what is missing.
 
-The repository contains a portable `SKILL.md`, focused technical references, and
-two optional Python helpers. Your agent uses its own tools to do the engineering.
+The repository contains a portable routing skill, 12 task skills, engine-specific
+playbooks, and two optional Python helpers. Your agent uses its own tools to do the engineering.
 
 ## What you get
 
@@ -113,8 +113,8 @@ git clone https://github.com/infinuts/port2browser.git (Join-Path $skillParent '
 
 For a project-only install, use `.agents/skills/port2browser` (Codex) or
 `.claude/skills/port2browser` (Claude Code) inside that project. To vendor the
-skill without a nested Git repository, copy `SKILL.md`, `references/`, `scripts/`
-and `LICENSE` into that folder. Keep those paths together when updating.
+skill without a nested Git repository, copy `SKILL.md`, `references/`, `scripts/`,
+`skills/` and `LICENSE` into that folder. Keep those paths together when updating.
 
 Update a cloned install with `git -C /path/to/port2browser pull --ff-only`.
 Pin a reviewed commit with `git -C /path/to/port2browser checkout <commit>` when
@@ -122,6 +122,51 @@ you need a repeatable setup. To uninstall, remove that skill folder from your
 agent's discovery directory.
 
 </details>
+
+## Focused task skills and engine routes
+
+The entrypoint loads only the instructions needed for the current task. Each
+folder below has its own `SKILL.md` and license; engine notes live beside the
+export, native and framework skills.
+
+| Task folder | Responsibility |
+| --- | --- |
+| [recon](skills/port2browser-recon/SKILL.md) | Read-only inventory, versions, source completeness and conflicting clues |
+| [route](skills/port2browser-route/SKILL.md) | Feasibility, dependency ledger and hardest-first experiments |
+| [export](skills/port2browser-export/SKILL.md) | Unity, Godot, Unreal forks, Defold, Cocos, authoring tools and Ren'Py |
+| [native](skills/port2browser-native/SKILL.md) | C/C++, Emscripten, rendering backends and middleware |
+| [frameworks](skills/port2browser-frameworks/SKILL.md) | Rust, Java, .NET, Haxe, Lua and Python runtimes |
+| [web](skills/port2browser-web/SKILL.md) | Electron/NW.js, RPG Maker and JavaScript libraries |
+| [open-runtime](skills/port2browser-open-runtime/SKILL.md) | Compatible open engines and legacy emulation |
+| [reverse](skills/port2browser-reverse/SKILL.md) | Bounded behavioral and format investigation |
+| [platform](skills/port2browser-platform/SKILL.md) | Graphics, scheduling, input, sound, storage and network services |
+| [assets](skills/port2browser-assets/SKILL.md) | Content reduction, compression, streaming and decoded-memory budgets |
+| [verify](skills/port2browser-verify/SKILL.md) | Actual browser input, output, state, audio, focus and reload evidence |
+| [release](skills/port2browser-release/SKILL.md) | Allowlisted packaging, hosting and accurate port reports |
+
+The [28-route catalog](references/engine-coverage.md) documents prerequisites,
+first probes and blockers. These are engineering workflows, not 28 demonstrated
+ports. Modern games require their own assessment of source access, renderer,
+shaders, plugins, middleware, asset memory and online services. An Unreal 4 HTML5
+fork does not establish UE5 support; a desktop mod loader does not establish a
+browser runtime. Preserve gameplay and disclose any proposed reduced scope.
+
+A normal clone keeps these modules inside the `port2browser` bundle. To make
+separate task skills discoverable, contributors can create a minimal collection:
+
+```sh
+# Run from this checkout; choose a new directory outside the checkout.
+python3 tools/package_skills.py --layout collection --output ../port2browser-skills
+# Or create one minimal bundle, without examples or development dependencies:
+python3 tools/package_skills.py --layout bundle --output ../port2browser-bundle
+```
+
+Copy the generated folders into your harness's skill directory following its
+own discovery instructions. Collection packaging adjusts cross-folder links;
+bundle packaging retains local task modules. Neither command installs tools or
+starts agents. Separately discovered task invocation has packaging checks, but
+has not received a new blind agent evaluation. The recorded pilot predates this
+modular workflow and does not establish its effectiveness.
 
 ## Try an original example
 
@@ -306,6 +351,7 @@ work calls for it; there is no need to load every note for every game.
 | File | Use it for |
 | --- | --- |
 | [SKILL.md](SKILL.md) | The agent's workflow and decision boundaries |
+| [Engine coverage](references/engine-coverage.md) | Version-specific route prerequisites and task playbooks |
 | [Approaches](references/approaches.md) | Engine clues, export choices, Wasm, graphics and emulation |
 | [Browser platform](references/browser-platform.md) | Main loop, rendering, audio, controls, storage, threads and hosting |
 | [Build and test](references/build-and-test.md) | Build patterns, playtest evidence and troubleshooting |
@@ -345,7 +391,10 @@ instructions, see the [changelog](CHANGELOG.md).
 external tools retain their own terms.
 
 Inspired by [REA](https://github.com/morluto/rea)'s practice of grounding reverse
-engineering findings in evidence. REA is optional; no REA code is bundled.
+engineering findings in evidence. The task-folder and engine-playbook organization
+is also inspired by [universal-modder](https://github.com/rehan-remade/universal-modder).
+Both are optional references; no code, hooks, tool installs or services from
+either project are bundled.
 
 <p align="center">
   <a href="https://github.com/infinuts/port2browser/issues">Report an issue</a> ·
