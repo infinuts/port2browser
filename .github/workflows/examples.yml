@@ -79,7 +79,7 @@ jobs:
         run: xvfb-run -a npm run test:browser -- --headed
       - name: Record raw and candidate-gzip size accounting
         run: python scripts/size_report.py examples/mosslight/build/demo > test-results/mosslight-size-report.json
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: browser-evidence
