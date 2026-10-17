@@ -3,8 +3,9 @@ const {PNG} = require('pngjs');
 test('Godot native exporter: gameplay, audio and user:// persistence', async ({page,browser},testInfo) => {
   test.setTimeout(90000);
   const errors=[], logs=[], navigationAborts=[], wasmStreamCancellations=[];
-  const responses=new Map();
-  let reloading=false;
+  const responses=new Map(), requestGenerations=new Map();
+  let generation=0;
+  page.on('request',request=>requestGenerations.set(request,generation));
   page.on('pageerror',e=>errors.push(e.message));
   page.on('console',e=>logs.push(`${e.type()}: ${e.text()}`));
   page.on('response',response=>{
@@ -20,11 +21,14 @@ test('Godot native exporter: gameplay, audio and user:// persistence', async ({p
     // Keep this evidence separate: only this exact asset/MIME/status/abort is
     // eligible, and the assertions below still require a running, rendered
     // engine before AND after reload. Other transport and HTTP failures fail.
-    if(aborted && new URL(request.url()).pathname==='/godot-beacon/build/web/index.wasm' &&
+    // Failed events from the old document can arrive after the new engine is
+    // ready. Attribute requests to their document, not to a transient flag.
+    if(aborted && requestGenerations.get(request)<generation) {
+      navigationAborts.push({url:request.url(),error:request.failure().errorText,generation:requestGenerations.get(request)});
+    } else if(aborted && new URL(request.url()).pathname==='/godot-beacon/build/web/index.wasm' &&
        response?.status()===200 && response.headers()['content-type']?.split(';')[0]==='application/wasm') {
-      wasmStreamCancellations.push({url:request.url(),status:response.status(),error:request.failure().errorText,duringReload:reloading});
-    } else if(reloading && aborted) navigationAborts.push(failure);
-    else errors.push(failure);
+      wasmStreamCancellations.push({url:request.url(),status:response.status(),error:request.failure().errorText,generation:requestGenerations.get(request)});
+    } else errors.push(failure);
   });
   try {
     await page.goto('/godot-beacon/build/web/');
@@ -58,11 +62,10 @@ test('Godot native exporter: gameplay, audio and user:// persistence', async ({p
     await page.waitForTimeout(2000);
     await testInfo.attach('gameplay-screenshot',{body:await page.screenshot(),contentType:'image/png'});
     const state=await page.evaluate(()=>exampleState());
-    reloading=true;
+    generation++;
     await page.reload();
     await expect(page.locator('#status')).toContainText('Position 132',{timeout:60000});
     expect(await page.evaluate(()=>exampleState().collected)).toBe(1);
-    reloading=false;
     await expect.poll(async()=>{
       const pixels=PNG.sync.read(await page.locator('canvas').screenshot());
       const x=Math.floor(pixels.width*137/320), y=Math.floor(pixels.height*110/180);
