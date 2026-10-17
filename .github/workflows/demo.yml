@@ -47,7 +47,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@v6
       - name: Publish demos (AssaultCube code only; no stock media)
         uses: actions/deploy-pages@v5
         id: deployment
