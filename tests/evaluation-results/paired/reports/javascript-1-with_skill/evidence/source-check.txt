@@ -1,0 +1,10 @@
+PASS: game.js byte-identical; index.html differs only by platform script insertion.
+a6c4d94d151628d8361c9f5b055c40bfb0128b2c451c959d65567edbe68dbcd1 input/game.js
+03d75c51807a5b90a3e4605752def118acc92fbf3acdd918c5786ab318880ff7 input/index.html
+f6fe4a1c316b4405d6bd029bf2f1aa7e23900bd9ceaa5e824c884297250070c4 input/main.cjs
+7deba52fe9ceb3af8e4505f4038167451e826b0c3eb4e870eaeaf8db23ced4ad input/package.json
+be63dc88a3b14085adee4be658d88829e346361711e2e3e439961d74753e89ea input/preload.cjs
+Build files:
+build-web/game.js 2899 bytes
+build-web/index.html 879 bytes
+build-web/platform.js 2131 bytes

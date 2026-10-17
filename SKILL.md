@@ -58,6 +58,11 @@ Read [Approach and engine selection](references/approaches.md). Confirm the exac
 engine/runtime version against its matching upstream documentation. Multiple
 engines may appear in launchers, tools, or bundled samples; identify the game.
 
+When source is missing or platform behavior is unclear, read the
+[reverse-engineering workflow and optional REA resource](references/no-source.md#investigate-before-reconstructing).
+Use recovered behavior to test a bounded reconstruction before choosing its
+browser implementation; an analysis result is not a completed port.
+
 ## 3. Choose a route with a falsifiable first milestone
 
 Compare plausible routes using the actual inputs:
@@ -93,6 +98,11 @@ asset loading, persistent saves, and any threads or networking the slice uses.
 Read [Browser platform adaptation](references/browser-platform.md) for the
 subsystems that apply, and [Build and test](references/build-and-test.md) for
 toolchain patterns and symptom-driven troubleshooting.
+For download-size budgets or release packaging, read
+[Size and compression](references/size-and-compression.md): reduce unused content
+and code, optimize assets, compare Brotli/gzip, and verify the compressed build.
+Report startup transfer, later streamed data and decoded memory separately;
+never promise an arbitrary compression ratio or count a launcher as a full game.
 Keep the native build working when source is available; use small, reversible
 commits and keep toolchain/version choices reproducible.
 

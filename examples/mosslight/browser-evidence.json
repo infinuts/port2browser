@@ -1,0 +1,390 @@
+{
+  "date": "2026-10-17",
+  "os": "macOS 15.7.4 arm64",
+  "emscripten": "4.0.16",
+  "native_sdl": "2.32.10",
+  "web_sdl": "2.32.8",
+  "playwright": "1.56.1",
+  "source_identity": "Built before commit; SHA-256 values identify the tested inputs. CI artifacts record their checkout revision.",
+  "source_sha256": {
+    "examples/mosslight/game.cpp": "3d4c6242d23960ccc91b51b3a2659a3a779078f9fb94a439c47d8e7cfa42f306",
+    "examples/mosslight/shell.html": "d15273d1c068d91d212452575b681d9868a64f4f2b33ceb3b9119b281206b55f",
+    "examples/mosslight/build.py": "6301ab41d2dc353ca5f0a45ab07f64324159b6fa96087f6e265e5aea293e44eb",
+    "examples/mosslight/packed-loader.js": "fd9331a36ab4c5784d2dcf46e1f08ac9ec8c834aea540ac0149f2a9585c026c6",
+    "tools/build_demo.py": "d4cbefebfd5e2bac92dfaaf72646e1e72a7b595693bb3751402e733f7a07761d",
+    "tests/browser/mosslight.spec.js": "85341bdd8a1c4b134dff34b0969d02e9ed0fb3e7ba64b22f05110d35bad6935c"
+  },
+  "sizes": {
+    "schema_version": 1,
+    "example": "mosslight",
+    "emscripten": "4.0.16",
+    "compression": "gzip level 9; deterministic headers; application decoding",
+    "packing_tools": {
+      "python": "3.12.14",
+      "zlib": "1.2.12"
+    },
+    "debug_raw_bytes": 3611695,
+    "release_raw_bytes": 855080,
+    "packed_startup_bytes": 260288,
+    "packed_files": {
+      "runtime.bin": {
+        "bytes": 42956,
+        "decoded_bytes": 179038,
+        "decoded_sha256": "406f0f646179c7e1729feee7c5fdd16f662e0d908ff373476ae0f0fe663c4c69"
+      },
+      "engine.bin": {
+        "bytes": 203407,
+        "decoded_bytes": 663552,
+        "decoded_sha256": "b93af65c9f6e086d7c41360ba6434093f94fa499644656f0c123efe495abb01d"
+      }
+    },
+    "startup_files": [
+      "index.html",
+      "packed-loader.js",
+      "runtime.bin",
+      "engine.bin"
+    ],
+    "scope": "Entire original procedural game; no external art/audio or later asset packs. Raw/reference copies are separate optional downloads.",
+    "measurements": {
+      "browser_transfer": "see browser evidence; numbers here are file bytes before HTTP overhead",
+      "peak_memory": "untested",
+      "manual_listening": "untested"
+    }
+  },
+  "tests": [
+    {
+      "title": "Mosslight web: explore, hazards, restore lighthouse, compressed parity and durable save",
+      "project": "chromium",
+      "status": "expected",
+      "gameplay-evidence": {
+        "variant": "web",
+        "browser": "141.0.7390.37",
+        "loading": {
+          "navigation": [
+            {
+              "encodedBodySize": 12490,
+              "transferSize": 12790
+            }
+          ],
+          "resources": [
+            {
+              "url": "http://127.0.0.1:8765/mosslight/build/web/index.js",
+              "encodedBodySize": 179038,
+              "decodedBodySize": 179038,
+              "transferSize": 179338
+            },
+            {
+              "url": "http://127.0.0.1:8765/mosslight/build/web/index.wasm",
+              "encodedBodySize": 663552,
+              "decodedBodySize": 663552,
+              "transferSize": 663852
+            }
+          ],
+          "readyMs": 318.30000019073486
+        },
+        "beforeReload": {
+          "x": 21,
+          "y": 2,
+          "mask": 7,
+          "health": 2,
+          "steps": 50,
+          "won": 1,
+          "started": 1,
+          "sounds": 5,
+          "saves": 1,
+          "saving": 0,
+          "queued": 3072,
+          "audioState": "running"
+        },
+        "restored": {
+          "x": 21,
+          "y": 2,
+          "mask": 7,
+          "health": 2,
+          "steps": 50,
+          "won": 1,
+          "started": 0,
+          "sounds": 0,
+          "saves": 0,
+          "saving": 0,
+          "queued": 0,
+          "audioState": "running"
+        },
+        "manualListening": "untested",
+        "peakMemory": "untested"
+      },
+      "browser-log": {
+        "logs": [
+          "warning: The ScriptProcessorNode is deprecated. Use AudioWorkletNode instead. (https://bit.ly/audio-worklet)",
+          "warning: The ScriptProcessorNode is deprecated. Use AudioWorkletNode instead. (https://bit.ly/audio-worklet)"
+        ],
+        "errors": [],
+        "navigationAborts": [],
+        "requests": [
+          "http://127.0.0.1:8765/mosslight/build/web/",
+          "http://127.0.0.1:8765/mosslight/build/web/index.js",
+          "http://127.0.0.1:8765/mosslight/build/web/index.wasm",
+          "http://127.0.0.1:8765/mosslight/build/web/",
+          "http://127.0.0.1:8765/mosslight/build/web/index.js",
+          "http://127.0.0.1:8765/mosslight/build/web/index.wasm"
+        ]
+      }
+    },
+    {
+      "title": "Mosslight demo: explore, hazards, restore lighthouse, compressed parity and durable save",
+      "project": "chromium",
+      "status": "expected",
+      "gameplay-evidence": {
+        "variant": "demo",
+        "browser": "141.0.7390.37",
+        "loading": {
+          "navigation": [
+            {
+              "encodedBodySize": 12645,
+              "transferSize": 12945
+            }
+          ],
+          "resources": [
+            {
+              "url": "http://127.0.0.1:8765/mosslight/build/demo/packed-loader.js",
+              "encodedBodySize": 1280,
+              "decodedBodySize": 1280,
+              "transferSize": 1580
+            },
+            {
+              "url": "http://127.0.0.1:8765/mosslight/build/demo/engine.bin",
+              "encodedBodySize": 203407,
+              "decodedBodySize": 203407,
+              "transferSize": 203707
+            },
+            {
+              "url": "http://127.0.0.1:8765/mosslight/build/demo/runtime.bin",
+              "encodedBodySize": 42956,
+              "decodedBodySize": 42956,
+              "transferSize": 43256
+            }
+          ],
+          "readyMs": 308
+        },
+        "beforeReload": {
+          "x": 21,
+          "y": 2,
+          "mask": 7,
+          "health": 2,
+          "steps": 50,
+          "won": 1,
+          "started": 1,
+          "sounds": 5,
+          "saves": 1,
+          "saving": 0,
+          "queued": 0,
+          "audioState": "running"
+        },
+        "restored": {
+          "x": 21,
+          "y": 2,
+          "mask": 7,
+          "health": 2,
+          "steps": 50,
+          "won": 1,
+          "started": 0,
+          "sounds": 0,
+          "saves": 0,
+          "saving": 0,
+          "queued": 0,
+          "audioState": "running"
+        },
+        "manualListening": "untested",
+        "peakMemory": "untested"
+      },
+      "browser-log": {
+        "logs": [
+          "warning: The ScriptProcessorNode is deprecated. Use AudioWorkletNode instead. (https://bit.ly/audio-worklet)",
+          "warning: The ScriptProcessorNode is deprecated. Use AudioWorkletNode instead. (https://bit.ly/audio-worklet)"
+        ],
+        "errors": [],
+        "navigationAborts": [],
+        "requests": [
+          "http://127.0.0.1:8765/mosslight/build/demo/",
+          "http://127.0.0.1:8765/mosslight/build/demo/packed-loader.js",
+          "http://127.0.0.1:8765/mosslight/build/demo/engine.bin",
+          "http://127.0.0.1:8765/mosslight/build/demo/runtime.bin",
+          "blob:http://127.0.0.1:8765/4540833d-cc0d-4f80-bf1c-6fbe102d23b8",
+          "http://127.0.0.1:8765/mosslight/build/demo/",
+          "http://127.0.0.1:8765/mosslight/build/demo/packed-loader.js",
+          "http://127.0.0.1:8765/mosslight/build/demo/engine.bin",
+          "http://127.0.0.1:8765/mosslight/build/demo/runtime.bin",
+          "blob:http://127.0.0.1:8765/a9b593d7-2e62-48d0-bc1e-84683b5430e2"
+        ]
+      }
+    },
+    {
+      "title": "Mosslight rejects a corrupt compressed game instead of reporting ready",
+      "project": "chromium",
+      "status": "expected"
+    },
+    {
+      "title": "Mosslight web: explore, hazards, restore lighthouse, compressed parity and durable save",
+      "project": "firefox",
+      "status": "expected",
+      "gameplay-evidence": {
+        "variant": "web",
+        "browser": "142.0.1",
+        "loading": {
+          "navigation": [
+            {
+              "encodedBodySize": 12490,
+              "transferSize": 12790
+            }
+          ],
+          "resources": [
+            {
+              "url": "http://127.0.0.1:8765/mosslight/build/web/index.js",
+              "encodedBodySize": 179038,
+              "decodedBodySize": 179038,
+              "transferSize": 179338
+            },
+            {
+              "url": "http://127.0.0.1:8765/mosslight/build/web/index.wasm",
+              "encodedBodySize": 663552,
+              "decodedBodySize": 663552,
+              "transferSize": 663852
+            }
+          ],
+          "readyMs": 528
+        },
+        "beforeReload": {
+          "x": 21,
+          "y": 2,
+          "mask": 7,
+          "health": 2,
+          "steps": 50,
+          "won": 1,
+          "started": 1,
+          "sounds": 5,
+          "saves": 1,
+          "saving": 0,
+          "queued": 16896,
+          "audioState": "running"
+        },
+        "restored": {
+          "x": 21,
+          "y": 2,
+          "mask": 7,
+          "health": 2,
+          "steps": 50,
+          "won": 1,
+          "started": 0,
+          "sounds": 0,
+          "saves": 0,
+          "saving": 0,
+          "queued": 0,
+          "audioState": "running"
+        },
+        "manualListening": "untested",
+        "peakMemory": "untested"
+      },
+      "browser-log": {
+        "logs": [],
+        "errors": [],
+        "navigationAborts": [],
+        "requests": [
+          "http://127.0.0.1:8765/mosslight/build/web/",
+          "http://127.0.0.1:8765/mosslight/build/web/index.js",
+          "http://127.0.0.1:8765/mosslight/build/web/index.wasm",
+          "http://127.0.0.1:8765/mosslight/build/web/",
+          "http://127.0.0.1:8765/mosslight/build/web/index.js",
+          "http://127.0.0.1:8765/mosslight/build/web/index.wasm"
+        ]
+      }
+    },
+    {
+      "title": "Mosslight demo: explore, hazards, restore lighthouse, compressed parity and durable save",
+      "project": "firefox",
+      "status": "expected",
+      "gameplay-evidence": {
+        "variant": "demo",
+        "browser": "142.0.1",
+        "loading": {
+          "navigation": [
+            {
+              "encodedBodySize": 12645,
+              "transferSize": 12945
+            }
+          ],
+          "resources": [
+            {
+              "url": "http://127.0.0.1:8765/mosslight/build/demo/packed-loader.js",
+              "encodedBodySize": 1280,
+              "decodedBodySize": 1280,
+              "transferSize": 1580
+            },
+            {
+              "url": "http://127.0.0.1:8765/mosslight/build/demo/engine.bin",
+              "encodedBodySize": 203407,
+              "decodedBodySize": 203407,
+              "transferSize": 203707
+            },
+            {
+              "url": "http://127.0.0.1:8765/mosslight/build/demo/runtime.bin",
+              "encodedBodySize": 42956,
+              "decodedBodySize": 42956,
+              "transferSize": 43256
+            }
+          ],
+          "readyMs": 323
+        },
+        "beforeReload": {
+          "x": 21,
+          "y": 2,
+          "mask": 7,
+          "health": 2,
+          "steps": 50,
+          "won": 1,
+          "started": 1,
+          "sounds": 5,
+          "saves": 1,
+          "saving": 0,
+          "queued": 15360,
+          "audioState": "running"
+        },
+        "restored": {
+          "x": 21,
+          "y": 2,
+          "mask": 7,
+          "health": 2,
+          "steps": 50,
+          "won": 1,
+          "started": 0,
+          "sounds": 0,
+          "saves": 0,
+          "saving": 0,
+          "queued": 0,
+          "audioState": "running"
+        },
+        "manualListening": "untested",
+        "peakMemory": "untested"
+      },
+      "browser-log": {
+        "logs": [],
+        "errors": [],
+        "navigationAborts": [],
+        "requests": [
+          "http://127.0.0.1:8765/mosslight/build/demo/",
+          "http://127.0.0.1:8765/mosslight/build/demo/packed-loader.js",
+          "http://127.0.0.1:8765/mosslight/build/demo/engine.bin",
+          "http://127.0.0.1:8765/mosslight/build/demo/runtime.bin",
+          "http://127.0.0.1:8765/mosslight/build/demo/",
+          "http://127.0.0.1:8765/mosslight/build/demo/packed-loader.js",
+          "http://127.0.0.1:8765/mosslight/build/demo/engine.bin",
+          "http://127.0.0.1:8765/mosslight/build/demo/runtime.bin"
+        ]
+      }
+    },
+    {
+      "title": "Mosslight rejects a corrupt compressed game instead of reporting ready",
+      "project": "firefox",
+      "status": "expected"
+    }
+  ]
+}

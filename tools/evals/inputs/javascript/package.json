@@ -1,0 +1,13 @@
+{
+  "name": "port2browser-electron-beacon",
+  "version": "1.0.0",
+  "private": true,
+  "main": "main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "smoke": "electron . --smoke"
+  },
+  "devDependencies": {
+    "electron": "44.8.0"
+  }
+}

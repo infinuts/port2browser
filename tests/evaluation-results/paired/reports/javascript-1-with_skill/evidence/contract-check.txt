@@ -1,0 +1,2 @@
+PASS: missing save, validation, invocation snapshot, commit completion, load, aborted save, Menu.
+Controlled IndexedDB double only; actual browser persistence and gameplay remain untested.

@@ -1,0 +1,29 @@
+{
+  "status": "blocked",
+  "engine": "unknown",
+  "confidence": "confirmed",
+  "evidence": [
+    "assessment.md",
+    "input/game.dat",
+    "input/README.txt"
+  ],
+  "blockers": [
+    "Only descriptive text was supplied; no game source, supported runtime, or browser build is available. Actual source or a browser export is required."
+  ],
+  "browser_tests": [
+    {
+      "browser": "Chromium",
+      "result": "untested",
+      "evidence": [
+        "assessment.md"
+      ]
+    },
+    {
+      "browser": "Firefox",
+      "result": "untested",
+      "evidence": [
+        "assessment.md"
+      ]
+    }
+  ]
+}
