@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Add inferred open-engine/emulation/Flash data clues with bounded headers and
+  explicit ambiguity, caps and schema-version-1 provenance.
+- Extend the catalog to 36 routes with raylib, Ebitengine, HaxeFlixel, Flash/Ruffle,
+  Java applets/CheerpJ, ScummVM, AGS and Flutter/Flame playbooks; guidance remains
+  separate from evaluated game compatibility.
+
 - Add an optional reusable JSON-plan browser verifier with retained state/render,
   Web Audio, focus, reload and limited timing evidence; unavailable tools stay untested.
 - Add shared-action touch controls to Electron Beacon and separate WebKit/mobile

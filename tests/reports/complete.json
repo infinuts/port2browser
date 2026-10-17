@@ -13,7 +13,8 @@
     "build_files": 0,
     "binaries": 0,
     "warnings": 0,
-    "metadata": 0
+    "metadata": 0,
+    "runtime_clues": 0
   },
   "scan_errors": {
     "stat": 0,
@@ -66,6 +67,7 @@
   "limitations": [
     "Filename/dependency clues do not confirm engine, editable source, rights or browser support.",
     "Archives are not opened; dependencies and binary imports are not fully analyzed.",
+    "Runtime clues are capped at 100; ROM/disk suffixes and unresolved MZ do not establish platform or browser compatibility.",
     "Links/reparse points, special files and common dependency/VCS directories are skipped.",
     "Evidence is capped at 10 paths per candidate; build_files and binaries at 100 each; warnings at 100.",
     "Traversal uses filesystem order; keep the input tree unchanged while scanning."
@@ -76,5 +78,6 @@
       "skill": "port2browser-export",
       "status": "investigate"
     }
-  ]
+  ],
+  "runtime_clues": []
 }

@@ -70,3 +70,25 @@ reads retain the 64 KiB bound, scan-error accounting and malformed-input warning
 Rust parsing is deliberately a declaration heuristic, not a TOML resolver; it
 can miss aliases, dependency subtables and workspace inheritance. Archive contents
 and build instructions are never executed to infer a route.
+
+## Runtime and data clues (additive)
+
+`runtime_clues` contains at most 100 `{path, kind, format, confidence, basis}`
+objects. `kind` points to `open-engine`, `emulation` or `flash` task navigation;
+confidence remains `inferred`. `omitted.runtime_clues` counts capped results and
+contributes to `completeness.output_capped`. Existing engine candidates and CLI
+arguments retain their meanings under schema version 1.
+
+WAD, PK3, SWF and NES clues sample at most the existing 4 KiB header limit. SWF
+version bytes are observed with their file paths, without decompressing the
+payload. Other ROM/disk/COM suffixes are filename clues only. PK3 can be a mod,
+WAD is ambiguous without a matching format, ISO/DSK do not identify a platform,
+and COM has no magic. MZ without a confirmed PE signature remains DOS/NE/PE
+unresolved; a confirmed PE does not acquire a DOS/emulation candidate. The binary
+output cap can leave later executable candidates uninspected, as already recorded
+by `omitted.binaries`. Headers and suffixes never establish bootability, gameplay,
+compatible data versions, firmware rights or a completed browser route.
+
+Catalog `candidate_ids` are navigation labels, not a declaration that every one
+has an implemented detector. Route selection can use manual evidence for engines
+that the bounded helper does not recognize.

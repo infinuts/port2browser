@@ -24,7 +24,7 @@ Task folders can also be installed independently as Agent Skills.
 | [Choose the route](skills/port2browser-route/SKILL.md) | Compare exporters, Wasm, frameworks, open engines, emulation and reconstruction |
 | [Engine export](skills/port2browser-export/SKILL.md) | Unity, Godot, Unreal forks, Defold, Cocos, GameMaker, Construct, GDevelop or Ren'Py project |
 | [Native C/C++](skills/port2browser-native/SKILL.md) | Rebuildable native engine, SDL or custom renderer/middleware |
-| [Framework/runtime](skills/port2browser-frameworks/SKILL.md) | Rust, Java, .NET, Haxe, Lua or Python backend/library compatibility |
+| [Framework/runtime](skills/port2browser-frameworks/SKILL.md) | Go, Rust, Java, .NET, Haxe, Lua, Python or Flutter backend/library compatibility |
 | [Web wrapper](skills/port2browser-web/SKILL.md) | Electron, NW.js, RPG Maker MV/MZ, Phaser, PixiJS or Three.js |
 | [Open engine/emulation](skills/port2browser-open-runtime/SKILL.md) | Exact data-compatible engine or legacy emulator exists |
 | [Investigate behavior](skills/port2browser-reverse/SKILL.md) | Required behavior/format is undocumented or source is missing |
