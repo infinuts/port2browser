@@ -97,3 +97,5 @@ and [no-source/rights guidance](references/no-source.md) as needed. A legacy
 copied install lacking task folders can still use these shared references;
 update the whole bundle before relying on a task module. Tools and browser/SDK
 dependencies remain optional and outside the installed skill.
+
+Note: If the game is Unity Based, use an asset ripper like https://github.com/AssetRipper/AssetRipper
